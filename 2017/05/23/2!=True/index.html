@@ -1,0 +1,998 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,学习笔记," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Gao" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="问题:为什么2!=True呢?1234567num=2&amp;gt;&amp;gt;&amp;gt; if num==True:...     print &apos;True&apos;... else:...     print &apos;False&apos;... False">
+<meta name="keywords" content="python,学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2!=True">
+<meta property="og:url" content="https://yikayiyo.github.io/2017/05/23/2!=True/index.html">
+<meta property="og:site_name" content="Gao">
+<meta property="og:description" content="问题:为什么2!=True呢?1234567num=2&amp;gt;&amp;gt;&amp;gt; if num==True:...     print &apos;True&apos;... else:...     print &apos;False&apos;... False">
+<meta property="og:updated_time" content="2017-06-06T13:31:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2!=True">
+<meta name="twitter:description" content="问题:为什么2!=True呢?1234567num=2&amp;gt;&amp;gt;&amp;gt; if num==True:...     print &apos;True&apos;... else:...     print &apos;False&apos;... False">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yikayiyo.github.io/2017/05/23/2!=True/"/>
+
+
+
+
+
+  <title> 2!=True | Gao </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/05/23/2!=True/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yikayiyo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/22975826?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                2!=True
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-23T10:59:19+08:00">
+                2017-05-23
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-06-06T21:31:26+08:00">
+                2017-06-06
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  591
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>问题:为什么2!=True呢?<br></p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">num=<span class="number">2</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">if</span> num==<span class="keyword">True</span>:</div><div class="line"><span class="meta">... </span>    <span class="keyword">print</span> <span class="string">'True'</span></div><div class="line"><span class="meta">... </span><span class="keyword">else</span>:</div><div class="line"><span class="meta">... </span>    <span class="keyword">print</span> <span class="string">'False'</span></div><div class="line"><span class="meta">... </span></div><div class="line"><span class="keyword">False</span></div></pre></td></tr></tbody></table></figure><p></p>
+<a id="more"></a>
+<p>其实也是个无聊的东西…查官方文档时候感觉还不错,至少能看懂…</p>
+<h4 id="真值测试" class="heading-control"><a href="#真值测试" class="headerlink" title="真值测试"></a>真值测试<a class="heading-anchor" href="#真值测试" aria-hidden="true"></a></h4><p>python中的任何对象都有真值，以下对象的真值为<strong>false</strong>：</p>
+<pre><code>- None
+- False
+- zero of any numeric type,for example 0,0.0,0j.
+- any empty sequence,for example,'',(),[].
+- any empty mapping,for example,{}
+- instances of user-defined classes, if the class defines a __bool__() or __len__() method, when that method returns the integer zero or bool value False. 
+</code></pre><p>其它所有对象的真值都被视为 <strong>true</strong> 。一些返回布尔值的操作和内置函数，总是返回0或者False来表示真值为<strong>false</strong>，返回1或者True来表示真值为<strong>true</strong>. (例外: <strong>布尔操作</strong> or 和 and 总是<strong>返回其操作数</strong>)</p>
+<h4 id="布尔操作" class="heading-control"><a href="#布尔操作" class="headerlink" title="布尔操作"></a>布尔操作<a class="heading-anchor" href="#布尔操作" aria-hidden="true"></a></h4><p>python中的布尔操作，有如下规则：</p>
+<table>
+<thead>
+<tr>
+<th>Operations</th>
+<th>Result</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x or y</td>
+<td>if x is false,then y,else x</td>
+<td>(1)</td>
+</tr>
+<tr>
+<td>x and y</td>
+<td>if x is false,then x,else y</td>
+<td>(2)</td>
+</tr>
+<tr>
+<td>not x</td>
+<td>if x is false,then True,else False</td>
+<td>(3)</td>
+</tr>
+</tbody>
+</table>
+<p>Notes:<br>(1) This is a short-circuit operator, so it only evaluates the second argument if the first one is false.<br>只会在第一个参数为假的时候考虑第二个参数.<br>(2) This is a short-circuit operator, so it only evaluates the second argument if the first one is true.<br>只会在第一个参数为真的时候考虑第二个参数.<br>(3) not has a lower priority than non-Boolean operators, so <strong>not a == b</strong> is interpreted as <strong>not (a == b)</strong>, and <strong>a == not b</strong> is a syntax error.</p>
+<p>于是有:</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">True</span> <span class="keyword">and</span> <span class="number">0</span>		<span class="comment"># 0	</span></div><div class="line"><span class="number">0</span> <span class="keyword">and</span> <span class="keyword">True</span>		<span class="comment"># 0</span></div><div class="line"><span class="keyword">True</span> <span class="keyword">and</span> <span class="number">1</span>		<span class="comment"># 1</span></div><div class="line"><span class="number">1</span> <span class="keyword">and</span> <span class="keyword">True</span>		<span class="comment"># True</span></div><div class="line"><span class="keyword">True</span> <span class="keyword">and</span> <span class="number">2</span>		<span class="comment"># 2</span></div><div class="line"><span class="number">2</span> <span class="keyword">and</span> <span class="keyword">True</span>		<span class="comment"># True</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">and</span> <span class="number">0</span>		<span class="comment"># False</span></div><div class="line"><span class="number">0</span> <span class="keyword">and</span> <span class="keyword">False</span>		<span class="comment"># 0</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">and</span> <span class="number">1</span>		<span class="comment"># False</span></div><div class="line"><span class="number">1</span> <span class="keyword">and</span> <span class="keyword">False</span>		<span class="comment"># False</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">and</span> <span class="number">2</span>		<span class="comment"># False</span></div><div class="line"><span class="number">2</span> <span class="keyword">and</span> <span class="keyword">False</span>		<span class="comment"># False</span></div></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">True</span> <span class="keyword">or</span> <span class="number">0</span>		<span class="comment"># True</span></div><div class="line"><span class="number">0</span> <span class="keyword">or</span> <span class="keyword">True</span>		<span class="comment"># True</span></div><div class="line"><span class="keyword">True</span> <span class="keyword">or</span> <span class="number">1</span>		<span class="comment"># True</span></div><div class="line"><span class="number">1</span> <span class="keyword">or</span> <span class="keyword">True</span>		<span class="comment"># 1</span></div><div class="line"><span class="keyword">True</span> <span class="keyword">or</span> <span class="number">2</span>		<span class="comment"># True</span></div><div class="line"><span class="number">2</span> <span class="keyword">or</span> <span class="keyword">True</span>		<span class="comment"># 2</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">or</span> <span class="number">0</span>		<span class="comment"># 0</span></div><div class="line"><span class="number">0</span> <span class="keyword">or</span> <span class="keyword">False</span>		<span class="comment"># False</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">or</span> <span class="number">1</span>		<span class="comment"># 1</span></div><div class="line"><span class="number">1</span> <span class="keyword">or</span> <span class="keyword">False</span>		<span class="comment"># 1</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">or</span> <span class="number">2</span>		<span class="comment"># 2</span></div><div class="line"><span class="number">2</span> <span class="keyword">or</span> <span class="keyword">False</span>		<span class="comment"># 2</span></div></pre></td></tr></tbody></table></figure>
+<h4 id="布尔值" class="heading-control"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值<a class="heading-anchor" href="#布尔值" aria-hidden="true"></a></h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">isinstance(<span class="keyword">True</span>,int)	<span class="comment"># True</span></div><div class="line">isinstance(<span class="keyword">False</span>,int)	<span class="comment"># True</span></div><div class="line"><span class="keyword">True</span> <span class="keyword">is</span> <span class="number">1</span>		<span class="comment"># False</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">is</span> <span class="number">0</span>		<span class="comment"># False</span></div><div class="line">int(<span class="keyword">True</span>)		<span class="comment"># 1</span></div><div class="line">int(<span class="keyword">False</span>)		<span class="comment"># 0</span></div><div class="line">bool(<span class="number">2</span>) 		<span class="comment"># True</span></div><div class="line">bool(<span class="number">0</span>) 		<span class="comment"># False</span></div></pre></td></tr></tbody></table></figure>
+<p>布尔值包括两个常量对象，分别是True和False，来表示真值；<br>在数值上下文中，布尔值True和False等同于1和0，例如：5+True，返回6；<br>内置函数bool()可以将任何值转换为布尔值，前提是该值可以被解释为真值.<br>结论：2 != True ，但是 bool(2) == True.</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/03/redis事务/" rel="next" title="redis事务">
+                <i class="fa fa-chevron-left"></i> redis事务
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/21/实体排序论文-2/" rel="prev" title="实体排序论文-2">
+                实体排序论文-2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bf0d73c76c44624" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/22975826?v=3&s=460"
+               alt="yikayiyo" />
+          <p class="site-author-name" itemprop="name">yikayiyo</p>
+           
+              <p class="site-description motion-element" itemprop="description">浪漫在哪里</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yikayiyo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://music.163.com/#/user/home?id=60564099" target="_blank" title="网易云">
+                  
+                    <i class="fa fa-fw fa-music"></i>
+                  
+                  网易云
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#真值测试"><span class="nav-number">1.</span> <span class="nav-text">真值测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布尔操作"><span class="nav-number">2.</span> <span class="nav-text">布尔操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布尔值"><span class="nav-number">3.</span> <span class="nav-text">布尔值</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yikayiyo</span>
+</div>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共26.4k字</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/assets/hijiki.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>

@@ -1,0 +1,973 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,学习笔记," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Gao" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="条件表达式一般情况下,条件分支只有简单的返回或对同一变量进行赋值操作时,可以转为条件表达式. 123456789101112131415161718#1.改写条件语句if x &amp;gt; 0:    y = math.log(x)else:    y = float(&apos;nan&apos;)#简洁写法y = math.log(x) if x &amp;gt; 0 else float(&apos;nan&apos;)#2.改写递归函数de">
+<meta name="keywords" content="python,学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简洁的python">
+<meta property="og:url" content="https://yikayiyo.github.io/2017/06/05/简洁的python/index.html">
+<meta property="og:site_name" content="Gao">
+<meta property="og:description" content="条件表达式一般情况下,条件分支只有简单的返回或对同一变量进行赋值操作时,可以转为条件表达式. 123456789101112131415161718#1.改写条件语句if x &amp;gt; 0:    y = math.log(x)else:    y = float(&apos;nan&apos;)#简洁写法y = math.log(x) if x &amp;gt; 0 else float(&apos;nan&apos;)#2.改写递归函数de">
+<meta property="og:updated_time" content="2017-06-06T13:18:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简洁的python">
+<meta name="twitter:description" content="条件表达式一般情况下,条件分支只有简单的返回或对同一变量进行赋值操作时,可以转为条件表达式. 123456789101112131415161718#1.改写条件语句if x &amp;gt; 0:    y = math.log(x)else:    y = float(&apos;nan&apos;)#简洁写法y = math.log(x) if x &amp;gt; 0 else float(&apos;nan&apos;)#2.改写递归函数de">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yikayiyo.github.io/2017/06/05/简洁的python/"/>
+
+
+
+
+
+  <title> 简洁的python | Gao </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/06/05/简洁的python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yikayiyo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/22975826?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                简洁的python
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-05T10:59:19+08:00">
+                2017-06-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-06-06T21:18:36+08:00">
+                2017-06-06
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  914
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="条件表达式" class="heading-control"><a href="#条件表达式" class="headerlink" title="条件表达式"></a>条件表达式<a class="heading-anchor" href="#条件表达式" aria-hidden="true"></a></h4><p>一般情况下,条件分支只有简单的返回或对同一变量进行赋值操作时,可以转为条件表达式.</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#1.改写条件语句</span></div><div class="line"><span class="keyword">if</span> x &gt; <span class="number">0</span>:</div><div class="line">    y = math.log(x)</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    y = float(<span class="string">'nan'</span>)</div><div class="line"><span class="comment">#简洁写法</span></div><div class="line">y = math.log(x) <span class="keyword">if</span> x &gt; <span class="number">0</span> <span class="keyword">else</span> float(<span class="string">'nan'</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#2.改写递归函数</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fac</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="keyword">if</span> x == <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> x * fac(x<span class="number">-1</span>)</div><div class="line"><span class="comment">#简洁写法</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fac</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="number">1</span> <span class="keyword">if</span> x == <span class="number">0</span> <span class="keyword">else</span> x * fac(x<span class="number">-1</span>)</div></pre></td></tr></tbody></table></figure>
+<p>列表解析(list comprehension)</p>
+<p>将一个列表转为另一个时用更少的代码<br><a id="more"></a></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#1.映射操作</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">capitalize_all</span><span class="params">(t)</span>:</span></div><div class="line">    res = []</div><div class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> t:</div><div class="line">        res.append(s.capitalize())</div><div class="line">    <span class="keyword">return</span> res</div><div class="line"><span class="comment">#简洁写法</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">capitalize_all</span><span class="params">(t)</span>:</span></div><div class="line">    <span class="keyword">return</span> [s.capitalize() <span class="keyword">for</span> s <span class="keyword">in</span> t]</div><div class="line"></div><div class="line"><span class="comment">#2.过滤操作</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">only_upper</span><span class="params">(t)</span>:</span></div><div class="line">    res = []</div><div class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> t:</div><div class="line">        <span class="keyword">if</span> s.isupper():</div><div class="line">            res.append(s)</div><div class="line">    <span class="keyword">return</span> res</div><div class="line"><span class="comment">#简洁写法</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">only_upper</span><span class="params">(t)</span>:</span></div><div class="line">    <span class="keyword">return</span> [s <span class="keyword">for</span> s <span class="keyword">in</span> t <span class="keyword">if</span> s.isupper()]</div></pre></td></tr></tbody></table></figure>
+<h4 id="生成器表达式" class="heading-control"><a href="#生成器表达式" class="headerlink" title="生成器表达式"></a>生成器表达式<a class="heading-anchor" href="#生成器表达式" aria-hidden="true"></a></h4><p>类似于列表解析但又不同,经常和sum,max,min之类的函数配合使用</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>l=[x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">5</span>)]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>l</div><div class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>]</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>g = (x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">5</span>))</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>g</div><div class="line">&lt;generator object &lt;genexpr&gt; at <span class="number">0x7f33f66f2780</span>&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>sum(g)</div><div class="line"><span class="number">30</span></div></pre></td></tr></tbody></table></figure>
+<h4 id="any和all" class="heading-control"><a href="#any和all" class="headerlink" title="any和all"></a>any和all<a class="heading-anchor" href="#any和all" aria-hidden="true"></a></h4><p>any接收一个布尔值组成的序列,其中任何值是True时返回True.</p>
+<p>all接收一个布尔值组成的序列,所有值是True时返回True.</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#发现禁止字母,返回False</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">avoids</span><span class="params">(word,forbidden)</span>:</span></div><div class="line">    <span class="keyword">for</span> letter <span class="keyword">in</span> word:</div><div class="line">        <span class="keyword">if</span> letter <span class="keyword">in</span> forbidden:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line"><span class="comment">#改写</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">avoids</span><span class="params">(word,forbidden)</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">not</span> any(letter <span class="keyword">in</span> forbidden <span class="keyword">for</span> letter <span class="keyword">in</span> word)</div><div class="line"></div><div class="line"><span class="comment">#单词必须使用required中的全部字母</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">uses_all</span><span class="params">(word,required)</span>:</span></div><div class="line">    <span class="keyword">for</span> letter <span class="keyword">in</span> required:</div><div class="line">        <span class="keyword">if</span> letter <span class="keyword">not</span> <span class="keyword">in</span> word:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line"><span class="comment">#改写</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">uses_all</span><span class="params">(word,required)</span>:</span></div><div class="line">    <span class="keyword">return</span> all(letter <span class="keyword">in</span> word <span class="keyword">for</span> letter <span class="keyword">in</span> required)</div></pre></td></tr></tbody></table></figure>
+<h4 id="集合" class="heading-control"><a href="#集合" class="headerlink" title="集合"></a>集合<a class="heading-anchor" href="#集合" aria-hidden="true"></a></h4><p>有些问题可以借助集合处理.</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#第一次出现时加入词典,再次出现时函数返回True</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">has_duplicates</span><span class="params">(t)</span>:</span></div><div class="line">    d={}</div><div class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> t:</div><div class="line">        <span class="keyword">if</span> x <span class="keyword">in</span> d:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">        d[x] = <span class="keyword">True</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line"><span class="comment">#同一函数借助集合的简写形式</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">has_duplicates</span><span class="params">(t)</span>:</span></div><div class="line">    <span class="keyword">return</span> len(set(t))&lt;len(t)</div></pre></td></tr></tbody></table></figure>
+<h4 id="计数器" class="heading-control"><a href="#计数器" class="headerlink" title="计数器"></a>计数器<a class="heading-anchor" href="#计数器" aria-hidden="true"></a></h4><p>将每个键映射到其出现次数,键是可散列的.</p>
+<p>类似于集合,提供了一些加法,减法,交集,并集的操作.还有一个常用的most_common方法,返回一个值-频率对的列表,按照最常见到最少见排序.</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>count=Counter(<span class="string">'parrot'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>count</div><div class="line">Counter({<span class="string">'r'</span>: <span class="number">2</span>, <span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'p'</span>: <span class="number">1</span>, <span class="string">'t'</span>: <span class="number">1</span>, <span class="string">'o'</span>: <span class="number">1</span>})</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> val,freq <span class="keyword">in</span> count.most_common(<span class="number">3</span>):</div><div class="line"><span class="meta">... </span>    print(val,freq)</div><div class="line"><span class="meta">... </span></div><div class="line">(<span class="string">'r'</span>, <span class="number">2</span>)</div><div class="line">(<span class="string">'a'</span>, <span class="number">1</span>)</div><div class="line">(<span class="string">'p'</span>, <span class="number">1</span>)</div></pre></td></tr></tbody></table></figure>
+<h4 id="命名元组" class="heading-control"><a href="#命名元组" class="headerlink" title="命名元组"></a>命名元组<a class="heading-anchor" href="#命名元组" aria-hidden="true"></a></h4><p>提供了快速定义简单类的方法；如果类变得很复杂,可以定义新类继承当前的命名元组,或者使用原始类定义.</p>
+<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#定义一个Point对象</div><div class="line">class Point:</div><div class="line">    def __init__(self,x=0,y=0):</div><div class="line">        self.x = x</div><div class="line">        self.y = y</div><div class="line">        </div><div class="line">    def __str__(self,):</div><div class="line">        return '(%g,%g)'%(self.x,self.y)</div><div class="line">    </div><div class="line">#改写</div><div class="line">from collections import namedtuple</div><div class="line">Point = namedtuple('Point',['x','y'])</div><div class="line"></div><div class="line"></div><div class="line">&gt;&gt;&gt; Point</div><div class="line">&lt;class '__main__.Point'&gt;</div><div class="line">&gt;&gt;&gt; p = Point(1,2)</div><div class="line">&gt;&gt;&gt; p</div><div class="line">Point(x=1,y=2)</div></pre></td></tr></tbody></table></figure>
+<h4 id="收集参数" class="heading-control"><a href="#收集参数" class="headerlink" title="收集参数"></a>收集参数<a class="heading-anchor" href="#收集参数" aria-hidden="true"></a></h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#收集任意个数的按位实参并输出</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">printall</span><span class="params">(*args)</span>:</span></div><div class="line">    print(args)</div><div class="line">    </div><div class="line"><span class="meta">&gt;&gt;&gt; </span>printall(<span class="number">1</span>,<span class="number">2.0</span>,<span class="string">'3'</span>)</div><div class="line">(<span class="number">1</span>, <span class="number">2.0</span>, <span class="string">'3'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>printall(<span class="number">1</span>,<span class="number">2.0</span>,third=<span class="string">'3'</span>)</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">TypeError: printall() got an unexpected keyword argument <span class="string">'third'</span></div><div class="line"></div><div class="line"><span class="comment">#收集关键词实参    </span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">printall</span><span class="params">(*args,**kwargs)</span>:</span></div><div class="line">    print(args,kwargs)</div><div class="line">    </div><div class="line"><span class="meta">&gt;&gt;&gt; </span>printall(<span class="number">1</span>,<span class="number">2.0</span>,third=<span class="string">'3'</span>)</div><div class="line">((<span class="number">1</span>, <span class="number">2.0</span>), {<span class="string">'third'</span>: <span class="string">'3'</span>})</div></pre></td></tr></tbody></table></figure>
+<p>处理参数很多的函数时,创建和传递字典来指定常用的选项是非常有用的.</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/09/借助义元改善词表示学习/" rel="next" title="借助义元改善词表示学习">
+                <i class="fa fa-chevron-left"></i> 借助义元改善词表示学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/03/redis事务/" rel="prev" title="redis事务">
+                redis事务 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bf0d73c76c44624" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/22975826?v=3&s=460"
+               alt="yikayiyo" />
+          <p class="site-author-name" itemprop="name">yikayiyo</p>
+           
+              <p class="site-description motion-element" itemprop="description">浪漫在哪里</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yikayiyo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://music.163.com/#/user/home?id=60564099" target="_blank" title="网易云">
+                  
+                    <i class="fa fa-fw fa-music"></i>
+                  
+                  网易云
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#条件表达式"><span class="nav-number">1.</span> <span class="nav-text">条件表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成器表达式"><span class="nav-number">2.</span> <span class="nav-text">生成器表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#any和all"><span class="nav-number">3.</span> <span class="nav-text">any和all</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集合"><span class="nav-number">4.</span> <span class="nav-text">集合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计数器"><span class="nav-number">5.</span> <span class="nav-text">计数器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命名元组"><span class="nav-number">6.</span> <span class="nav-text">命名元组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#收集参数"><span class="nav-number">7.</span> <span class="nav-text">收集参数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yikayiyo</span>
+</div>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共26.4k字</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/assets/hijiki.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>

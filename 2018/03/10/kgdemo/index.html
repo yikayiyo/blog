@@ -1,0 +1,1152 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="学习笔记,知识图谱," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Gao" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="实验环境系统：ubuntu16.04 软件目录:  项目目录/home/gao/software/kgdemo/ 数据库/home/gao/software/mysql 应用框架/home/gao/software/apache-jena-3.6.0（这里使用了它的TDB组件 SPARQL服务器/home/gao/software/apache-jena-fuseki-3.6.0 数据转化工具/h">
+<meta name="keywords" content="学习笔记,知识图谱">
+<meta property="og:type" content="article">
+<meta property="og:title" content="知识图谱小demo">
+<meta property="og:url" content="https://yikayiyo.github.io/2018/03/10/kgdemo/index.html">
+<meta property="og:site_name" content="Gao">
+<meta property="og:description" content="实验环境系统：ubuntu16.04 软件目录:  项目目录/home/gao/software/kgdemo/ 数据库/home/gao/software/mysql 应用框架/home/gao/software/apache-jena-3.6.0（这里使用了它的TDB组件 SPARQL服务器/home/gao/software/apache-jena-fuseki-3.6.0 数据转化工具/h">
+<meta property="og:image" content="https://yikayiyo.github.io/2018/03/10/kgdemo/ErGraph.png">
+<meta property="og:image" content="https://yikayiyo.github.io/2018/03/10/kgdemo/OntoGraph.png">
+<meta property="og:updated_time" content="2019-03-15T01:55:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="知识图谱小demo">
+<meta name="twitter:description" content="实验环境系统：ubuntu16.04 软件目录:  项目目录/home/gao/software/kgdemo/ 数据库/home/gao/software/mysql 应用框架/home/gao/software/apache-jena-3.6.0（这里使用了它的TDB组件 SPARQL服务器/home/gao/software/apache-jena-fuseki-3.6.0 数据转化工具/h">
+<meta name="twitter:image" content="https://yikayiyo.github.io/2018/03/10/kgdemo/ErGraph.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yikayiyo.github.io/2018/03/10/kgdemo/"/>
+
+
+
+
+
+  <title> 知识图谱小demo | Gao </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2018/03/10/kgdemo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yikayiyo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/22975826?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                知识图谱小demo
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T10:14:20+08:00">
+                2018-03-10
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-15T09:55:28+08:00">
+                2019-03-15
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="实验环境" class="heading-control"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境<a class="heading-anchor" href="#实验环境" aria-hidden="true"></a></h2><p>系统：<br>ubuntu16.04</p>
+<p>软件目录:</p>
+<ul>
+<li>项目目录/home/gao/software/kgdemo/</li>
+<li>数据库/home/gao/software/mysql</li>
+<li>应用框架/home/gao/software/apache-jena-3.6.0（这里使用了它的TDB组件</li>
+<li>SPARQL服务器/home/gao/software/apache-jena-fuseki-3.6.0</li>
+<li>数据转化工具/home/gao/software/d2rq-0.8.1</li>
+<li>本体构建工具/home/gao/software/Protege-5.2.0<a id="more"></a>
+</li>
+</ul>
+<h2 id="准备" class="heading-control"><a href="#准备" class="headerlink" title="准备"></a>准备<a class="heading-anchor" href="#准备" aria-hidden="true"></a></h2><h3 id="数据" class="heading-control"><a href="#数据" class="headerlink" title="数据"></a>数据<a class="heading-anchor" href="#数据" aria-hidden="true"></a></h3><p>与电影相关的.基本统计数据如下：</p>
+<ol>
+<li>演员数量：505人</li>
+<li>电影数量：4518部</li>
+<li>电影类型：19类</li>
+<li>人物与电影的关系：14451</li>
+<li>电影与类型的关系：7898</li>
+</ol>
+<p>演员的基本信息包括：姓名、英文名、出生日期、死亡日期、出生地、个人简介.<br>电影的基本信息包括：电影名称、电影简介、电影评分、电影发行日期、电影类型.</p>
+<img src="/2018/03/10/kgdemo/ErGraph.png" alt="ErGraph.png" title="">
+<h3 id="本体建模" class="heading-control"><a href="#本体建模" class="headerlink" title="本体建模"></a>本体建模<a class="heading-anchor" href="#本体建模" aria-hidden="true"></a></h3><img src="/2018/03/10/kgdemo/OntoGraph.png" alt="OntoGraph.png" title="">
+<ul>
+<li><p>打开protege,在Ontology IRI中填写新建本体资源的IRI为”<a href="http://www.kgmovie.demo.com" target="_blank" rel="external">http://www.kgmovie.demo.com</a>“</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 进入protege目录,执行下面的命令</div><div class="line">./run.sh</div></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>点击“Entities”tab标签,选择“Classes”标签.在这个界面,我们创建电影知识图谱的类/概念.</p>
+<p>在owl:Thing下创建三个子类,Person,Movie,Genre.三个类的默认关系是互斥的.</p>
+</li>
+</ul>
+<ul>
+<li><p>切换到”Object Properties”页面创建<strong>类之间的关系,即,对象属性</strong>。</p>
+<p>创建了三个对象属性，”hasActedIn”表示某人参演了某电影,该属性的”domain”是人,”range”是电影。(<em>“domain”表示该属性是属于哪个类的，”range”表示该属性的取值范围</em>),设置该属性的逆属性(Inverse of)是”hasActor”,可用于推理.另外一个属性”hasGenre”表示电影属于什么类型.</p>
+</li>
+<li><p>切换到”Data properties”页面创建<strong>类的属性,即,数据属性</strong>.</p>
+<p>其实区分数据属性和对象属性还有一个很直观的方法,我们观察其”range”取值范围即可.</p>
+<p><strong>对象属性的取值范围是类,而数据属性的取值范围则是字面量.</strong></p>
+</li>
+<li><p>保存文件,命名为”kgdemo.owl”</p>
+</li>
+<li><p>注意到,<strong>mysql中有五个表,本体中只有三个类</strong></p>
+</li>
+</ul>
+<h2 id="数据转换" class="heading-control"><a href="#数据转换" class="headerlink" title="数据转换"></a>数据转换<a class="heading-anchor" href="#数据转换" aria-hidden="true"></a></h2><h3 id="mysql-gt-RDF" class="heading-control"><a href="#mysql-gt-RDF" class="headerlink" title="mysql -> RDF"></a>mysql -&gt; RDF<a class="heading-anchor" href="#mysql-gt-RDF" aria-hidden="true"></a></h3><ul>
+<li><p>下载D2RQ，进入其目录，运行下面的命令生成<strong>默认的</strong>mapping文件：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./generate-mapping -u &lt;username&gt; -p &lt;password&gt; -o ../kgdemo/kg_demo_movie_mapping.ttl jdbc:mysql:///kg_demo_movie</div></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>根据我们定义的本体<strong>修改mapping文件</strong></p>
+<p>ttl文件中添加前缀: @prefix : <a href="http://www.kgmovie.demo.com#" target="_blank" rel="external">http://www.kgmovie.demo.com#</a> .(包括最后的这个句号)</p>
+<p>去除没用的genre__label和genre_genre_id信息</p>
+<p>vocab:xxxx 换成了本体构建时候的类</p>
+<p>d2rq:property属性修改为本体中定义的属性(对象属性或者数据属性)</p>
+</li>
+<li><p>数据转为RDF</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./dump-rdf -o ../kgdemo/kg_demo_movie.nt ../kgdemo/kg_demo_movie_mapping.ttl</div></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>查询示例</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> ?titles <span class="keyword">WHERE</span> {</div><div class="line">  ?p rdf:<span class="keyword">type</span> :Person.</div><div class="line">  ?p :personEnglishName <span class="string">'Stephen Chow'</span>.</div><div class="line">  ?p :hasActedIn ?movies.</div><div class="line">  ?movies :movieTitle ?titles</div><div class="line">}</div><div class="line"><span class="keyword">limit</span> <span class="number">10</span></div></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>返回结果为:</p>
+<p>| titles           |<br>| —————- |<br>| “功夫”             |<br>| “琉璃樽”            |<br>| “英雄本色”           |<br>| “少林足球”           |<br>| “西游记第壹佰零壹回之月光宝盒” |<br>| “长江七号”           |<br>| “西游记大结局之仙履奇缘”    |<br>| “建国大业”           |<br>| “审死官”            |<br>| “龙在天涯”           |</p>
+</li>
+</ul>
+<h3 id="Bug-To-Fix" class="heading-control"><a href="#Bug-To-Fix" class="headerlink" title="Bug To Fix"></a>Bug To Fix<a class="heading-anchor" href="#Bug-To-Fix" aria-hidden="true"></a></h3><p>使用中文姓名查询不到person</p>
+<h2 id="jena-SPARQL-endpoint及推理" class="heading-control"><a href="#jena-SPARQL-endpoint及推理" class="headerlink" title="jena SPARQL endpoint及推理"></a>jena SPARQL endpoint及推理<a class="heading-anchor" href="#jena-SPARQL-endpoint及推理" aria-hidden="true"></a></h2><h3 id="jena示例" class="heading-control"><a href="#jena示例" class="headerlink" title="jena示例"></a>jena示例<a class="heading-anchor" href="#jena示例" aria-hidden="true"></a></h3><ul>
+<li>下载apache-jena和apache-jena-fuseki</li>
+<li>在apache-jena目录下,使用“tdbloader”将之前我们的RDF数据以TDB的方式存储。命令如下：</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">./tdbloader --loc="../../kgdemo/tdb" "../../kgdemo/kg_demo_movie.nt"</div><div class="line">16:15:50 INFO  loader               :: -- Start triples data phase</div><div class="line">16:15:50 INFO  loader               :: ** Load empty triples table</div><div class="line">16:15:50 INFO  loader               :: -- Start quads data phase</div><div class="line">16:15:50 INFO  loader               :: ** Load empty quads table</div><div class="line">16:15:50 INFO  loader               :: Load: ../../kgdemo/kg_demo_movie.nt -- 2018/03/19 16:15:50 CST</div><div class="line">16:15:52 INFO  loader               :: -- Finish triples data phase</div><div class="line">16:15:52 INFO  loader               :: ** Data: 47,144 triples loaded in 1.26 seconds [Rate: 37,327.00 per second]</div><div class="line">16:15:52 INFO  loader               :: -- Finish quads data phase</div><div class="line">16:15:52 INFO  loader               :: -- Start triples index phase</div><div class="line">16:15:52 INFO  loader               :: ** Index SPO-&gt;POS: 47,144 slots indexed in 0.14 seconds [Rate: 334,354.63 per second]</div><div class="line">16:15:52 INFO  loader               :: ** Index SPO-&gt;OSP: 47,144 slots indexed in 0.13 seconds [Rate: 374,158.72 per second]</div><div class="line">16:15:52 INFO  loader               :: -- Finish triples index phase</div><div class="line">16:15:52 INFO  loader               :: ** 47,144 triples indexed in 0.27 seconds [Rate: 172,688.64 per second]</div><div class="line">16:15:52 INFO  loader               :: -- Finish triples load</div><div class="line">16:15:52 INFO  loader               :: ** Completed: 47,144 triples loaded in 1.55 seconds [Rate: 30,356.73 per second]</div><div class="line">16:15:52 INFO  loader               :: -- Finish quads load</div></pre></td></tr></tbody></table></figure>
+<ul>
+<li>在fuseki-server目录下,运行 <em>./fuseki-server</em> 服务,会在当前目录生成run文件夹,将本体文件重命名为”kgdemo.ttl”放入run/database,然后在run/configuration里创建config.ttl文件,内容为:</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">@prefix :      &lt;http://base/#&gt; .</div><div class="line">@prefix tdb:   &lt;http://jena.hpl.hp.com/2008/tdb#&gt; .</div><div class="line">@prefix rdf:   &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .</div><div class="line">@prefix ja:    &lt;http://jena.hpl.hp.com/2005/11/Assembler#&gt; .</div><div class="line">@prefix rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .</div><div class="line">@prefix fuseki: &lt;http://jena.apache.org/fuseki#&gt; .</div><div class="line"></div><div class="line"></div><div class="line">:service1        a                fuseki:Service ;</div><div class="line">fuseki:dataset                    &lt;#dataset&gt; ;</div><div class="line">fuseki:name                       "kg_demo_movie" ;</div><div class="line">fuseki:serviceQuery               "query" , "sparql" ;</div><div class="line">fuseki:serviceReadGraphStore      "get" ;</div><div class="line">fuseki:serviceReadWriteGraphStore "data" ;</div><div class="line">fuseki:serviceUpdate              "update" ;</div><div class="line">fuseki:serviceUpload              "upload" .</div><div class="line"></div><div class="line"></div><div class="line">&lt;#dataset&gt; rdf:type ja:RDFDataset ;</div><div class="line">    ja:defaultGraph &lt;#model_inf&gt; ;</div><div class="line">    .</div><div class="line"></div><div class="line">&lt;#model_inf&gt; a ja:InfModel ;</div><div class="line">    ja:baseModel &lt;#tdbGraph&gt; ;</div><div class="line"></div><div class="line">    #本体文件的路径</div><div class="line">    ja:content [ja:externalContent &lt;file:////home/gao/software/apache-jena-fuseki-3.6.0/run/databases/kgdemo.ttl&gt; ] ;</div><div class="line">    </div><div class="line">    #启用OWL推理机</div><div class="line">    ja:reasoner [ja:reasonerURL &lt;http://jena.hpl.hp.com/2003/OWLFBRuleReasoner&gt;] .</div><div class="line"></div><div class="line">&lt;#tdbGraph&gt; rdf:type tdb:GraphTDB ;</div><div class="line">    tdb:dataset &lt;#tdbDataset&gt; ;</div><div class="line">    .</div><div class="line"></div><div class="line">&lt;#tdbDataset&gt; rdf:type tdb:DatasetTDB ;</div><div class="line">    tdb:location "/home/gao/software/kgdemo/tdb" ;</div></pre></td></tr></tbody></table></figure>
+<ul>
+<li>重启运行 <em>./fuseki-server</em></li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[2018-03-19 16:39:13] Server     INFO  Apache Jena Fuseki 3.6.0</div><div class="line">[2018-03-19 16:39:13] Config     INFO  FUSEKI_HOME=/home/gao/software/apache-jena-fuseki-3.6.0</div><div class="line">[2018-03-19 16:39:13] Config     INFO  FUSEKI_BASE=/home/gao/software/apache-jena-fuseki-3.6.0/run</div><div class="line">[2018-03-19 16:39:13] Config     INFO  Shiro file: file:///home/gao/software/apache-jena-fuseki-3.6.0/run/shiro.ini</div><div class="line">[2018-03-19 16:39:13] Config     INFO  Configuration file: /home/gao/software/apache-jena-fuseki-3.6.0/run/config.ttl</div><div class="line">[2018-03-19 16:39:13] Config     INFO  Load configuration: file:///home/gao/software/apache-jena-fuseki-3.6.0/run/configuration/conf.ttl</div><div class="line">[2018-03-19 16:39:13] Config     INFO  Register: /kg_demo_movie</div><div class="line">[2018-03-19 16:39:13] Server     INFO  Started 2018/03/19 16:39:13 CST on port 3030</div></pre></td></tr></tbody></table></figure>
+<ul>
+<li>打开页面localhost:3030,查询,这里使用中文ok</li>
+</ul>
+<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</div><div class="line">prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;</div><div class="line">prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt;</div><div class="line">prefix : &lt;http://www.kgmovie.demo.com#&gt;</div><div class="line"></div><div class="line">SELECT ?titles WHERE {</div><div class="line">  ?p rdf:type :Person.</div><div class="line">  ?p :personName '周星驰'.</div><div class="line">  ?p :hasActedIn ?movies.</div><div class="line">  ?movies :movieTitle ?titles</div><div class="line">}</div><div class="line">limit 10</div></pre></td></tr></tbody></table></figure>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>titles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>“琉璃樽”</td>
+</tr>
+<tr>
+<td>2</td>
+<td>“西游记第壹佰零壹回之月光宝盒”</td>
+</tr>
+<tr>
+<td>3</td>
+<td>“大内密探零零发”</td>
+</tr>
+<tr>
+<td>4</td>
+<td>“功夫”</td>
+</tr>
+<tr>
+<td>5</td>
+<td>“长江七号”</td>
+</tr>
+<tr>
+<td>6</td>
+<td>“回魂夜”</td>
+</tr>
+<tr>
+<td>7</td>
+<td>“百变星君”</td>
+</tr>
+<tr>
+<td>8</td>
+<td>“英雄本色”</td>
+</tr>
+<tr>
+<td>9</td>
+<td>“建国大业”</td>
+</tr>
+<tr>
+<td>10</td>
+<td>“唐伯虎点秋香”</td>
+</tr>
+</tbody>
+</table>
+<h3 id="自定义推理规则" class="heading-control"><a href="#自定义推理规则" class="headerlink" title="自定义推理规则"></a>自定义推理规则<a class="heading-anchor" href="#自定义推理规则" aria-hidden="true"></a></h3><ul>
+<li>在“databases”文件夹下新建一个文本文件“rules.ttl”，填入如下内容：</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@prefix : &lt;http://www.kgmovie.demo.com#&gt; .</div><div class="line">@prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .</div><div class="line">@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .</div><div class="line">@prefix xsd: &lt;XML Schema&gt; .</div><div class="line">@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .</div><div class="line"></div><div class="line">[ruleComedian: (?p :hasActedIn ?m) (?m :hasGenre ?g) (?g :genreName '喜剧') -&gt; (?p rdf:type :Comedian)]</div><div class="line">[ruleInverse: (?p :hasActedIn ?m) -&gt; (?m :hasActor ?p)]</div></pre></td></tr></tbody></table></figure>
+<ul>
+<li>修改juseki-server配置文件:</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">@prefix :      &lt;http://base/#&gt; .</div><div class="line">@prefix tdb:   &lt;http://jena.hpl.hp.com/2008/tdb#&gt; .</div><div class="line">@prefix rdf:   &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .</div><div class="line">@prefix ja:    &lt;http://jena.hpl.hp.com/2005/11/Assembler#&gt; .</div><div class="line">@prefix rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .</div><div class="line">@prefix fuseki: &lt;http://jena.apache.org/fuseki#&gt; .</div><div class="line"></div><div class="line"></div><div class="line">:service1        a                fuseki:Service ;</div><div class="line">fuseki:dataset                    &lt;#dataset&gt; ;</div><div class="line">fuseki:name                       "kg_demo_movie" ;</div><div class="line">fuseki:serviceQuery               "query" , "sparql" ;</div><div class="line">fuseki:serviceReadGraphStore      "get" ;</div><div class="line">fuseki:serviceReadWriteGraphStore "data" ;</div><div class="line">fuseki:serviceUpdate              "update" ;</div><div class="line">fuseki:serviceUpload              "upload" .</div><div class="line"></div><div class="line"></div><div class="line">&lt;#dataset&gt; rdf:type ja:RDFDataset ;</div><div class="line">    ja:defaultGraph &lt;#model_inf&gt; ;</div><div class="line">    .</div><div class="line"></div><div class="line">&lt;#model_inf&gt; a ja:InfModel ;</div><div class="line">    ja:baseModel &lt;#tdbGraph&gt; ;</div><div class="line"></div><div class="line">    #本体文件的路径</div><div class="line">    ja:content [ja:externalContent &lt;file:////home/gao/software/apache-jena-fuseki-3.6.0/run/databases/kgdemo.ttl&gt; ] ;</div><div class="line">    </div><div class="line">    #关闭OWL推理机</div><div class="line">    #ja:reasoner [ja:reasonerURL &lt;http://jena.hpl.hp.com/2003/OWLFBRuleReasoner&gt;] .</div><div class="line">	</div><div class="line">	#开启规则推理机，并指定规则文件路径</div><div class="line">    ja:reasoner [</div><div class="line">        ja:reasonerURL &lt;http://jena.hpl.hp.com/2003/GenericRuleReasoner&gt; ; </div><div class="line">        ja:rulesFrom &lt;file:////home/gao/software/apache-jena-fuseki-3.6.0/run/databases/rules.ttl&gt; ; ]</div><div class="line">    .</div><div class="line">&lt;#tdbGraph&gt; rdf:type tdb:GraphTDB ;</div><div class="line">    tdb:dataset &lt;#tdbDataset&gt; ;</div><div class="line">    .</div><div class="line"></div><div class="line">&lt;#tdbDataset&gt; rdf:type tdb:DatasetTDB ;</div><div class="line">    tdb:location "/home/gao/software/kgdemo/tdb" ;</div><div class="line">    .</div></pre></td></tr></tbody></table></figure>
+<ul>
+<li>查询:</li>
+</ul>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> n <span class="keyword">WHERE</span> {</div><div class="line">?x rdf:<span class="keyword">type</span> :Comedian.</div><div class="line">?x :personName ?n.</div><div class="line">}</div><div class="line"><span class="keyword">limit</span> <span class="number">10</span></div></pre></td></tr></tbody></table></figure>
+<p>结果如下:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>n</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>“邓浩光”</td>
+</tr>
+<tr>
+<td>2</td>
+<td>“梁朝伟”</td>
+</tr>
+<tr>
+<td>3</td>
+<td>“杨恭如”</td>
+</tr>
+<tr>
+<td>4</td>
+<td>“梁韵蕊”</td>
+</tr>
+<tr>
+<td>5</td>
+<td>“吴宇森”</td>
+</tr>
+<tr>
+<td>6</td>
+<td>“徐锦江”</td>
+</tr>
+<tr>
+<td>7</td>
+<td>“黄家驹”</td>
+</tr>
+<tr>
+<td>8</td>
+<td>“叶进”</td>
+</tr>
+<tr>
+<td>9</td>
+<td>“午马”</td>
+</tr>
+<tr>
+<td>10</td>
+<td>“梁咏琪”</td>
+</tr>
+</tbody>
+</table>
+<h3 id="TODO" class="heading-control"><a href="#TODO" class="headerlink" title="TODO"></a>TODO<a class="heading-anchor" href="#TODO" aria-hidden="true"></a></h3><p>不用sparql，用natural language查询结果<br>query-answer</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/知识图谱/" rel="tag"># 知识图谱</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/26/sparql/" rel="next" title="sparql 笔记">
+                <i class="fa fa-chevron-left"></i> sparql 笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/10/构建IT领域概念图谱/" rel="prev" title="构建IT领域概念图谱">
+                构建IT领域概念图谱 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bf0d73c76c44624" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/22975826?v=3&s=460"
+               alt="yikayiyo" />
+          <p class="site-author-name" itemprop="name">yikayiyo</p>
+           
+              <p class="site-description motion-element" itemprop="description">浪漫在哪里</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yikayiyo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://music.163.com/#/user/home?id=60564099" target="_blank" title="网易云">
+                  
+                    <i class="fa fa-fw fa-music"></i>
+                  
+                  网易云
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验环境"><span class="nav-number">1.</span> <span class="nav-text">实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备"><span class="nav-number">2.</span> <span class="nav-text">准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据"><span class="nav-number">2.1.</span> <span class="nav-text">数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本体建模"><span class="nav-number">2.2.</span> <span class="nav-text">本体建模</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据转换"><span class="nav-number">3.</span> <span class="nav-text">数据转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-gt-RDF"><span class="nav-number">3.1.</span> <span class="nav-text">mysql -> RDF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bug-To-Fix"><span class="nav-number">3.2.</span> <span class="nav-text">Bug To Fix</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jena-SPARQL-endpoint及推理"><span class="nav-number">4.</span> <span class="nav-text">jena SPARQL endpoint及推理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jena示例"><span class="nav-number">4.1.</span> <span class="nav-text">jena示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义推理规则"><span class="nav-number">4.2.</span> <span class="nav-text">自定义推理规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TODO"><span class="nav-number">4.3.</span> <span class="nav-text">TODO</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yikayiyo</span>
+</div>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共26.4k字</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/assets/hijiki.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>

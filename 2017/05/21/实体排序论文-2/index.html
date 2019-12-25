@@ -1,0 +1,985 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="实体排序,相似度计算,集成学习," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Gao" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="知识图谱中实体相似度计算研究知识图谱  本质是一种语义网络,结点代表实体或概念,边代表实体或概念间的各种语义关系.一个含有大量实体的知识库,如果构建得当,实体信息表示得当,可以很方便的供我们分析处理. 相似实体  对于实体间关系的研究,目前较多的集中在相似性的度量.判断实体之间的相似度首先要理解实体的语义信息,传统的字符串匹配不可行,例如让你从刘德华和马德华和张学友中选两个相似度较高的,">
+<meta name="keywords" content="实体排序,相似度计算,集成学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实体排序论文-2">
+<meta property="og:url" content="https://yikayiyo.github.io/2017/05/21/实体排序论文-2/index.html">
+<meta property="og:site_name" content="Gao">
+<meta property="og:description" content="知识图谱中实体相似度计算研究知识图谱  本质是一种语义网络,结点代表实体或概念,边代表实体或概念间的各种语义关系.一个含有大量实体的知识库,如果构建得当,实体信息表示得当,可以很方便的供我们分析处理. 相似实体  对于实体间关系的研究,目前较多的集中在相似性的度量.判断实体之间的相似度首先要理解实体的语义信息,传统的字符串匹配不可行,例如让你从刘德华和马德华和张学友中选两个相似度较高的,">
+<meta property="og:updated_time" content="2017-05-23T08:20:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="实体排序论文-2">
+<meta name="twitter:description" content="知识图谱中实体相似度计算研究知识图谱  本质是一种语义网络,结点代表实体或概念,边代表实体或概念间的各种语义关系.一个含有大量实体的知识库,如果构建得当,实体信息表示得当,可以很方便的供我们分析处理. 相似实体  对于实体间关系的研究,目前较多的集中在相似性的度量.判断实体之间的相似度首先要理解实体的语义信息,传统的字符串匹配不可行,例如让你从刘德华和马德华和张学友中选两个相似度较高的,">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yikayiyo.github.io/2017/05/21/实体排序论文-2/"/>
+
+
+
+
+
+  <title> 实体排序论文-2 | Gao </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/05/21/实体排序论文-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yikayiyo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/22975826?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                实体排序论文-2
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-21T10:59:19+08:00">
+                2017-05-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-05-23T16:20:04+08:00">
+                2017-05-23
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="知识图谱中实体相似度计算研究" class="heading-control"><a href="#知识图谱中实体相似度计算研究" class="headerlink" title="知识图谱中实体相似度计算研究"></a>知识图谱中实体相似度计算研究<a class="heading-anchor" href="#知识图谱中实体相似度计算研究" aria-hidden="true"></a></h3><h4 id="知识图谱" class="heading-control"><a href="#知识图谱" class="headerlink" title="知识图谱"></a>知识图谱<a class="heading-anchor" href="#知识图谱" aria-hidden="true"></a></h4><p>  本质是一种语义网络,结点代表实体或概念,边代表实体或概念间的各种语义关系.一个含有大量实体的知识库,如果构建得当,实体信息表示得当,可以很方便的供我们分析处理.</p>
+<h4 id="相似实体" class="heading-control"><a href="#相似实体" class="headerlink" title="相似实体"></a>相似实体<a class="heading-anchor" href="#相似实体" aria-hidden="true"></a></h4><p>  对于实体间关系的研究,目前较多的集中在相似性的度量.判断实体之间的相似度首先要理解实体的语义信息,传统的字符串匹配不可行,例如让你从刘德华和马德华和张学友中选两个相似度较高的,<a id="more"></a>你肯定会说是刘德华和张学友,尽管从字符串匹配的角度看,刘德华和马德华匹配度更高.<br>  在数据结构化存储的知识库中,实体属性可以作为相似度判断的主要依据.而如何度量属性上的相似度是解决问题的关键.文本型属性的相似度计算是更研究重点.</p>
+<h4 id="本文贡献" class="heading-control"><a href="#本文贡献" class="headerlink" title="本文贡献"></a>本文贡献<a class="heading-anchor" href="#本文贡献" aria-hidden="true"></a></h4><ol>
+<li>提出知识图谱中实体相似度的通用方法,可以处理各种类型的属性值,包括数值型,列表型,文本型；</li>
+<li>文本型数据的相似度计算中使用了语义模型,增加了实体在语义上的相似度；</li>
+<li>实体的相似度计算中,使用了集成学习的方法,提高分类的正确率；</li>
+</ol>
+<h4 id="相关工作" class="heading-control"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作<a class="heading-anchor" href="#相关工作" aria-hidden="true"></a></h4><ol>
+<li>相似实体推荐在诸多领域得到广泛应用.如电商和搜索引擎中的推荐系统；医疗领域可以评注病人之间的相似度,辅助医生决策.</li>
+<li>对于文本相似度计算,有基于统计的方法和基于语义分析的方法.基于统计的方法通常采用VSM进行文本表示,将文本表示为特征词集合,根据词频提取关键特征词,计算在关键特征词向量空间上的相似度,来代表文本相似度.基于语义分析的方法,考虑了词语间的语义关系,即近义词.</li>
+</ol>
+<h4 id="算法设计" class="heading-control"><a href="#算法设计" class="headerlink" title="算法设计"></a>算法设计<a class="heading-anchor" href="#算法设计" aria-hidden="true"></a></h4><p>假设:</p>
+<ol>
+<li>不同类别实体对相似度为0；</li>
+<li>实体与自身相似度为4；</li>
+<li>实体对相似度满足对称性,即实体1和实体2的相似度等于实体2和实体1的相似度；</li>
+</ol>
+<h5 id="数据预处理" class="heading-control"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理<a class="heading-anchor" href="#数据预处理" aria-hidden="true"></a></h5><p>  剔除不满足上述假设的数据,占比0.9%；<br>  列表型数据中属性表达不一致的进行归一化,例如普通话,中文,汉语,简体中文等归为汉语；</p>
+<h5 id="特征生成" class="heading-control"><a href="#特征生成" class="headerlink" title="特征生成"></a>特征生成<a class="heading-anchor" href="#特征生成" aria-hidden="true"></a></h5><p>  对于不同类型的属性值,采用不同的计算方法:</p>
+<ol>
+<li>对于数值型的属性:<br>$$<br>D(d_i,d_j)=\frac{|d_j-d_i|}{Max(d_n)-Min(d_n)}<br>$$<br>  D的值域在[0,1],di和dj差值越大D越大,表示它们之间的相似度越小.</li>
+<li>对于列表型的属性,采用Jaccard计算相似度:<br>$$<br>Jaccard(A,B)=\frac{|A\cap B|}{|A\cup B|}<br>$$<br>  Jaccard的值域在[0,1],越大相似度越高.</li>
+<li>对于文本型的属性,首先进行分词,计算得到TF-IDF向量.使用余弦相似度衡量相似性:<br>$$<br>CosSim=\frac{\sum_{i=1}^n(A_i*B_i)}{\sqrt{\sum_{i=1}^N(A_i)^2}*\sqrt{\sum_{i=1}^N(B_i)^2}}<br>$$</li>
+</ol>
+<p>  引入LDA得到降维了的主题模型向量,使用余弦相似度和Hellinger距离衡量向量间的相似性:<br>$$<br>H(P,Q)=\frac1{\sqrt2}\sqrt{\sum_{i=1}^{k}(\sqrt{p_i}-\sqrt{q_i})^2}<br>$$</p>
+<h5 id="模型选择" class="heading-control"><a href="#模型选择" class="headerlink" title="模型选择"></a>模型选择<a class="heading-anchor" href="#模型选择" aria-hidden="true"></a></h5><p>  提到了机器学习中涉及到的一些基本方法.</p>
+<h5 id="算法总结" class="heading-control"><a href="#算法总结" class="headerlink" title="算法总结"></a>算法总结<a class="heading-anchor" href="#算法总结" aria-hidden="true"></a></h5><p>  主要是2个模块:特征生成和分类器训练<br>  数据约束:不同类别下的实体,属性会有不同,维度也有差异；同类别下的实体特征维度相同；<br>  需要对不同类别的实体训练不同的分类器；</p>
+<h4 id="实验结果" class="heading-control"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果<a class="heading-anchor" href="#实验结果" aria-hidden="true"></a></h4><p>  引入集成学习效果并不明显,但是比单一分类效果好.</p>
+<h4 id="TODO" class="heading-control"><a href="#TODO" class="headerlink" title="TODO"></a>TODO<a class="heading-anchor" href="#TODO" aria-hidden="true"></a></h4><p>  特征之间加区分度.</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/实体排序/" rel="tag"># 实体排序</a>
+          
+            <a href="/tags/相似度计算/" rel="tag"># 相似度计算</a>
+          
+            <a href="/tags/集成学习/" rel="tag"># 集成学习</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/23/2!=True/" rel="next" title="2!=True">
+                <i class="fa fa-chevron-left"></i> 2!=True
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/18/实体排序论文-1/" rel="prev" title="实体排序论文-1">
+                实体排序论文-1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bf0d73c76c44624" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/22975826?v=3&s=460"
+               alt="yikayiyo" />
+          <p class="site-author-name" itemprop="name">yikayiyo</p>
+           
+              <p class="site-description motion-element" itemprop="description">浪漫在哪里</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yikayiyo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://music.163.com/#/user/home?id=60564099" target="_blank" title="网易云">
+                  
+                    <i class="fa fa-fw fa-music"></i>
+                  
+                  网易云
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识图谱中实体相似度计算研究"><span class="nav-number">1.</span> <span class="nav-text">知识图谱中实体相似度计算研究</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#知识图谱"><span class="nav-number">1.1.</span> <span class="nav-text">知识图谱</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相似实体"><span class="nav-number">1.2.</span> <span class="nav-text">相似实体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本文贡献"><span class="nav-number">1.3.</span> <span class="nav-text">本文贡献</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相关工作"><span class="nav-number">1.4.</span> <span class="nav-text">相关工作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法设计"><span class="nav-number">1.5.</span> <span class="nav-text">算法设计</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据预处理"><span class="nav-number">1.5.1.</span> <span class="nav-text">数据预处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#特征生成"><span class="nav-number">1.5.2.</span> <span class="nav-text">特征生成</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#模型选择"><span class="nav-number">1.5.3.</span> <span class="nav-text">模型选择</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#算法总结"><span class="nav-number">1.5.4.</span> <span class="nav-text">算法总结</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实验结果"><span class="nav-number">1.6.</span> <span class="nav-text">实验结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TODO"><span class="nav-number">1.7.</span> <span class="nav-text">TODO</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yikayiyo</span>
+</div>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共26.4k字</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/assets/hijiki.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>

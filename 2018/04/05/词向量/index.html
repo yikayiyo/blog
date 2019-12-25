@@ -1,0 +1,1032 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="学习笔记,machine learning,TensorFlow," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Gao" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="关键词：model base, variable sharing, model sharing word2vec 文本的分布式表示是许多自然语言处理任务的基础 word2vec是用来生成词语分布式表示的一组模型 主要有两种模型：skip-gram和CBOW 算法角度：CBOW模型从上下文词预测目标词，skip-gram模型从目标词预测上下文词">
+<meta name="keywords" content="学习笔记,machine learning,TensorFlow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="word2vec + manage experiments">
+<meta property="og:url" content="https://yikayiyo.github.io/2018/04/05/词向量/index.html">
+<meta property="og:site_name" content="Gao">
+<meta property="og:description" content="关键词：model base, variable sharing, model sharing word2vec 文本的分布式表示是许多自然语言处理任务的基础 word2vec是用来生成词语分布式表示的一组模型 主要有两种模型：skip-gram和CBOW 算法角度：CBOW模型从上下文词预测目标词，skip-gram模型从目标词预测上下文词">
+<meta property="og:updated_time" content="2018-07-25T06:51:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="word2vec + manage experiments">
+<meta name="twitter:description" content="关键词：model base, variable sharing, model sharing word2vec 文本的分布式表示是许多自然语言处理任务的基础 word2vec是用来生成词语分布式表示的一组模型 主要有两种模型：skip-gram和CBOW 算法角度：CBOW模型从上下文词预测目标词，skip-gram模型从目标词预测上下文词">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yikayiyo.github.io/2018/04/05/词向量/"/>
+
+
+
+
+
+  <title> word2vec + manage experiments | Gao </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2018/04/05/词向量/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yikayiyo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/22975826?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                word2vec + manage experiments
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-05T22:30:10+08:00">
+                2018-04-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-07-25T14:51:00+08:00">
+                2018-07-25
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关键词：model base, variable sharing, model sharing</p>
+<h4 id="word2vec" class="heading-control"><a href="#word2vec" class="headerlink" title="word2vec"></a>word2vec<a class="heading-anchor" href="#word2vec" aria-hidden="true"></a></h4><ul>
+<li>文本的分布式表示是许多自然语言处理任务的基础</li>
+<li>word2vec是用来生成词语分布式表示的一组模型</li>
+<li>主要有两种模型：skip-gram和CBOW</li>
+<li>算法角度：CBOW模型从上下文词预测目标词，skip-gram模型从目标词预测上下文词<a id="more"></a></li>
+<li>统计角度：CBOW模型将an entire context as one observation，这样做smoothes over了许多分布信息，适合小一些的数据集上；skip-gram模型则是将<strong>each</strong> context-target pair as a new observation，在larger datasets上表现更好</li>
+<li>训练词向量：定义一个单层网络，任务是给定中心词预测词典中的词作为上下文词的概率，我们最后要的是隐含层的权重参数</li>
+<li>使用 softmax 来获得可能的目标词的分布，分母要对字典中的所有词取指数再求和，计算是瓶颈</li>
+<li>规避瓶颈的方法：层次化的softmax 和基于采样的 softmax </li>
+<li>文章<strong>Distributed Representations of Words and Phrases and their Compositionality </strong>指出，训练skip-gram模型时，与更复杂的分层softmax相比，负采样可以加快训练速度，为频繁词汇提供更好的向量表示</li>
+<li>负采样实际上是一种称为噪声对比估计（NCE）的简化模型，基于假设，如噪声样本的数量k和噪声样本的分布Q满足kQ(w) = 1，来简化计算；理论上不能保证其导数和softmax梯度一致</li>
+<li>NCE则随着noise样本增多，提供了这种保证</li>
+<li>负采样和NCE只在训练时有用</li>
+</ul>
+<h4 id="Implementing" class="heading-control"><a href="#Implementing" class="headerlink" title="Implementing"></a>Implementing<a class="heading-anchor" href="#Implementing" aria-hidden="true"></a></h4><ul>
+<li>词的indices作为输入（一个scalar），</li>
+<li>BATCH_SIZE的样本，输入维度为[BATCH_SIZE]，输出维度为[BATCH_SIZE,1]</li>
+<li>词向量矩阵维度为[VOCAB_SIZE,EMBED_SIZE]，每一行代表一个词向量</li>
+<li>利用tf.nn.embedding_lookup()找中心词对应的向量，免去了不必要的计算（matrix and onehot vector）</li>
+<li>loss使用tf.nn.nce_loss()，optimizer使用GradientDescentOptimizer</li>
+</ul>
+<h4 id="Structure-TF-models" class="heading-control"><a href="#Structure-TF-models" class="headerlink" title="Structure TF models"></a>Structure TF models<a class="heading-anchor" href="#Structure-TF-models" aria-hidden="true"></a></h4><p>定义图</p>
+<ul>
+<li>导入数据（placeholder or tf.data）</li>
+<li>定义权重</li>
+<li>定义模型</li>
+<li>定义损失函数</li>
+<li>定义优化器</li>
+</ul>
+<p>执行图</p>
+<ul>
+<li>初始化所有变量</li>
+<li>初始化迭代器或者feed in训练数据</li>
+<li>数据经过模型得到结果</li>
+<li>计算cost</li>
+<li>调整模型参数使得cost最小或者最大</li>
+</ul>
+<p>build model as a class in order to reuse easily.</p>
+<h4 id="Variable-sharing" class="heading-control"><a href="#Variable-sharing" class="headerlink" title="Variable sharing"></a>Variable sharing<a class="heading-anchor" href="#Variable-sharing" aria-hidden="true"></a></h4><p>Name scope</p>
+<p>将相关的ops放在一个name_scope下，这样得到的图在TensorBoard上是一块一块的，更加整洁。<br>TensorBoard图中三种边：</p>
+<ol>
+<li>灰实边：数据流</li>
+<li>橙实边：参考边，op_lest影响op_right</li>
+<li>灰虚边：控制依赖边，op_left依赖于op_right</li>
+</ol>
+<p>Variable scope</p>
+<p>和Name scope一样都创建了namespace，调用tf.variable_scope(“name”)会隐式地调用tf.name_scope(“name”)，Variable scope主要功能是促进变量共享（facilitate variable sharing)<br>为实现变量共享:</p>
+<ol>
+<li>使用 <strong>tf.get_variable()</strong>,它会在创建变量之前检查其是否存在</li>
+<li>将所用到的变量放到一个VarScope，将这个VarScope设置为可复用的（reusable）</li>
+</ol>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fully_connected</span><span class="params">(x,output_dim,scope_name)</span>:</span> <span class="comment">#	基础组件：全连接层</span></div><div class="line">    <span class="keyword">with</span> tf.variable_scope(scope_name):</div><div class="line">        w = tf.get_variable(<span class="string">"weights"</span>,[x.shape[<span class="number">1</span>],output_dim],initializer=tf.random_normal_initializer())</div><div class="line">        b = tf.get_variable(<span class="string">"bias"</span>,[output_dim],initializer= tf.constant_initializer(<span class="number">0.0</span>))</div><div class="line">        <span class="keyword">return</span> tf.matmul(x,w) + b</div><div class="line">        </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">two_hidden_layer</span><span class="params">(x)</span>:</span>  <span class="comment">#网络结构：两个全连接层</span></div><div class="line">    h1 = fully_connected(x,<span class="number">50</span>,<span class="string">'h1'</span>)</div><div class="line">    h2 = fully_connected(h1,<span class="number">10</span>,<span class="string">'h2'</span>)</div><div class="line">    </div><div class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">'two_layers'</span>) <span class="keyword">as</span> scope: <span class="comment">#调用网络，输入x1，x2</span></div><div class="line">    logits1 = two_hidden_layer(x1)</div><div class="line">    scope.reuse_variables()</div><div class="line">    logits2 = two_hidden_layer(x2）</div></pre></td></tr></tbody></table></figure>
+<p>以上代码模式，基础组件可以定义更多，比如conv，relu，网络结构可以更复杂，比如放一个ResNet，非常容易scale。<br>由于使用了变量共享，多次传入x，网络TensorBoard图的复杂程度不会爆炸式增加。</p>
+<p>Graph collections</p>
+<p>使用这个，可以获取满足一定条件的所有变量，tf.get_collection(key,scope=None)<br>比如执行optimizer的时候，默认情况下它会获取key=tf.GraphKeys.TRAINABLE_VARIABLES的变量，即所有可训练的变量（当然也可以传入指定的、要训练的变量<br>获取某个scope下的所有变量，tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES,scope=’scope_name’)<br>key还有许多其它的值，见官网。</p>
+<h4 id="Manage-experiments" class="heading-control"><a href="#Manage-experiments" class="headerlink" title="Manage experiments"></a>Manage experiments<a class="heading-anchor" href="#Manage-experiments" aria-hidden="true"></a></h4><p>实验总是很久，中断随时发生，因此训练可以随时随地停止、像没事一样恢复，非常重要。<br>另外一个问题是论文结果复现，控制实验的随机因子对复现结果非常关键。</p>
+<p>tf.train.Saver()</p>
+<p><strong>周期性地保存模型参数</strong>是个好习惯<br>tf.train.Saver()类将图的<strong>变量保存</strong>（不是整张图）到二进制文件，也就是一个checkpoint（变量名到tensors的映射）</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#定义模型</span></div><div class="line">...</div><div class="line">global_steps = tf.Variable(<span class="number">0</span>, trainable=<span class="keyword">False</span>，name=<span class="string">'global_steps'</span>)</div><div class="line">optimizer = tf.train.GradientDescentOptimizer(lr).minimize(loss,global_step=global_steps)</div><div class="line"><span class="comment">#创建一个saver对象</span></div><div class="line">saver = tf.train.Saver()</div><div class="line"></div><div class="line"><span class="comment">#启动一个会话来执行计算</span></div><div class="line"><span class="keyword">with</span> tf.session() <span class="keyword">as</span> sess:</div><div class="line">	<span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">1</span>,training_steps):</div><div class="line">        sess.run([optimizer]) <span class="comment">#global_step会在每一步训练后自加1</span></div><div class="line">        <span class="keyword">if</span> step%<span class="number">1000</span>==<span class="number">0</span>:</div><div class="line">            <span class="comment">#这里传入step也差不多吧...默认保存图中所有变量</span></div><div class="line">            saver.save(sess,<span class="string">'checkpoints/model-name'</span>,global_step=global_steps)</div></pre></td></tr></tbody></table></figure>
+<p>生成的checkpoint名，像这样，’checkpoints/skip-gram-10000’<br>在恢复模型时可以直接传入checkpoint名（如果有的话</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ckpt = tf.train.get_checkpoint_state(os.path.dirname(<span class="string">'checkpoints/model-name'</span>))</div><div class="line"><span class="keyword">if</span> ckpt <span class="keyword">and</span> ckpt.model_checkpoint_path:</div><div class="line">    saver.restore(sess,ckpt.model_checkpoint_path) <span class="comment">#恢复的是最近的一个check point</span></div></pre></td></tr></tbody></table></figure>
+<p>恢复的时候，网络图还得自己重新搭（still have to create the graph ourselves）之后再加载变量<br>当然，经常的做法是到目前为止表现最好的参数也保存下来（不止是最近的一次）</p>
+<p>tf.summary</p>
+<p>记录模型训练过程中指标变化，包括loss，accuracy等等</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#创建summaries</span></div><div class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">"summaries"</span>):</div><div class="line">    tf.summary.scalar(<span class="string">"loss"</span>,loss)</div><div class="line">    tf.summary.histogram(<span class="string">"histogram loss"</span>,loss)</div><div class="line">    tf.summary.scalar(<span class="string">"accuracy"</span>,accuracy)</div><div class="line">    summary_op = tf.summary.merge_all()</div><div class="line"></div><div class="line"><span class="comment">#执行summary op</span></div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">    <span class="keyword">for</span> step <span class="keyword">in</span> range(steps):</div><div class="line">        _loss,_,summary = sess.run([model.loss,model.optimizer,model.summary_op],feed_dict={...})</div><div class="line">        writer = tf.summary.FileWriter(<span class="string">'path'</span>+str(lr),sess.graph) <span class="comment">#将lr写入路径，方便tensorboard对比</span></div><div class="line">        writer.add(summary,global_step=step) <span class="comment">#记录每一个step的summary</span></div><div class="line">    writer.close()</div></pre></td></tr></tbody></table></figure>
+<p>control randomization</p>
+<p>为了使得别人在实验时结果会与你一致</p>
+<ol>
+<li><p>op级别<br>所有的tensor初始化时都传入seed参数<br>session记录了随机状态，每一个新的session都会重新start the random state</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">c = tf.random_uniform([],<span class="number">-10</span>,<span class="number">10</span>,seed=<span class="number">2</span>)</div><div class="line">d = tf.random_uniform([],<span class="number">-10</span>,<span class="number">10</span>,seed=<span class="number">2</span>)</div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">    print(sess.run(c)) <span class="comment">#value: a</span></div><div class="line">    print(sess.run(d)) <span class="comment">#same value: a</span></div><div class="line">    print(sess.run(c)) <span class="comment">#value: b</span></div></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>graph级别<br>比如demo1.py和demo2.py代码相同，设置了tf.set_random_seed(seed)的话执行结果是相同的</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">tf.set_random_seed(<span class="number">2</span>)</div><div class="line">c = tf.random_uniform([],<span class="number">-10</span>,<span class="number">10</span>)</div><div class="line">d = tf.random_uniform([],<span class="number">-10</span>,<span class="number">10</span>)</div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">    print(sess.run(c)) <span class="comment"># 都是a</span></div><div class="line">    print(sess.run(d)) <span class="comment"># 都是b</span></div></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
+          
+            <a href="/tags/TensorFlow/" rel="tag"># TensorFlow</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/25/python异步/" rel="next" title="异步网络编程">
+                <i class="fa fa-chevron-left"></i> 异步网络编程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/29/TensorFlow02/" rel="prev" title="linear and logistic regression in TensorFlow">
+                linear and logistic regression in TensorFlow <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bf0d73c76c44624" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/22975826?v=3&s=460"
+               alt="yikayiyo" />
+          <p class="site-author-name" itemprop="name">yikayiyo</p>
+           
+              <p class="site-description motion-element" itemprop="description">浪漫在哪里</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yikayiyo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://music.163.com/#/user/home?id=60564099" target="_blank" title="网易云">
+                  
+                    <i class="fa fa-fw fa-music"></i>
+                  
+                  网易云
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#word2vec"><span class="nav-number">1.</span> <span class="nav-text">word2vec</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Implementing"><span class="nav-number">2.</span> <span class="nav-text">Implementing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Structure-TF-models"><span class="nav-number">3.</span> <span class="nav-text">Structure TF models</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Variable-sharing"><span class="nav-number">4.</span> <span class="nav-text">Variable sharing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Manage-experiments"><span class="nav-number">5.</span> <span class="nav-text">Manage experiments</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yikayiyo</span>
+</div>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共26.4k字</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/assets/hijiki.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>
