@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Misbehavior</title>
   
-  <subtitle>南风北上 一切都是刚刚开始</subtitle>
+  
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yikayiyo.github.io/"/>
@@ -10,7 +10,7 @@
   <id>https://yikayiyo.github.io/</id>
   
   <author>
-    <name>XiaoLi</name>
+    <name>yikayiyo</name>
     
   </author>
   
