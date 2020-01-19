@@ -1,0 +1,1005 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="学习笔记,java,并行编程," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Misbehavior" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Parallel Loops未知循环次数，利用了指针的for循环每一个迭代当作一个子任务，finish约束整个循环 1234finish {    for (p = head; p != null ; p = p.next)         async compute(p);} 已知循环次数n，可以利用forall 123// vector additionforall (i : [0:n-1])">
+<meta name="keywords" content="学习笔记,java,并行编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Loop Parallelism">
+<meta property="og:url" content="https://yikayiyo.github.io/2020/01/13/Loop Parallelism/index.html">
+<meta property="og:site_name" content="Misbehavior">
+<meta property="og:description" content="Parallel Loops未知循环次数，利用了指针的for循环每一个迭代当作一个子任务，finish约束整个循环 1234finish {    for (p = head; p != null ; p = p.next)         async compute(p);} 已知循环次数n，可以利用forall 123// vector additionforall (i : [0:n-1])">
+<meta property="og:updated_time" content="2020-01-19T08:10:19.891Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Loop Parallelism">
+<meta name="twitter:description" content="Parallel Loops未知循环次数，利用了指针的for循环每一个迭代当作一个子任务，finish约束整个循环 1234finish {    for (p = head; p != null ; p = p.next)         async compute(p);} 已知循环次数n，可以利用forall 123// vector additionforall (i : [0:n-1])">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yikayiyo.github.io/2020/01/13/Loop Parallelism/"/>
+
+
+
+
+
+  <title> Loop Parallelism | Misbehavior </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Misbehavior</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2020/01/13/Loop Parallelism/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yikayiyo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/a004d41c238dac41bbaf0850c4ed2bc1?s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misbehavior">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Loop Parallelism
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-13T13:49:17+08:00">
+                2020-01-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-19T16:10:19+08:00">
+                2020-01-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  705 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Parallel-Loops" class="heading-control"><a href="#Parallel-Loops" class="headerlink" title="Parallel Loops"></a>Parallel Loops<a class="heading-anchor" href="#Parallel-Loops" aria-hidden="true"></a></h3><p>未知循环次数，利用了指针的for循环<br>每一个迭代当作一个子任务，<code>finish</code>约束整个循环</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">finish {</div><div class="line">    <span class="keyword">for</span> (p = head; p != <span class="keyword">null</span> ; p = p.next) </div><div class="line">        <span class="function">async <span class="title">compute</span><span class="params">(p)</span></span>;</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<p>已知循环次数n，可以利用<code>forall</code></p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// vector addition</span></div><div class="line">forall (i : [<span class="number">0</span>:n-<span class="number">1</span>]) </div><div class="line">    a[i] = b[i] + c[i]</div></pre></td></tr></tbody></table></figure>
+<p>利用 Java streams，上述功能有更加简洁的表达方式<br></p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">a = IntStream.rangeClosed(<span class="number">0</span>, N-<span class="number">1</span>).parallel().toArray(i -&gt; b[i] + c[i]);</div></pre></td></tr></tbody></table></figure><p></p>
+<a id="more"></a>
+<h3 id="Parallel-Matrix-Multiplication" class="heading-control"><a href="#Parallel-Matrix-Multiplication" class="headerlink" title="Parallel Matrix Multiplication"></a>Parallel Matrix Multiplication<a class="heading-anchor" href="#Parallel-Matrix-Multiplication" aria-hidden="true"></a></h3><p>假设两个<code>n*n</code>的矩阵相乘，有</p>
+<p>$$<br>c[i][j] = \sum_{k=0}^{n-1} a[i][k] * b[k][j]<br>$$<br>伪代码表示为</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(i : [<span class="number">0</span>:n-<span class="number">1</span>]) {</div><div class="line">  <span class="keyword">for</span>(j : [<span class="number">0</span>:n-<span class="number">1</span>]) { c[i][j] = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(k : [<span class="number">0</span>:n-<span class="number">1</span>]) {</div><div class="line">      c[i][j] = c[i][j] + a[i][k]*b[k][j]</div><div class="line">    }</div><div class="line">  }</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<p>要替换成并行计算，可以简单地将外两层的for循环改成<code>forall</code></p>
+<p>for-k 必须是线性的，因为这里有写数据（data race</p>
+<h3 id="Barriers-in-Parallel-Loops" class="heading-control"><a href="#Barriers-in-Parallel-Loops" class="headerlink" title="Barriers in Parallel Loops"></a>Barriers in Parallel Loops<a class="heading-anchor" href="#Barriers-in-Parallel-Loops" aria-hidden="true"></a></h3><p>下面有一个简单的并行任务</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">forall (i : [<span class="number">0</span>:n-<span class="number">1</span>]) {</div><div class="line">    myId = lookup(i); <span class="comment">// convert int to a string </span></div><div class="line">    print HELLO, myId;</div><div class="line">    print BYE, myId;</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<p>在不同的执行下会有不同顺序的结果（相同myId对应的HELLO一定在BYE之前</p>
+<p>barriers可以将一个parallel loop分为不同的阶段</p>
+<p>在两个print之间插入一个barrier，可以保证所有的HELLO出现在BYE之前</p>
+<p>两种写法：</p>
+<ul>
+<li><p>在一个<code>forall</code>循环中插入barriers分为不同的阶段 (两个对应的print共享myId</p>
+</li>
+<li><p>为每个阶段写自己的<code>forall</code>循环 (借助 intermediate data structure  to communicate the myId values from one <em>forall</em> to another <em>forall</em> </p>
+</li>
+</ul>
+<h3 id="Parallel-One-Dimensional-Iterative-Averaging" class="heading-control"><a href="#Parallel-One-Dimensional-Iterative-Averaging" class="headerlink" title="Parallel One-Dimensional Iterative Averaging"></a>Parallel One-Dimensional Iterative Averaging<a class="heading-anchor" href="#Parallel-One-Dimensional-Iterative-Averaging" aria-hidden="true"></a></h3><p>Solve the recurrence<br>$$<br>X<em>i=\frac{X</em>{i-1}+X_{i+1}}2<br>$$</p>
+<p>with boundary conditions<br>$$<br>X_0=0\ and\ X_n=1<br>$$</p>
+<p><a href="https://en.wikipedia.org/wiki/Jacobi_method" target="_blank" rel="external">Jacobi method</a>利用两个数组oldX[] and newX[]迭代求解该问题，并行伪代码如下：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (iter: [<span class="number">0</span>:nsteps-<span class="number">1</span>]) {</div><div class="line">  forall (i: [<span class="number">1</span>:n-<span class="number">1</span>]) {</div><div class="line">    newX[i] = (oldX[i-<span class="number">1</span>] + oldX[i+<span class="number">1</span>]) / <span class="number">2</span>;</div><div class="line">  }</div><div class="line">  swap pointers newX and oldX;</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<p>上述方法创建了 <em>nsteps</em> <em>×</em> (<em>n</em> <em>−</em> 1) 个任务</p>
+<p><strong>使用Barriers可以减少需要创建的任务个数</strong></p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">forall ( i: [<span class="number">1</span>:n-<span class="number">1</span>]) {</div><div class="line">  <span class="keyword">for</span> (iter: [<span class="number">0</span>:nsteps-<span class="number">1</span>]) {</div><div class="line">    newX[i] = (oldX[i-<span class="number">1</span>] + oldX[i+<span class="number">1</span>]) / <span class="number">2</span>;</div><div class="line">    NEXT; <span class="comment">// Barrier</span></div><div class="line">    swap pointers newX and oldX;</div><div class="line">  }</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<p>上述方法只需要创建 <em>(n-1)</em> 个任务</p>
+<p>This is a significant improvement since creating tasks is usually more expensive than performing barrier operations.</p>
+<h3 id="Iteration-Grouping-Chunking-in-Parallel-Loops" class="heading-control"><a href="#Iteration-Grouping-Chunking-in-Parallel-Loops" class="headerlink" title="Iteration Grouping/Chunking in Parallel Loops"></a>Iteration Grouping/Chunking in Parallel Loops<a class="heading-anchor" href="#Iteration-Grouping-Chunking-in-Parallel-Loops" aria-hidden="true"></a></h3><p>对于向量相加问题</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">forall (i : [<span class="number">0</span>:n-<span class="number">1</span>]) a[i] = b[i] + c[i]</div></pre></td></tr></tbody></table></figure>
+<p>上述方法创建了n个任务，当n很大时overheads也会很大</p>
+<p>解决方法</p>
+<p><strong>分组</strong>（<em>loop</em> <em>chunking</em> or <em>iteration grouping</em></p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">forall (g:[<span class="number">0</span>:ng-<span class="number">1</span>])</div><div class="line">  <span class="keyword">for</span> (i : mygroup(g, ng, [<span class="number">0</span>:n-<span class="number">1</span>])) a[i] = b[i] + c[i]</div></pre></td></tr></tbody></table></figure>
+<p>上述方法将任务个数从 <strong>n</strong> 降到了 <strong>ng</strong>（分组个数</p>
+<p>分组方法有两种：</p>
+<ul>
+<li>block<ul>
+<li>将连续的迭代分为一组</li>
+</ul>
+</li>
+<li>cyclic<ul>
+<li>将同余类迭代（ iterations in the same congruence class，分为一组</li>
+</ul>
+</li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/并行编程/" rel="tag"># 并行编程</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/16/Pipelining/" rel="next" title="Data flow Synchronization and Pipelining">
+                <i class="fa fa-chevron-left"></i> Data flow Synchronization and Pipelining
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/10/Functional-Parallelism/" rel="prev" title="Functional Parallelism">
+                Functional Parallelism <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bf0d73c76c44624" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://s.gravatar.com/avatar/a004d41c238dac41bbaf0850c4ed2bc1?s=460"
+               alt="yikayiyo" />
+          <p class="site-author-name" itemprop="name">yikayiyo</p>
+           
+              <p class="site-description motion-element" itemprop="description">浪漫在哪里</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yikayiyo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://music.163.com/#/user/home?id=60564099" target="_blank" title="网易云">
+                  
+                    <i class="fa fa-fw fa-music"></i>
+                  
+                  网易云
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Loops"><span class="nav-number">1.</span> <span class="nav-text">Parallel Loops</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Matrix-Multiplication"><span class="nav-number">2.</span> <span class="nav-text">Parallel Matrix Multiplication</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Barriers-in-Parallel-Loops"><span class="nav-number">3.</span> <span class="nav-text">Barriers in Parallel Loops</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-One-Dimensional-Iterative-Averaging"><span class="nav-number">4.</span> <span class="nav-text">Parallel One-Dimensional Iterative Averaging</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iteration-Grouping-Chunking-in-Parallel-Loops"><span class="nav-number">5.</span> <span class="nav-text">Iteration Grouping/Chunking in Parallel Loops</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小Li</span>
+</div>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共28.8k字</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/assets/hijiki.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>

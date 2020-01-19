@@ -4,6 +4,75 @@
   
     
     <entry>
+      <title>Data flow Synchronization and Pipelining</title>
+      <link href="/2020/01/16/Pipelining/"/>
+      <url>/2020/01/16/Pipelining/</url>
+      
+        <content type="html"><![CDATA[<p><a href="https://www.coursera.org/learn/parallel-programming-in-java/" target="_blank" rel="external">https://www.coursera.org/learn/parallel-programming-in-java/</a></p><h3 id="Split-phase-Barriers-with-Java-Phasers" class="heading-control"><a href="#Split-phase-Barriers-with-Java-Phasers" class="headerlink" title="Split-phase Barriers with Java Phasers"></a>Split-phase Barriers with Java Phasers<a class="heading-anchor" href="#Split-phase-Barriers-with-Java-Phasers" aria-hidden="true"></a></h3><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> 并行编程 </tag>
+            
+            <tag> 学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Loop Parallelism</title>
+      <link href="/2020/01/13/Loop%20Parallelism/"/>
+      <url>/2020/01/13/Loop%20Parallelism/</url>
+      
+        <content type="html"><![CDATA[<h3 id="Parallel-Loops" class="heading-control"><a href="#Parallel-Loops" class="headerlink" title="Parallel Loops"></a>Parallel Loops<a class="heading-anchor" href="#Parallel-Loops" aria-hidden="true"></a></h3><p>未知循环次数，利用了指针的for循环<br>每一个迭代当作一个子任务，<code>finish</code>约束整个循环</p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">finish {</div><div class="line">    <span class="keyword">for</span> (p = head; p != <span class="keyword">null</span> ; p = p.next) </div><div class="line">        <span class="function">async <span class="title">compute</span><span class="params">(p)</span></span>;</div><div class="line">}</div></pre></td></tr></tbody></table></figure><p>已知循环次数n，可以利用<code>forall</code></p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// vector addition</span></div><div class="line">forall (i : [<span class="number">0</span>:n-<span class="number">1</span>]) </div><div class="line">    a[i] = b[i] + c[i]</div></pre></td></tr></tbody></table></figure><p>利用 Java streams，上述功能有更加简洁的表达方式<br></p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">a = IntStream.rangeClosed(<span class="number">0</span>, N-<span class="number">1</span>).parallel().toArray(i -&gt; b[i] + c[i]);</div></pre></td></tr></tbody></table></figure><p></p><a id="more"></a><h3 id="Parallel-Matrix-Multiplication" class="heading-control"><a href="#Parallel-Matrix-Multiplication" class="headerlink" title="Parallel Matrix Multiplication"></a>Parallel Matrix Multiplication<a class="heading-anchor" href="#Parallel-Matrix-Multiplication" aria-hidden="true"></a></h3><p>假设两个<code>n*n</code>的矩阵相乘，有</p><p>$$<br>c[i][j] = \sum_{k=0}^{n-1} a[i][k] * b[k][j]<br>$$<br>伪代码表示为</p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(i : [<span class="number">0</span>:n-<span class="number">1</span>]) {</div><div class="line">  <span class="keyword">for</span>(j : [<span class="number">0</span>:n-<span class="number">1</span>]) { c[i][j] = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(k : [<span class="number">0</span>:n-<span class="number">1</span>]) {</div><div class="line">      c[i][j] = c[i][j] + a[i][k]*b[k][j]</div><div class="line">    }</div><div class="line">  }</div><div class="line">}</div></pre></td></tr></tbody></table></figure><p>要替换成并行计算，可以简单地将外两层的for循环改成<code>forall</code></p><p>for-k 必须是线性的，因为这里有写数据（data race</p><h3 id="Barriers-in-Parallel-Loops" class="heading-control"><a href="#Barriers-in-Parallel-Loops" class="headerlink" title="Barriers in Parallel Loops"></a>Barriers in Parallel Loops<a class="heading-anchor" href="#Barriers-in-Parallel-Loops" aria-hidden="true"></a></h3><p>下面有一个简单的并行任务</p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">forall (i : [<span class="number">0</span>:n-<span class="number">1</span>]) {</div><div class="line">    myId = lookup(i); <span class="comment">// convert int to a string </span></div><div class="line">    print HELLO, myId;</div><div class="line">    print BYE, myId;</div><div class="line">}</div></pre></td></tr></tbody></table></figure><p>在不同的执行下会有不同顺序的结果（相同myId对应的HELLO一定在BYE之前</p><p>barriers可以将一个parallel loop分为不同的阶段</p><p>在两个print之间插入一个barrier，可以保证所有的HELLO出现在BYE之前</p><p>两种写法：</p><ul><li><p>在一个<code>forall</code>循环中插入barriers分为不同的阶段 (两个对应的print共享myId</p></li><li><p>为每个阶段写自己的<code>forall</code>循环 (借助 intermediate data structure  to communicate the myId values from one <em>forall</em> to another <em>forall</em> </p></li></ul><h3 id="Parallel-One-Dimensional-Iterative-Averaging" class="heading-control"><a href="#Parallel-One-Dimensional-Iterative-Averaging" class="headerlink" title="Parallel One-Dimensional Iterative Averaging"></a>Parallel One-Dimensional Iterative Averaging<a class="heading-anchor" href="#Parallel-One-Dimensional-Iterative-Averaging" aria-hidden="true"></a></h3><p>Solve the recurrence<br>$$<br>X<em>i=\frac{X</em>{i-1}+X_{i+1}}2<br>$$</p><p>with boundary conditions<br>$$<br>X_0=0\ and\ X_n=1<br>$$</p><p><a href="https://en.wikipedia.org/wiki/Jacobi_method" target="_blank" rel="external">Jacobi method</a>利用两个数组oldX[] and newX[]迭代求解该问题，并行伪代码如下：</p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (iter: [<span class="number">0</span>:nsteps-<span class="number">1</span>]) {</div><div class="line">  forall (i: [<span class="number">1</span>:n-<span class="number">1</span>]) {</div><div class="line">    newX[i] = (oldX[i-<span class="number">1</span>] + oldX[i+<span class="number">1</span>]) / <span class="number">2</span>;</div><div class="line">  }</div><div class="line">  swap pointers newX and oldX;</div><div class="line">}</div></pre></td></tr></tbody></table></figure><p>上述方法创建了 <em>nsteps</em> <em>×</em> (<em>n</em> <em>−</em> 1) 个任务</p><p><strong>使用Barriers可以减少需要创建的任务个数</strong></p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">forall ( i: [<span class="number">1</span>:n-<span class="number">1</span>]) {</div><div class="line">  <span class="keyword">for</span> (iter: [<span class="number">0</span>:nsteps-<span class="number">1</span>]) {</div><div class="line">    newX[i] = (oldX[i-<span class="number">1</span>] + oldX[i+<span class="number">1</span>]) / <span class="number">2</span>;</div><div class="line">    NEXT; <span class="comment">// Barrier</span></div><div class="line">    swap pointers newX and oldX;</div><div class="line">  }</div><div class="line">}</div></pre></td></tr></tbody></table></figure><p>上述方法只需要创建 <em>(n-1)</em> 个任务</p><p>This is a significant improvement since creating tasks is usually more expensive than performing barrier operations.</p><h3 id="Iteration-Grouping-Chunking-in-Parallel-Loops" class="heading-control"><a href="#Iteration-Grouping-Chunking-in-Parallel-Loops" class="headerlink" title="Iteration Grouping/Chunking in Parallel Loops"></a>Iteration Grouping/Chunking in Parallel Loops<a class="heading-anchor" href="#Iteration-Grouping-Chunking-in-Parallel-Loops" aria-hidden="true"></a></h3><p>对于向量相加问题</p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">forall (i : [<span class="number">0</span>:n-<span class="number">1</span>]) a[i] = b[i] + c[i]</div></pre></td></tr></tbody></table></figure><p>上述方法创建了n个任务，当n很大时overheads也会很大</p><p>解决方法</p><p><strong>分组</strong>（<em>loop</em> <em>chunking</em> or <em>iteration grouping</em></p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">forall (g:[<span class="number">0</span>:ng-<span class="number">1</span>])</div><div class="line">  <span class="keyword">for</span> (i : mygroup(g, ng, [<span class="number">0</span>:n-<span class="number">1</span>])) a[i] = b[i] + c[i]</div></pre></td></tr></tbody></table></figure><p>上述方法将任务个数从 <strong>n</strong> 降到了 <strong>ng</strong>（分组个数</p><p>分组方法有两种：</p><ul><li>block<ul><li>将连续的迭代分为一组</li></ul></li><li>cyclic<ul><li>将同余类迭代（ iterations in the same congruence class，分为一组</li></ul></li></ul><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 学习笔记 </tag>
+            
+            <tag> java </tag>
+            
+            <tag> 并行编程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Functional Parallelism</title>
+      <link href="/2020/01/10/Functional-Parallelism/"/>
+      <url>/2020/01/10/Functional-Parallelism/</url>
+      
+        <content type="html"><![CDATA[<h3 id="Future-Tasks" class="heading-control"><a href="#Future-Tasks" class="headerlink" title="Future Tasks"></a><strong>Future Tasks</strong><a class="heading-anchor" href="#Future-Tasks" aria-hidden="true"></a></h3><p><code>future tasks</code></p><ul><li>tasks with <strong>return values</strong></li></ul><p><code>future objects</code>（also known as <code>promise objects</code></p><ul><li><p>a “handle” for accessing a task’s return value</p></li><li><p>两个主要操作：</p><ul><li><p>Assignment，形式如下</p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">A = future { </div><div class="line">    ⟨ task-with-<span class="keyword">return</span>-value ⟩ </div><div class="line">}</div></pre></td></tr></tbody></table></figure><p>future object 被限制为只能一次赋值（<em>single assignment</em>，类似于final变量</p><p>future task 完成后 future object就不能修改了</p></li><li><p>Blocking read</p><ul><li>A.get() 读操作会等待，直到与 future object 关联的 task 完成，将该任务的返回值作为 A.get() 的值</li><li>A.get() 之后的任何statement S 开始执行时与A关联的任务已经完成</li></ul></li></ul></li></ul><a id="more"></a><h3 id="Creating-Future-Tasks-in-Java’s-Fork-Join-Framework" class="heading-control"><a href="#Creating-Future-Tasks-in-Java’s-Fork-Join-Framework" class="headerlink" title="Creating Future Tasks in Java’s Fork/Join Framework"></a><strong>Creating Future Tasks in Java’s Fork/Join Framework</strong><a class="heading-anchor" href="#Creating-Future-Tasks-in-Java’s-Fork-Join-Framework" aria-hidden="true"></a></h3><p>future tasks和regular tasks的一些关键不同：</p><ol><li>future tasks 继承自FJ框架的 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/RecursiveTask.html" target="_blank" rel="external">RecursiveTask</a> 类，regular tasks 继承自 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/RecursiveAction.html" target="_blank" rel="external">RecursiveAction</a> 类</li><li>future task 的 <strong>compute()</strong> 方法必须有 non-void 的返回值</li><li><strong>left.join() </strong>这样的方法调用都会等left指向的任务执行，只是future task 有返回值</li></ol><h3 id="Memoization" class="heading-control"><a href="#Memoization" class="headerlink" title="Memoization"></a><strong>Memoization</strong><a class="heading-anchor" href="#Memoization" aria-hidden="true"></a></h3><p>记录f(x)的执行结果，防止重复计算</p><ol><li><p>创建特定的数据结构，记录<br>$$<br>{(x_1,y_1=f(x_1)),(x_2,y_2=f(x_2)),…}<br>$$</p></li><li><p>当出现 f 的调用时先在记录中查找</p></li></ol><p>future task在这里非常适合，记录的形式变为了<br>$$<br>{(x_1,y_1=future(f(x_1))),(x_2,y_2=future(f(x_2))),…}<br>$$</p><p>对于输入x，如果对应的future对象已经创建，则可以调用该对象的 get() 方法</p><h3 id="Java-Streams" class="heading-control"><a href="#Java-Streams" class="headerlink" title="Java Streams"></a><strong>Java Streams</strong><a class="heading-anchor" href="#Java-Streams" aria-hidden="true"></a></h3><p>操作集合对象除了<code>for loop</code>还可以利用<code>Java streams</code>提供的API</p><p>下面的例子求注册学生的平均年龄</p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">students.stream()</div><div class="line">    .filter(s -&gt; s.getStatus() == Student.ACTIVE)</div><div class="line">    .mapToInt(a -&gt; a.getAge())</div><div class="line">    .average();</div></pre></td></tr></tbody></table></figure><p>Java streams 提供了并行编程的API</p><p>上面代码的 <em>students.stream()</em> 替换为 <em>students.parallelStream()</em> 或者 <em>Stream.of(students).parallel()</em> 就可以了</p><h3 id="Determinism-and-Data-Races" class="heading-control"><a href="#Determinism-and-Data-Races" class="headerlink" title="Determinism and Data Races"></a><strong>Determinism and Data Races</strong><a class="heading-anchor" href="#Determinism-and-Data-Races" aria-hidden="true"></a></h3><p><em>functionally deterministic</em></p><ul><li>A parallel program is said to be <em>functionally deterministic</em> if it always computes the same answer when given the same input</li></ul><p><em>structurally deterministic</em></p><ul><li>It always computes the same computation graph, when given the same input. </li></ul><p>没有数据竞争不足以保证确定性</p><p>有数据竞争也不意味着程序的不确定性</p><p>带有数据竞争的不确定程序，每次产生的结果不同，但是可能每个结果都是可接受的！！e.g., different locations for a search pattern in a target string</p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 学习笔记 </tag>
+            
+            <tag> java </tag>
+            
+            <tag> 并行编程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Task Parallelism</title>
       <link href="/2020/01/08/Task%20Parallelism/"/>
       <url>/2020/01/08/Task%20Parallelism/</url>
@@ -291,9 +360,9 @@
       
         <tags>
             
-            <tag> 读书笔记 </tag>
-            
             <tag> 杂 </tag>
+            
+            <tag> 读书笔记 </tag>
             
         </tags>
       
