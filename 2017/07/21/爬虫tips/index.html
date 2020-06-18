@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  751 字
+                  699 字
                 </span>
               
 
@@ -477,29 +477,11 @@
 </li>
 </ul>
 <h4 id="数据库缓存" class="heading-control"><a href="#数据库缓存" class="headerlink" title="数据库缓存"></a>数据库缓存<a class="heading-anchor" href="#数据库缓存" aria-hidden="true"></a></h4><p>存储大量数据,没有复杂的连接操作,选择易拓展的NoSql<br>加载时间比文件系统多,但免于文件系统的限制</p>
-<h3 id="并发下载" class="heading-control"><a href="#并发下载" class="headerlink" title="并发下载"></a>并发下载<a class="heading-anchor" href="#并发下载" aria-hidden="true"></a></h3><h4 id="多线程爬虫" class="heading-control"><a href="#多线程爬虫" class="headerlink" title="多线程爬虫"></a>多线程爬虫<a class="heading-anchor" href="#多线程爬虫" aria-hidden="true"></a></h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#处理url的函数</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">thread_crawler</span>:</span></div><div class="line">    ...</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">process_url</span>:</span></div><div class="line">		<span class="keyword">pass</span></div><div class="line">    ...</div><div class="line">	</div><div class="line">    <span class="comment">#逻辑:设定一个线程池,最大线程数为max_threads.当有URL爬取时,检测是否有线程,有的话处理掉完成的线程,			再判断是否创建新线程</span></div><div class="line">    threads=[]</div><div class="line">    <span class="keyword">while</span> threads <span class="keyword">or</span> crawl_queue:</div><div class="line">        <span class="keyword">for</span> thread <span class="keyword">in</span> threads:</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> thread.is_allive():</div><div class="line">                <span class="comment">#remove</span></div><div class="line">                threads.remove(thread)</div><div class="line">        <span class="comment">#在多个线程中启动process_url,条件是当前线程数小于设定值,并且待爬队列不为空</span></div><div class="line">        <span class="keyword">while</span> len(threads)&lt;max_threads <span class="keyword">and</span> crawl_queue:</div><div class="line">            thread = threading.Thread(target=process_url)</div><div class="line">            thread.start()</div><div class="line">            threads.append(thread)</div></pre></td></tr></tbody></table></figure>
+<h3 id="并发下载" class="heading-control"><a href="#并发下载" class="headerlink" title="并发下载"></a>并发下载<a class="heading-anchor" href="#并发下载" aria-hidden="true"></a></h3><h4 id="多线程爬虫" class="heading-control"><a href="#多线程爬虫" class="headerlink" title="多线程爬虫"></a>多线程爬虫<a class="heading-anchor" href="#多线程爬虫" aria-hidden="true"></a></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#处理url的函数</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">thread_crawler</span>:</span></div><div class="line">    ...</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">process_url</span>:</span></div><div class="line">		<span class="keyword">pass</span></div><div class="line">    ...</div><div class="line">	</div><div class="line">    <span class="comment">#逻辑:设定一个线程池,最大线程数为max_threads.当有URL爬取时,检测是否有线程,有的话处理掉完成的线程,			再判断是否创建新线程</span></div><div class="line">    threads=[]</div><div class="line">    <span class="keyword">while</span> threads <span class="keyword">or</span> crawl_queue:</div><div class="line">        <span class="keyword">for</span> thread <span class="keyword">in</span> threads:</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> thread.is_allive():</div><div class="line">                <span class="comment">#remove</span></div><div class="line">                threads.remove(thread)</div><div class="line">        <span class="comment">#在多个线程中启动process_url,条件是当前线程数小于设定值,并且待爬队列不为空</span></div><div class="line">        <span class="keyword">while</span> len(threads)&lt;max_threads <span class="keyword">and</span> crawl_queue:</div><div class="line">            thread = threading.Thread(target=process_url)</div><div class="line">            thread.start()</div><div class="line">            threads.append(thread)</div></pre></td></tr></table></figure>
 <h4 id="多进程爬虫" class="heading-control"><a href="#多进程爬虫" class="headerlink" title="多进程爬虫"></a>多进程爬虫<a class="heading-anchor" href="#多进程爬虫" aria-hidden="true"></a></h4><p>有几个cpu创建几个进程</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">processes=[]</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(num_cpus):</div><div class="line">    p=multiprocessing.Process(target=thread_crawler)</div><div class="line">    p.start()</div><div class="line">    processes.append(p)</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">processes=[]</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(num_cpus):</div><div class="line">    p=multiprocessing.Process(target=thread_crawler)</div><div class="line">    p.start()</div><div class="line">    processes.append(p)</div></pre></td></tr></table></figure>
 <h3 id="动态内容" class="heading-control"><a href="#动态内容" class="headerlink" title="动态内容"></a>动态内容<a class="heading-anchor" href="#动态内容" aria-hidden="true"></a></h3><p>todo…</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
       
     </div>
 
@@ -632,7 +614,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -645,7 +627,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -738,7 +720,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共28.8k字</span>
+  <span class="post-count">博客全站共27.1k字</span>
 </div>
 
 

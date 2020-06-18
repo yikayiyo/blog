@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="学习笔记,python,迭代器," />
+  <meta name="keywords" content="python,学习笔记,迭代器," />
 
 
 
@@ -90,7 +90,7 @@
 
 
 <meta name="description" content="昨天的问题解决了   -   - 123456&amp;gt;&amp;gt;&amp;gt; i.__iter__()&amp;lt;listiterator object at 0x7f5f9d3f2310&amp;gt;&amp;gt;&amp;gt;&amp;gt; i.__iter__()&amp;lt;listiterator object at 0x7f5f9d3f22d0&amp;gt;&amp;gt;&amp;gt;&amp;gt; i.__iter__()&amp;lt;listiter">
-<meta name="keywords" content="学习笔记,python,迭代器">
+<meta name="keywords" content="python,学习笔记,迭代器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python迭代器(2)">
 <meta property="og:url" content="https://yikayiyo.github.io/2017/04/19/python迭代器-2/index.html">
@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  182 字
+                  130 字
                 </span>
               
 
@@ -411,30 +411,12 @@
 
       
         <p>昨天的问题解决了   -   -</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__()</div><div class="line">&lt;listiterator object at <span class="number">0x7f5f9d3f2310</span>&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__()</div><div class="line">&lt;listiterator object at <span class="number">0x7f5f9d3f22d0</span>&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__()</div><div class="line">&lt;listiterator object at <span class="number">0x7f5f9d3f2350</span>&gt;</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__()</div><div class="line">&lt;listiterator object at <span class="number">0x7f5f9d3f2310</span>&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__()</div><div class="line">&lt;listiterator object at <span class="number">0x7f5f9d3f22d0</span>&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__()</div><div class="line">&lt;listiterator object at <span class="number">0x7f5f9d3f2350</span>&gt;</div></pre></td></tr></table></figure>
 <p>每次调用 <strong><em>i.__iter__()</em></strong>时总会产生新的iterator对象,这样调用<strong><em>next()</em></strong>时才会总是输出1.</p>
 <p>去麻烦了一下外国朋友,顺便写了写英文 : )</p>
 <p>我之前为什么会觉得四次调用是作用在同一个对象上的呢? 尴尬 -  -</p>
 <p>[<a href="http://stackoverflow.com/questions/43487625/what-happend-when-i-assign-an-iterator-to-a-variable" target="_blank" rel="external">http://stackoverflow.com/questions/43487625/what-happend-when-i-assign-an-iterator-to-a-variable</a>]</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
       
     </div>
 
@@ -462,9 +444,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
-          
             <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
           
             <a href="/tags/迭代器/" rel="tag"># 迭代器</a>
           
@@ -560,7 +542,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -573,7 +555,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -650,7 +632,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共28.8k字</span>
+  <span class="post-count">博客全站共27.1k字</span>
 </div>
 
 

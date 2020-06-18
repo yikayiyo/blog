@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  297 字
+                  245 字
                 </span>
               
 
@@ -411,10 +411,10 @@
 
       
         <p>借助selenium和phantomJS抓取淘宝美食信息.</p>
-<h4 id="配置" class="heading-control"><a href="#配置" class="headerlink" title="配置"></a>配置<a class="heading-anchor" href="#配置" aria-hidden="true"></a></h4><p>数据库配置<br></p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#样例</span></div><div class="line">MONGO_URL=<span class="string">'localhost'</span></div><div class="line">MONGO_DB=<span class="string">'taobao'</span></div><div class="line">MONGO_TABLE=<span class="string">'product'</span></div></pre></td></tr></tbody></table></figure><p></p>
+<h4 id="配置" class="heading-control"><a href="#配置" class="headerlink" title="配置"></a>配置<a class="heading-anchor" href="#配置" aria-hidden="true"></a></h4><p>数据库配置<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#样例</span></div><div class="line">MONGO_URL=<span class="string">'localhost'</span></div><div class="line">MONGO_DB=<span class="string">'taobao'</span></div><div class="line">MONGO_TABLE=<span class="string">'product'</span></div></pre></td></tr></table></figure></p>
 <p>声明浏览器</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">browser=webdriver.PhantomJS(service_args=SERVICE_ARGS)</div></pre></td></tr></tbody></table></figure>
-<p>浏览器配置<br></p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#不加载图片、开启缓存</span></div><div class="line">SERVICE_ARGS=[<span class="string">'--load-images=false'</span>,<span class="string">'--disk-cache=true'</span>]</div></pre></td></tr></tbody></table></figure><p></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">browser=webdriver.PhantomJS(service_args=SERVICE_ARGS)</div></pre></td></tr></table></figure>
+<p>浏览器配置<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#不加载图片、开启缓存</span></div><div class="line">SERVICE_ARGS=[<span class="string">'--load-images=false'</span>,<span class="string">'--disk-cache=true'</span>]</div></pre></td></tr></table></figure></p>
 <h4 id="搜索" class="heading-control"><a href="#搜索" class="headerlink" title="搜索"></a>搜索<a class="heading-anchor" href="#搜索" aria-hidden="true"></a></h4><a id="more"></a>
 <ol>
 <li>给定url,请求页面</li>
@@ -435,25 +435,7 @@
 <li>存入数据库</li>
 </ol>
 <h4 id="注意" class="heading-control"><a href="#注意" class="headerlink" title="注意"></a>注意<a class="heading-anchor" href="#注意" aria-hidden="true"></a></h4><p>抛出异常</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
       
     </div>
 
@@ -586,7 +568,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -599,7 +581,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -692,7 +674,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共28.8k字</span>
+  <span class="post-count">博客全站共27.1k字</span>
 </div>
 
 

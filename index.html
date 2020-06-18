@@ -294,6 +294,184 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2020/06/18/git修改最近一次commit的信息/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yikayiyo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/a004d41c238dac41bbaf0850c4ed2bc1?s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misbehavior">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2020/06/18/git修改最近一次commit的信息/" itemprop="url">
+                  git修改最近一次commit的信息
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-18T13:29:00+08:00">
+                2020-06-18
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-18T13:40:50+08:00">
+                2020-06-18
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  63 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近一次提交的信息不太对，已经push到远端。</p>
+<img src="/2020/06/18/git修改最近一次commit的信息/xiugaiqian.png" alt="修改前" title="修改前">
+<p>修改步骤：</p>
+<ol>
+<li><p>输入命令，会进入编辑器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit --amend</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改commit信息，退出编辑器</p>
+</li>
+<li><p>强制推送</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push -f</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>修改后：</p>
+<img src="/2020/06/18/git修改最近一次commit的信息/xiugaihou.png" alt="修改后" title="修改后">
+<p>注意到：<strong>commit号改变了</strong></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2020/01/16/Pipelining/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -376,7 +554,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  67 字
+                  15 字
                 </span>
               
 
@@ -414,25 +592,7 @@
         
           
             <p><a href="https://www.coursera.org/learn/parallel-programming-in-java/" target="_blank" rel="external">https://www.coursera.org/learn/parallel-programming-in-java/</a></p>
-<h3 id="Split-phase-Barriers-with-Java-Phasers" class="heading-control"><a href="#Split-phase-Barriers-with-Java-Phasers" class="headerlink" title="Split-phase Barriers with Java Phasers"></a>Split-phase Barriers with Java Phasers<a class="heading-anchor" href="#Split-phase-Barriers-with-Java-Phasers" aria-hidden="true"></a></h3><script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+<h3 id="Split-phase-Barriers-with-Java-Phasers" class="heading-control"><a href="#Split-phase-Barriers-with-Java-Phasers" class="headerlink" title="Split-phase Barriers with Java Phasers"></a>Split-phase Barriers with Java Phasers<a class="heading-anchor" href="#Split-phase-Barriers-with-Java-Phasers" aria-hidden="true"></a></h3>
           
         
       
@@ -557,7 +717,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  705 字
+                  671 字
                 </span>
               
 
@@ -594,10 +754,10 @@
       
         
           <h3 id="Parallel-Loops"><a href="#Parallel-Loops" class="headerlink" title="Parallel Loops"></a>Parallel Loops</h3><p>未知循环次数，利用了指针的for循环<br>每一个迭代当作一个子任务，<code>finish</code>约束整个循环</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">finish {</div><div class="line">    <span class="keyword">for</span> (p = head; p != <span class="keyword">null</span> ; p = p.next) </div><div class="line">        <span class="function">async <span class="title">compute</span><span class="params">(p)</span></span>;</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">finish &#123;</div><div class="line">    <span class="keyword">for</span> (p = head; p != <span class="keyword">null</span> ; p = p.next) </div><div class="line">        <span class="function">async <span class="title">compute</span><span class="params">(p)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>已知循环次数n，可以利用<code>forall</code></p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// vector addition</span></div><div class="line">forall (i : [<span class="number">0</span>:n-<span class="number">1</span>]) </div><div class="line">    a[i] = b[i] + c[i]</div></pre></td></tr></tbody></table></figure>
-<p>利用 Java streams，上述功能有更加简洁的表达方式<br></p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">a = IntStream.rangeClosed(<span class="number">0</span>, N-<span class="number">1</span>).parallel().toArray(i -&gt; b[i] + c[i]);</div></pre></td></tr></tbody></table></figure><p></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// vector addition</span></div><div class="line">forall (i : [<span class="number">0</span>:n-<span class="number">1</span>]) </div><div class="line">    a[i] = b[i] + c[i]</div></pre></td></tr></table></figure>
+<p>利用 Java streams，上述功能有更加简洁的表达方式<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">a = IntStream.rangeClosed(<span class="number">0</span>, N-<span class="number">1</span>).parallel().toArray(i -&gt; b[i] + c[i]);</div></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/01/13/Loop Parallelism/" rel="contents">
@@ -728,7 +888,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  571 字
+                  521 字
                 </span>
               
 
@@ -775,7 +935,7 @@
 <li><p>两个主要操作：</p>
 <ul>
 <li><p>Assignment，形式如下</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">A = future { </div><div class="line">    ⟨ task-with-<span class="keyword">return</span>-value ⟩ </div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">A = future &#123; </div><div class="line">    ⟨ task-with-<span class="keyword">return</span>-value ⟩ </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>future object 被限制为只能一次赋值（<em>single assignment</em>，类似于final变量</p>
 <p>future task 完成后 future object就不能修改了</p>
 </li>
@@ -957,12 +1117,12 @@
           <p><a href="https://www.coursera.org/learn/parallel-programming-in-java/">https://www.coursera.org/learn/parallel-programming-in-java/</a></p>
 <h3 id="Task-Creation-and-Termination-Async-Finish"><a href="#Task-Creation-and-Termination-Async-Finish" class="headerlink" title="Task Creation and Termination (Async, Finish)"></a>Task Creation and Termination (Async, Finish)</h3><p>以数组求和作为例子</p>
 <p>为了求得数组的和，可以将数组分为前后两个部分。两部分的求和可以并行执行，但是在求总和之前要保证两个子任务已经完成。</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">finish {</div><div class="line">  async SUM1;  <span class="comment">// asynchronously compute sum of the lower half of the array</span></div><div class="line">  SUM2;  <span class="comment">// compute sum of the upper half of the array in parallel with SUM1</span></div><div class="line">}</div><div class="line">SUM;  <span class="comment">// combine the two partial sums after both SUM1 and SUM2 have finished</span></div></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">finish &#123;</div><div class="line">  async SUM1;  <span class="comment">// asynchronously compute sum of the lower half of the array</span></div><div class="line">  SUM2;  <span class="comment">// compute sum of the upper half of the array in parallel with SUM1</span></div><div class="line">&#125;</div><div class="line">SUM;  <span class="comment">// combine the two partial sums after both SUM1 and SUM2 have finished</span></div></pre></td></tr></table></figure>
 <p><code>async &lt;stmt1&gt;</code> ：父任务创建子任务执行<code>&lt;stmt1&gt;</code>，并且是并行于父任务的其余部分执行</p>
 <p>上面的伪代码中，<code>async SUM1;</code>创建子任务SUM1，和SUM2并行执行</p>
 <p><code>finish &lt;stmt2&gt;</code>：父任务执行<code>&lt;stmt2&gt;</code>，并且等待<code>&lt;stmt2&gt;以及其中创建的异步任务</code>完成</p>
 <p>上例中，父任务等待SUM1和SUM2完成，才能执行SUM</p>
-<h3 id="Tasks-in-Java’s-Fork-Join-Framework"><a href="#Tasks-in-Java’s-Fork-Join-Framework" class="headerlink" title="Tasks in Java’s Fork/Join Framework"></a>Tasks in Java’s Fork/Join Framework</h3><p>数组求和的<strong>分治</strong>写法</p>
+<h3 id="Tasks-in-Java’s-Fork-Join-Framework"><a href="#Tasks-in-Java’s-Fork-Join-Framework" class="headerlink" title="Tasks in Java’s Fork/Join Framework"></a>Tasks in Java’s Fork/Join Framework</h3><p>数组求和的<strong>分治</strong>写法
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/01/08/Task Parallelism/" rel="contents">
@@ -970,188 +1130,6 @@
             </a>
           </div>
           <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2019/12/25/Markdown显示__/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yikayiyo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/a004d41c238dac41bbaf0850c4ed2bc1?s=460">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Misbehavior">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/12/25/Markdown显示__/" itemprop="url">
-                  Markdown显示__init__.py
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-25T12:59:36+08:00">
-                2019-12-25
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-25T13:31:10+08:00">
-                2019-12-25
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  101 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Markdown语法中双下划线 <code>__</code> 和双星 <code>**</code> 都是强调作用<br>python中的 <strong>init</strong>.py就显示成这个样子了 <span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f612.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f612.png?v8">😒</span></p>
-<p>可以使用反引号将其包含，显示效果: <code>__init__.py</code> <span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f60b.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f60b.png?v8">😋</span></p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-          
         
       
     </div>
@@ -1233,7 +1211,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1246,7 +1224,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1323,7 +1301,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共28.8k字</span>
+  <span class="post-count">博客全站共27.1k字</span>
 </div>
 
 

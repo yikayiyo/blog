@@ -89,17 +89,17 @@
 
 
 
-<meta name="description" content="Future Tasksfuture tasks  tasks with return values  future objects（also known as promise objects  a “handle” for accessing a task’s return value  两个主要操作：  Assignment，形式如下 123A = future {     ⟨ task-wi">
+<meta name="description" content="Future Tasksfuture tasks  tasks with return values  future objects（also known as promise objects  a “handle” for accessing a task’s return value  两个主要操作：  Assignment，形式如下 123A = future &amp;#123;     ⟨ ta">
 <meta name="keywords" content="学习笔记,java,并行编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Functional Parallelism">
 <meta property="og:url" content="https://yikayiyo.github.io/2020/01/10/Functional-Parallelism/index.html">
 <meta property="og:site_name" content="Misbehavior">
-<meta property="og:description" content="Future Tasksfuture tasks  tasks with return values  future objects（also known as promise objects  a “handle” for accessing a task’s return value  两个主要操作：  Assignment，形式如下 123A = future {     ⟨ task-wi">
+<meta property="og:description" content="Future Tasksfuture tasks  tasks with return values  future objects（also known as promise objects  a “handle” for accessing a task’s return value  两个主要操作：  Assignment，形式如下 123A = future &amp;#123;     ⟨ ta">
 <meta property="og:updated_time" content="2020-01-19T07:38:55.707Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Functional Parallelism">
-<meta name="twitter:description" content="Future Tasksfuture tasks  tasks with return values  future objects（also known as promise objects  a “handle” for accessing a task’s return value  两个主要操作：  Assignment，形式如下 123A = future {     ⟨ task-wi">
+<meta name="twitter:description" content="Future Tasksfuture tasks  tasks with return values  future objects（also known as promise objects  a “handle” for accessing a task’s return value  两个主要操作：  Assignment，形式如下 123A = future &amp;#123;     ⟨ ta">
 
 
 
@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  571 字
+                  521 字
                 </span>
               
 
@@ -421,7 +421,7 @@
 <li><p>两个主要操作：</p>
 <ul>
 <li><p>Assignment，形式如下</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">A = future { </div><div class="line">    ⟨ task-with-<span class="keyword">return</span>-value ⟩ </div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">A = future &#123; </div><div class="line">    ⟨ task-with-<span class="keyword">return</span>-value ⟩ </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>future object 被限制为只能一次赋值（<em>single assignment</em>，类似于final变量</p>
 <p>future task 完成后 future object就不能修改了</p>
 </li>
@@ -452,7 +452,7 @@
 <p>对于输入x，如果对应的future对象已经创建，则可以调用该对象的 get() 方法</p>
 <h3 id="Java-Streams" class="heading-control"><a href="#Java-Streams" class="headerlink" title="Java Streams"></a><strong>Java Streams</strong><a class="heading-anchor" href="#Java-Streams" aria-hidden="true"></a></h3><p>操作集合对象除了<code>for loop</code>还可以利用<code>Java streams</code>提供的API</p>
 <p>下面的例子求注册学生的平均年龄</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">students.stream()</div><div class="line">    .filter(s -&gt; s.getStatus() == Student.ACTIVE)</div><div class="line">    .mapToInt(a -&gt; a.getAge())</div><div class="line">    .average();</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">students.stream()</div><div class="line">    .filter(s -&gt; s.getStatus() == Student.ACTIVE)</div><div class="line">    .mapToInt(a -&gt; a.getAge())</div><div class="line">    .average();</div></pre></td></tr></table></figure>
 <p>Java streams 提供了并行编程的API</p>
 <p>上面代码的 <em>students.stream()</em> 替换为 <em>students.parallelStream()</em> 或者 <em>Stream.of(students).parallel()</em> 就可以了</p>
 <h3 id="Determinism-and-Data-Races" class="heading-control"><a href="#Determinism-and-Data-Races" class="headerlink" title="Determinism and Data Races"></a><strong>Determinism and Data Races</strong><a class="heading-anchor" href="#Determinism-and-Data-Races" aria-hidden="true"></a></h3><p><em>functionally deterministic</em></p>
@@ -466,25 +466,7 @@
 <p>没有数据竞争不足以保证确定性</p>
 <p>有数据竞争也不意味着程序的不确定性</p>
 <p>带有数据竞争的不确定程序，每次产生的结果不同，但是可能每个结果都是可接受的！！e.g., different locations for a search pattern in a target string</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
       
     </div>
 
@@ -619,7 +601,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -632,7 +614,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -725,7 +707,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共28.8k字</span>
+  <span class="post-count">博客全站共27.1k字</span>
 </div>
 
 

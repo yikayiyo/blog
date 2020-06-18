@@ -382,7 +382,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  733 字
+                  681 字
                 </span>
               
 
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -433,25 +433,7 @@
 <p>  可以看出,效果不错.可如果你有看迭代过程中回归系数的变化情况,会发现一些周期性的波动.样本中不能分类的点(数据集并非线性可分)在每次迭代时都会引发系数的剧烈改变.<br>  我们希望算法能避免来回波动,更快地收敛,于是有了改进的随机梯度上升算法:<br>  1. 步长不再一成不变<br>  2. 随机选取样本更新回归系数,选过的样本丢弃<br>    遍历20次的时候系数基本上就已经收敛了.代码中给的默认迭代次数是150次.<br>    <img src="/2017/05/15/Logistic-Regression/sga120.png" alt="改进随机梯度上升迭代20次得到的decision boundary" title="改进随机梯度上升迭代20次得到的decision boundary"><br>    <img src="/2017/05/15/Logistic-Regression/sga1150.png" alt="改进随机梯度上升迭代150次得到的decision boundary" title="改进随机梯度上升迭代150次得到的decision boundary"></p>
 <p>  代码链接<br><a href="https://github.com/yikayiyo/machinelearninginaction/blob/master/Ch05/logRegres.py" target="_blank" rel="external">https://github.com/yikayiyo/machinelearninginaction/blob/master/Ch05/logRegres.py</a></p>
 <h4 id="Summary" class="heading-control"><a href="#Summary" class="headerlink" title="Summary"></a>Summary<a class="heading-anchor" href="#Summary" aria-hidden="true"></a></h4><p>  逻辑回归的目的是找非线性函数sigmoid的最佳拟合参数.<br>  为找最佳,最常用的是梯度上升法.<br>  简化版本为随机梯度上升算法,占用更少的计算机资源,是一个在线算法.<br>  通过调整步长和样本选取方式可以继续改进算法.</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
       
     </div>
 
@@ -586,7 +568,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -599,7 +581,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -692,7 +674,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共28.8k字</span>
+  <span class="post-count">博客全站共27.1k字</span>
 </div>
 
 

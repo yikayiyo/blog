@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  544 字
+                  496 字
                 </span>
               
 
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  1 分钟
                 </span>
               
             </div>
@@ -412,29 +412,11 @@
       
         <h4 id="概述" class="heading-control"><a href="#概述" class="headerlink" title="概述"></a>概述<a class="heading-anchor" href="#概述" aria-hidden="true"></a></h4><p>  一组命令的集合,要么都执行,要么都不执行.同命令一样,是Redis的最小执行单位.<br>  <a id="more"></a></p>
 <h4 id="原理" class="heading-control"><a href="#原理" class="headerlink" title="原理"></a>原理<a class="heading-anchor" href="#原理" aria-hidden="true"></a></h4><p>  先将属于同一事务的命令发送给Redis,然后让Redis依次执行这些命令(FIFO).</p>
-<h4 id="实例" class="heading-control"><a href="#实例" class="headerlink" title="实例"></a>实例<a class="heading-anchor" href="#实例" aria-hidden="true"></a></h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">redis&gt; MULTI</div><div class="line">OK</div><div class="line">redis&gt; SADD "user:1:following" 2</div><div class="line">QUEUED</div><div class="line">redis&gt; SADD "user:2:followers" 1</div><div class="line">QUEUED</div><div class="line">redis&gt; EXEC</div><div class="line">1) (interger) 1</div><div class="line">2) (interger) 1</div></pre></td></tr></tbody></table></figure>
+<h4 id="实例" class="heading-control"><a href="#实例" class="headerlink" title="实例"></a>实例<a class="heading-anchor" href="#实例" aria-hidden="true"></a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">redis&gt; MULTI</div><div class="line">OK</div><div class="line">redis&gt; SADD &quot;user:1:following&quot; 2</div><div class="line">QUEUED</div><div class="line">redis&gt; SADD &quot;user:2:followers&quot; 1</div><div class="line">QUEUED</div><div class="line">redis&gt; EXEC</div><div class="line">1) (interger) 1</div><div class="line">2) (interger) 1</div></pre></td></tr></table></figure>
 <p>  MULTI命令告诉Redis,下面的命令属于同一事务.<br>  当输入一条命令,Redis返回QUEUED,表示该命令已经进入等待执行的事务队列中了.<br>  当事务队列里的所有命令被执行完之后,EXEC命令会将回复队列作为自己的执行结果返回给客户端,客户端从事务状态返回到非事务状态,至此,事务执行完毕。<br>  如果在发送EXEC命令前客户端掉线了,则Redis会请空事务队列,所有命令都不执行；一旦服务器端收到了EXEC,所有的命令就都会被执行.</p>
 <h4 id="错误处理" class="heading-control"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理<a class="heading-anchor" href="#错误处理" aria-hidden="true"></a></h4><p>  包括<strong>语法错误</strong>和<strong>运行错误</strong>.<br>  如果事务队列中的命令存在语法错误(指令不存在或者参数不对),执行EXEC后Redis会返回错误,连语法正确的命令也不会执行.这种错误的命令在输入时,Redis就会提示你error信息.<br>  运行错误,是指那些在输入时Redis不会返回error提示信息的命令.例如,使用散列命令操作集合类型的键,这种错误在实际执行之前Redis是无法发现的.如果一条命令出现了运行错误,事务里的其它命令依然会被执行.<br>  Redis事务没有回滚功能.开发者需要自己处理错误,恢复数据库.</p>
 <h4 id="错误预防" class="heading-control"><a href="#错误预防" class="headerlink" title="错误预防"></a>错误预防<a class="heading-anchor" href="#错误预防" aria-hidden="true"></a></h4><p>  对于语法错误,完全可以在开发时找到并解决；<br>  对于运行错误,可以做的是,合理规划数据库(保证键名规范等)</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
       
     </div>
 
@@ -567,7 +549,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -580,7 +562,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -673,7 +655,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共28.8k字</span>
+  <span class="post-count">博客全站共27.1k字</span>
 </div>
 
 

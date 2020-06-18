@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  4.6k 字
+                  4.7k 字
                 </span>
               
 
@@ -437,7 +437,7 @@
 <h3 id="SPARQL-Queries" class="heading-control"><a href="#SPARQL-Queries" class="headerlink" title="SPARQL Queries"></a>SPARQL Queries<a class="heading-anchor" href="#SPARQL-Queries" aria-hidden="true"></a></h3><p>介绍SPARQL查询语言更多更有用的特征</p>
 <h4 id="More-Readable-Query-Results" class="heading-control"><a href="#More-Readable-Query-Results" class="headerlink" title="More Readable Query Results"></a>More Readable Query Results<a class="heading-anchor" href="#More-Readable-Query-Results" aria-hidden="true"></a></h4><ul>
 <li><p><strong>分号</strong>表示接下来的谓语-宾语对与之前的共有一个主语</p>
-  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">SELECT ?first ?last</div><div class="line">WHERE</div><div class="line">{</div><div class="line">  ?person ab:firstName ?first;</div><div class="line">          ab:lastName  ?last.</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">SELECT ?first ?last</div><div class="line">WHERE</div><div class="line">&#123;</div><div class="line">  ?person ab:firstName ?first;</div><div class="line">          ab:lastName  ?last.</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>使用那些可读性强的属性，比如标签、描述等等（字符串，而不是URI</p>
 </li>
@@ -448,23 +448,23 @@
 <li>将triple pattern放入到OPTIONAL graph patterns中，表示“如果有的话，检索该值”</li>
 <li>OPTIONAL{t1.t2.t3}包含三个三元组，这些三元组需要同时满足</li>
 <li>OPTIONAL{t1} OPTIONAL{t2} OPTIONAL{t3}则是三个独立的条件</li>
-<li>OPTIONAL graph patterns的顺序很重要  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 优先使用nick作为?first</div><div class="line">SELECT ?first ?last</div><div class="line">WHERE</div><div class="line">{</div><div class="line">    ?s ab:lastName ?last.</div><div class="line">    OPTIONAL {?s ab:nick ?first}</div><div class="line">    OPTIONAL {?s ab:firstName ?first}</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<li>OPTIONAL graph patterns的顺序很重要  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 优先使用nick作为?first</div><div class="line">SELECT ?first ?last</div><div class="line">WHERE</div><div class="line">&#123;</div><div class="line">    ?s ab:lastName ?last.</div><div class="line">    OPTIONAL &#123;?s ab:nick ?first&#125;</div><div class="line">    OPTIONAL &#123;?s ab:firstName ?first&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="Finding-Data-That-Doesn’t-Meet-Certain-Conditions" class="heading-control"><a href="#Finding-Data-That-Doesn’t-Meet-Certain-Conditions" class="headerlink" title="Finding Data That Doesn’t Meet Certain Conditions"></a>Finding Data That Doesn’t Meet Certain Conditions<a class="heading-anchor" href="#Finding-Data-That-Doesn’t-Meet-Certain-Conditions" aria-hidden="true"></a></h4><ul>
 <li><p>SPARQL1.0</p>
-  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 利用FILTER和bound，?v没有绑定值时返回true，然后输出</div><div class="line">OPTIONAL {?s ?p ?v}</div><div class="line">FILTER(!bound(?v))</div></pre></td></tr></tbody></table></figure>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 利用FILTER和bound，?v没有绑定值时返回true，然后输出</div><div class="line">OPTIONAL &#123;?s ?p ?v&#125;</div><div class="line">FILTER(!bound(?v))</div></pre></td></tr></table></figure>
 </li>
 <li><p>SPARQL1.1</p>
-  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 当指定的pattern不存在时返回ture</div><div class="line">NOT EXISTS {?s ?p ?v}</div></pre></td></tr></tbody></table></figure>
-  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#另一种方式，减去满足pattern的资源（多数情况下表现相同</div><div class="line">MINUS {?s ?p ?v}</div></pre></td></tr></tbody></table></figure>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 当指定的pattern不存在时返回ture</div><div class="line">NOT EXISTS &#123;?s ?p ?v&#125;</div></pre></td></tr></table></figure>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#另一种方式，减去满足pattern的资源（多数情况下表现相同</div><div class="line">MINUS &#123;?s ?p ?v&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="Serching-Futher-In-The-Data" class="heading-control"><a href="#Serching-Futher-In-The-Data" class="headerlink" title="Serching Futher In The Data"></a>Serching Futher In The Data<a class="heading-anchor" href="#Serching-Futher-In-The-Data" aria-hidden="true"></a></h4><ul>
 <li>RDF三元组中的对象可以是字符串或者URI，字符串值更易读，但是<strong>URI使得将该数据和其它数据链接起来更加容易</strong></li>
 <li>如果一个数据集中资源的URI可以和另一个数据集中的URI对应起来，哪怕数据集来自不同的地方，不清楚组织形式，也可以利用SPARQL查询到更多的信息</li>
 <li><strong>逗号</strong>表示“接下来的三元组主语谓语和前一个三元组的相同”</li>
-<li>利用属性路径（property paths）：  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"># 借助正则表达式的符号+（one or more）,返回直接引用、间接引用了A的论文</div><div class="line">SELECT ?s </div><div class="line">WHERE</div><div class="line">{?s c:cites+ :paperA.}</div><div class="line"># 指定引用层数</div><div class="line">#{?s c:cites{3} :paperA.}</div><div class="line">#相同效果</div><div class="line">#{?s c:cites/c:cites/c:cites :paperA.}</div><div class="line">#^表示取相反,返回A引用的文章</div><div class="line">#{?s ^c:cites :paperA.}</div><div class="line"># ^结合property path的例子：引用了F引用的文章的文章</div><div class="line">#{</div><div class="line">#    ?s c:cites/^c:cites :paperF .</div><div class="line">#    FILTER(?s != :paperF)</div><div class="line">#}</div></pre></td></tr></tbody></table></figure>
+<li>利用属性路径（property paths）：  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"># 借助正则表达式的符号+（one or more）,返回直接引用、间接引用了A的论文</div><div class="line">SELECT ?s </div><div class="line">WHERE</div><div class="line">&#123;?s c:cites+ :paperA.&#125;</div><div class="line"># 指定引用层数</div><div class="line">#&#123;?s c:cites&#123;3&#125; :paperA.&#125;</div><div class="line">#相同效果</div><div class="line">#&#123;?s c:cites/c:cites/c:cites :paperA.&#125;</div><div class="line">#^表示取相反,返回A引用的文章</div><div class="line">#&#123;?s ^c:cites :paperA.&#125;</div><div class="line"># ^结合property path的例子：引用了F引用的文章的文章</div><div class="line">#&#123;</div><div class="line">#    ?s c:cites/^c:cites :paperF .</div><div class="line">#    FILTER(?s != :paperF)</div><div class="line">#&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="Searching-With-Blank-Nodes" class="heading-control"><a href="#Searching-With-Blank-Nodes" class="headerlink" title="Searching With Blank Nodes"></a>Searching With Blank Nodes<a class="heading-anchor" href="#Searching-With-Blank-Nodes" aria-hidden="true"></a></h4><ul>
@@ -484,7 +484,7 @@
 <li>FILTER() 只有一个参数，表达式只要返回的是布尔值就可以作为参数</li>
 <li>RDF解析器读入输入数据时，它将这些前缀映射到适当的名称空间URIs，然后将数据交给查询处理器</li>
 <li>!isURI(?city): 如果?city不是一个正常的URI，返回true</li>
-<li>IN关键字：查询某个变量属于列表的三元组（前面加NOT可以表示相反的意思  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># ask for data where the ?v is either A or B</div><div class="line">FILTER(?v IN (A,B))</div></pre></td></tr></tbody></table></figure>
+<li>IN关键字：查询某个变量属于列表的三元组（前面加NOT可以表示相反的意思  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># ask for data where the ?v is either A or B</div><div class="line">FILTER(?v IN (A,B))</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="Retrieving-A-Specific-Number-Of-Results" class="heading-control"><a href="#Retrieving-A-Specific-Number-Of-Results" class="headerlink" title="Retrieving A Specific Number Of Results"></a>Retrieving A Specific Number Of Results<a class="heading-anchor" href="#Retrieving-A-Specific-Number-Of-Results" aria-hidden="true"></a></h4><ul>
@@ -495,20 +495,20 @@
 <h4 id="Querying-Named-Graphs" class="heading-control"><a href="#Querying-Named-Graphs" class="headerlink" title="Querying Named Graphs"></a>Querying Named Graphs<a class="heading-anchor" href="#Querying-Named-Graphs" aria-hidden="true"></a></h4><ul>
 <li>命名图(named graph)：为三元组集合命名，方便管理（进行替换之类的操作</li>
 <li><p>查询的数据集可以在查询内部用FROM指定，也可以在外部在ARQ命令行中指定，后者会覆盖前者</p>
-  <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * </div><div class="line"><span class="keyword">FROM</span>&lt;xx.ttl&gt;</div><div class="line"><span class="keyword">FROM</span>&lt;yy.ttl&gt;</div><div class="line"><span class="keyword">WHERE</span></div><div class="line">{...}</div></pre></td></tr></tbody></table></figure>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * </div><div class="line"><span class="keyword">FROM</span>&lt;xx.ttl&gt;</div><div class="line"><span class="keyword">FROM</span>&lt;yy.ttl&gt;</div><div class="line"><span class="keyword">WHERE</span></div><div class="line">&#123;...&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>指定的查询数据集构成了默认图(default graph)，它不属于任何命名图</p>
 </li>
 <li><p>FROM NAMED :表示数据集不会被加入到默认图，查询时需要指定其graph name（ARQ的约定是将URI作为其name），第六章会有SPARQL1.1标准的相关内容</p>
-  <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> ?lname ?courseName</div><div class="line"><span class="keyword">FROM</span> &lt;ex069.ttl&gt;</div><div class="line"><span class="keyword">FROM</span> NAMED &lt;ex125.ttl&gt;</div><div class="line"><span class="keyword">FROM</span> NAMED &lt;ex122.ttl&gt; # 即使这里写了，如果在查询中没有指定（GRAPH &lt;ex125.ttl&gt;），其数据不会被用来检索</div><div class="line"><span class="keyword">WHERE</span></div><div class="line">{</div><div class="line">    { ?student ab:lastName ?lname }</div><div class="line">    <span class="keyword">UNION</span></div><div class="line">    { GRAPH &lt;ex125.ttl&gt; { ?course ab:courseTitle ?courseName } }</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> ?lname ?courseName</div><div class="line"><span class="keyword">FROM</span> &lt;ex069.ttl&gt;</div><div class="line"><span class="keyword">FROM</span> NAMED &lt;ex125.ttl&gt;</div><div class="line"><span class="keyword">FROM</span> NAMED &lt;ex122.ttl&gt; # 即使这里写了，如果在查询中没有指定（GRAPH &lt;ex125.ttl&gt;），其数据不会被用来检索</div><div class="line"><span class="keyword">WHERE</span></div><div class="line">&#123;</div><div class="line">    &#123; ?student ab:lastName ?lname &#125;</div><div class="line">    <span class="keyword">UNION</span></div><div class="line">    &#123; GRAPH &lt;ex125.ttl&gt; &#123; ?course ab:courseTitle ?courseName &#125; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>GRAPH关键字：查询中使用这个关键字表明引用特定命名图中的数据</p>
 </li>
 <li><p>GRAPH后面也可以跟变量，让SPARQL处理器寻找满足某个模式的图</p>
-  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#这里只设置了特定的命名图来查询，如果存在默认图，则没有任何返回结果</div><div class="line">SELECT *</div><div class="line">FROM NAMED &lt;yyy.ttl&gt;</div><div class="line">FROM NAMED &lt;xxx.ttl&gt;</div><div class="line">WHERE</div><div class="line">{GRAPH ?g(?s ?p ?o)}</div></pre></td></tr></tbody></table></figure>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#这里只设置了特定的命名图来查询，如果存在默认图，则没有任何返回结果</div><div class="line">SELECT *</div><div class="line">FROM NAMED &lt;yyy.ttl&gt;</div><div class="line">FROM NAMED &lt;xxx.ttl&gt;</div><div class="line">WHERE</div><div class="line">&#123;GRAPH ?g(?s ?p ?o)&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>SPARQL处理器有一些预定义的命名图，当你在GRAPH中指定时不需要事先标识</p>
-  <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> ?graph ?email </div><div class="line"><span class="keyword">FROM</span> &lt;ex134.ttl&gt; </div><div class="line"><span class="keyword">FROM</span> NAMED &lt;ex125.ttl&gt; </div><div class="line"><span class="keyword">FROM</span> NAMED &lt;ex122.ttl&gt; </div><div class="line"><span class="keyword">WHERE</span> </div><div class="line">{</div><div class="line">    ?graph dc:<span class="built_in">date</span> <span class="string">"2011-09-24"</span> . </div><div class="line">    { GRAPH ?graph { ?s ab:email ?email } }</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> ?graph ?email </div><div class="line"><span class="keyword">FROM</span> &lt;ex134.ttl&gt; </div><div class="line"><span class="keyword">FROM</span> NAMED &lt;ex125.ttl&gt; </div><div class="line"><span class="keyword">FROM</span> NAMED &lt;ex122.ttl&gt; </div><div class="line"><span class="keyword">WHERE</span> </div><div class="line">&#123;</div><div class="line">    ?graph dc:<span class="built_in">date</span> <span class="string">"2011-09-24"</span> . </div><div class="line">    &#123; GRAPH ?graph &#123; ?s ab:email ?email &#125; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="Queries-In-Your-Queries" class="heading-control"><a href="#Queries-In-Your-Queries" class="headerlink" title="Queries In Your Queries"></a>Queries In Your Queries<a class="heading-anchor" href="#Queries-In-Your-Queries" aria-hidden="true"></a></h4><ul>
@@ -518,20 +518,20 @@
 <h4 id="Combining-Values-And-Assigning-Values-To-Variables" class="heading-control"><a href="#Combining-Values-And-Assigning-Values-To-Variables" class="headerlink" title="Combining Values And Assigning Values To Variables"></a>Combining Values And Assigning Values To Variables<a class="heading-anchor" href="#Combining-Values-And-Assigning-Values-To-Variables" aria-hidden="true"></a></h4><ul>
 <li>sparql查询出来的值可以用于数学运算，函数调用</li>
 <li><p>BIND关键字</p>
-  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#数学运算的例子</div><div class="line">#这里利用amount创建了变量tip和total</div><div class="line">SELECT ?description </div><div class="line">?amount </div><div class="line">((?amount * .2) AS ?tip) </div><div class="line">((?amount + ?tip) AS ?total)</div><div class="line">WHERE</div><div class="line">{</div><div class="line">    ?meal e:description ?description ;</div><div class="line">          e:amount ?amount .</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
-  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#函数调用的例子</div><div class="line">SELECT </div><div class="line">(UCASE(SUBSTR(?description,1,3))as ?mealCode) </div><div class="line">?amount </div><div class="line">WHERE</div><div class="line">{</div><div class="line">    ?meal e:description ?description ;</div><div class="line">          e:amount ?amount .</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
-  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#改进,expression calculation moved to a subquery,利用BIND关键字为变量赋值</div><div class="line">SELECT ?mealCode ?amount</div><div class="line">WHERE</div><div class="line">{</div><div class="line">    ?meal e:description ?description ;</div><div class="line">          e:amount ?amount .</div><div class="line">    BIND (UCASE(SUBSTR(?description,1,3)) as ?mealCode)</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#数学运算的例子</div><div class="line">#这里利用amount创建了变量tip和total</div><div class="line">SELECT ?description </div><div class="line">?amount </div><div class="line">((?amount * .2) AS ?tip) </div><div class="line">((?amount + ?tip) AS ?total)</div><div class="line">WHERE</div><div class="line">&#123;</div><div class="line">    ?meal e:description ?description ;</div><div class="line">          e:amount ?amount .</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#函数调用的例子</div><div class="line">SELECT </div><div class="line">(UCASE(SUBSTR(?description,1,3))as ?mealCode) </div><div class="line">?amount </div><div class="line">WHERE</div><div class="line">&#123;</div><div class="line">    ?meal e:description ?description ;</div><div class="line">          e:amount ?amount .</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#改进,expression calculation moved to a subquery,利用BIND关键字为变量赋值</div><div class="line">SELECT ?mealCode ?amount</div><div class="line">WHERE</div><div class="line">&#123;</div><div class="line">    ?meal e:description ?description ;</div><div class="line">          e:amount ?amount .</div><div class="line">    BIND (UCASE(SUBSTR(?description,1,3)) as ?mealCode)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="Sorting-Aggregating-Finding-The-Biggest-And-Smallest-And…" class="heading-control"><a href="#Sorting-Aggregating-Finding-The-Biggest-And-Smallest-And…" class="headerlink" title="Sorting, Aggregating, Finding The Biggest And Smallest And…"></a>Sorting, Aggregating, Finding The Biggest And Smallest And…<a class="heading-anchor" href="#Sorting-Aggregating-Finding-The-Biggest-And-Smallest-And…" aria-hidden="true"></a></h4><ul>
 <li><p>SPARQL使用<strong>ORDER BY</strong>来排序（默认从小到大）.</p>
-  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># 根据amount排序</div><div class="line">SELECT ?description ?date ?amount</div><div class="line">WHERE</div><div class="line">{</div><div class="line">    ?meal e:description ?description ;</div><div class="line">    e:date ?date ;</div><div class="line">    e:amount ?amount .</div><div class="line">}</div><div class="line">ORDER BY ?amount</div></pre></td></tr></tbody></table></figure>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># 根据amount排序</div><div class="line">SELECT ?description ?date ?amount</div><div class="line">WHERE</div><div class="line">&#123;</div><div class="line">    ?meal e:description ?description ;</div><div class="line">    e:date ?date ;</div><div class="line">    e:amount ?amount .</div><div class="line">&#125;</div><div class="line">ORDER BY ?amount</div></pre></td></tr></table></figure>
 </li>
 <li><p>从大到小排序：利用DESC()，括号里面是排序用的指标</p>
-  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#根据amount从大到小排序</div><div class="line">SELECT ?description ?date ?amount </div><div class="line">WHERE</div><div class="line">{</div><div class="line">    ?meal e:description ?description ;</div><div class="line">        e:date ?date ;</div><div class="line">        e:amount ?amount .</div><div class="line">}</div><div class="line">ORDER BY DESC(?amount)</div></pre></td></tr></tbody></table></figure>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#根据amount从大到小排序</div><div class="line">SELECT ?description ?date ?amount </div><div class="line">WHERE</div><div class="line">&#123;</div><div class="line">    ?meal e:description ?description ;</div><div class="line">        e:date ?date ;</div><div class="line">        e:amount ?amount .</div><div class="line">&#125;</div><div class="line">ORDER BY DESC(?amount)</div></pre></td></tr></table></figure>
 </li>
 <li><p>多条件排序，各个条件空格隔开</p>
-  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># 先根据description排序（字母表），再根据amount从大到小排序</div><div class="line">SELECT ?description ?date ?amount </div><div class="line">WHERE</div><div class="line">{</div><div class="line">    ?meal e:description ?description ;</div><div class="line">        e:date ?date ;</div><div class="line">        e:amount ?amount .</div><div class="line">}</div><div class="line">ORDER BY ?description DESC(?amount)</div></pre></td></tr></tbody></table></figure>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># 先根据description排序（字母表），再根据amount从大到小排序</div><div class="line">SELECT ?description ?date ?amount </div><div class="line">WHERE</div><div class="line">&#123;</div><div class="line">    ?meal e:description ?description ;</div><div class="line">        e:date ?date ;</div><div class="line">        e:amount ?amount .</div><div class="line">&#125;</div><div class="line">ORDER BY ?description DESC(?amount)</div></pre></td></tr></table></figure>
 </li>
 <li><p>找最值</p>
 <ul>
@@ -540,28 +540,28 @@
 </ul>
 </li>
 <li><p>均值：AVG()</p>
-  <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> (<span class="keyword">AVG</span>(?amount) <span class="keyword">as</span> ?avgAmount)</div><div class="line"><span class="keyword">WHERE</span></div><div class="line">{</div><div class="line">    ?meal e:amount ?amount .</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> (<span class="keyword">AVG</span>(?amount) <span class="keyword">as</span> ?avgAmount)</div><div class="line"><span class="keyword">WHERE</span></div><div class="line">&#123;</div><div class="line">    ?meal e:amount ?amount .</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>求和SUM(),计数COUNT()</p>
 </li>
 <li><p>GROUP_CONCAT(): 将很多数据绑定到一个变量，默认的分隔符是空格</p>
-  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 返回一个amountlist，形如“25.05,10.00,6.65,31.45”</div><div class="line">SELECT (GROUP_CONCAT(?amount;SEPARATOR = ',') AS amountlist)</div><div class="line">WHERE { ?meal e:amount ?amount.}</div></pre></td></tr></tbody></table></figure>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 返回一个amountlist，形如“25.05,10.00,6.65,31.45”</div><div class="line">SELECT (GROUP_CONCAT(?amount;SEPARATOR = ',') AS amountlist)</div><div class="line">WHERE &#123; ?meal e:amount ?amount.&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>GROUP BY: 根据某属性分组；代入SUM()函数可以求和，类似的，可以代入别的函数</p>
-  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 统计早中晚餐总数</div><div class="line">SELECT ?description (SUM(?amount) AS ?meanTotal)</div><div class="line">WHERE</div><div class="line">{...}</div><div class="line">GROUP BY ?description</div></pre></td></tr></tbody></table></figure>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 统计早中晚餐总数</div><div class="line">SELECT ?description (SUM(?amount) AS ?meanTotal)</div><div class="line">WHERE</div><div class="line">&#123;...&#125;</div><div class="line">GROUP BY ?description</div></pre></td></tr></table></figure>
 </li>
 <li><p>HAVING 关键字：限定显示出来的结果需要满足的条件</p>
-  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#我们只对总数超过20的感兴趣</div><div class="line">SELECT ?description (SUM(?amount) AS ?meanTotal)</div><div class="line">WHERE</div><div class="line">{...}</div><div class="line">GROUP BY ?description</div><div class="line">HAVING (SUM(?amount)&gt;20)</div></pre></td></tr></tbody></table></figure>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#我们只对总数超过20的感兴趣</div><div class="line">SELECT ?description (SUM(?amount) AS ?meanTotal)</div><div class="line">WHERE</div><div class="line">&#123;...&#125;</div><div class="line">GROUP BY ?description</div><div class="line">HAVING (SUM(?amount)&gt;20)</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="Query-A-Remote-SPARQL-Service" class="heading-control"><a href="#Query-A-Remote-SPARQL-Service" class="headerlink" title="Query A Remote SPARQL Service"></a>Query A Remote SPARQL Service<a class="heading-anchor" href="#Query-A-Remote-SPARQL-Service" aria-hidden="true"></a></h4><ul>
 <li><p>查询远程sparql服务</p>
 <ul>
 <li><p>FROM 关键字(RDF file)</p>
-  <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> ?title</div><div class="line"><span class="keyword">FROM</span> &lt;xxx://xxx.xxx.xxxx/xxx&gt;</div><div class="line">{?s dc:title ?title}</div></pre></td></tr></tbody></table></figure>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> ?title</div><div class="line"><span class="keyword">FROM</span> &lt;xxx://xxx.xxx.xxxx/xxx&gt;</div><div class="line">&#123;?s dc:title ?title&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>SERVICE 关键字(SPARQL endpoint)</p>
-  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># 在SPAERQL endpoint运行查询得到一些内容，再进行检索返回结果</div><div class="line">SELECT ?p ?o</div><div class="line">WHERE</div><div class="line">{</div><div class="line">    SERVICE &lt;xxx://xxx.xxx/xxx&gt;</div><div class="line">    {</div><div class="line">        SELECT ?p ?o</div><div class="line">        WHERE {xxx ?p ?o}</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># 在SPAERQL endpoint运行查询得到一些内容，再进行检索返回结果</div><div class="line">SELECT ?p ?o</div><div class="line">WHERE</div><div class="line">&#123;</div><div class="line">    SERVICE &lt;xxx://xxx.xxx/xxx&gt;</div><div class="line">    &#123;</div><div class="line">        SELECT ?p ?o</div><div class="line">        WHERE &#123;xxx ?p ?o&#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -583,7 +583,7 @@
 <li>DESCRIBE要求提供描述特定资源的三元组</li>
 </ul>
 <h4 id="Copying-Data" class="heading-control"><a href="#Copying-Data" class="headerlink" title="Copying Data"></a>Copying Data<a class="heading-anchor" href="#Copying-Data" aria-hidden="true"></a></h4><ul>
-<li>利用CONSTRUCT抽取三元组；结合GRAPH关键字可以从特定命名图中抽取；SELECT后面跟的是变量列表，CONSTRUCT后面跟的是想要构造的三元组      <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#construct后面跟的是三元组，用花括号包围,里面可以包含任意个三元组模式（triple patterns）</div><div class="line">CONSTRUCT</div><div class="line">{?person ?p ?o}</div><div class="line">WHERE</div><div class="line">{...}</div></pre></td></tr></tbody></table></figure>
+<li>利用CONSTRUCT抽取三元组；结合GRAPH关键字可以从特定命名图中抽取；SELECT后面跟的是变量列表，CONSTRUCT后面跟的是想要构造的三元组      <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#construct后面跟的是三元组，用花括号包围,里面可以包含任意个三元组模式（triple patterns）</div><div class="line">CONSTRUCT</div><div class="line">&#123;?person ?p ?o&#125;</div><div class="line">WHERE</div><div class="line">&#123;...&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="Creating-New-Data" class="heading-control"><a href="#Creating-New-Data" class="headerlink" title="Creating New Data"></a>Creating New Data<a class="heading-anchor" href="#Creating-New-Data" aria-hidden="true"></a></h4><ul>
@@ -645,7 +645,7 @@
 </ul>
 <h4 id="Program-Logic-Functions" class="heading-control"><a href="#Program-Logic-Functions" class="headerlink" title="Program Logic Functions"></a>Program Logic Functions<a class="heading-anchor" href="#Program-Logic-Functions" aria-hidden="true"></a></h4><ul>
 <li>IF()函数有三个参数。 如果第一个参数为true，则该函数返回第二个参数的值; 否则返回第三个</li>
-<li>COALESCE():接受很多参数，返回the first one that doesn’t result in an error  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">SELECT ?first ?last </div><div class="line">WHERE </div><div class="line">{</div><div class="line">?s ab:lastName ?last; </div><div class="line">   ab:firstName ?firstname . </div><div class="line">OPTIONAL{ ?s ab:nick ?nickname . } </div><div class="line">BIND (COALESCE(?nickname,?firstname) AS ?first)</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<li>COALESCE():接受很多参数，返回the first one that doesn’t result in an error  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">SELECT ?first ?last </div><div class="line">WHERE </div><div class="line">&#123;</div><div class="line">?s ab:lastName ?last; </div><div class="line">   ab:firstName ?firstname . </div><div class="line">OPTIONAL&#123; ?s ab:nick ?nickname . &#125; </div><div class="line">BIND (COALESCE(?nickname,?firstname) AS ?first)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="Node-Type-and-Datatype-Checking-Functions" class="heading-control"><a href="#Node-Type-and-Datatype-Checking-Functions" class="headerlink" title="Node Type and Datatype Checking Functions"></a>Node Type and Datatype Checking Functions<a class="heading-anchor" href="#Node-Type-and-Datatype-Checking-Functions" aria-hidden="true"></a></h4><ul>
@@ -660,13 +660,13 @@
 <li>URI() function lets you convert values to URIs if possible</li>
 <li>在将值传递给URI()或IRI()函数之前，使用ENCODE_FOR_URI()函数预处理是个推荐的做法，但要注意它只接受simple literals或xsd：string</li>
 <li>str():返回传入资源的字符串形式，传入为空白节点时不返回值</li>
-<li>一个例子：  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CONSTRUCT {?s ?p ?testURI.} </div><div class="line">WHERE</div><div class="line">{</div><div class="line">    ?s ?p ?o . </div><div class="line">    BIND( IF(isURI(?o), ?o, URI(ENCODE_FOR_URI(str(?o))) ) AS ?testURI)</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<li>一个例子：  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CONSTRUCT &#123;?s ?p ?testURI.&#125; </div><div class="line">WHERE</div><div class="line">&#123;</div><div class="line">    ?s ?p ?o . </div><div class="line">    BIND( IF(isURI(?o), ?o, URI(ENCODE_FOR_URI(str(?o))) ) AS ?testURI)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="Datatype-Conversion" class="heading-control"><a href="#Datatype-Conversion" class="headerlink" title="Datatype Conversion"></a>Datatype Conversion<a class="heading-anchor" href="#Datatype-Conversion" aria-hidden="true"></a></h4><ul>
 <li>conversion to boolean is pickier: xsd:boolean(?o)不能转换True，可以转换true</li>
 <li>xsd:dateTime()不能转换“2011-11-12” ，可以转换“2011-11-12T14:30:00”</li>
-<li>STRDT()接收两个参数，一个literal值和一个类型URI，创建一个typed literal（自定义类型）  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">CONSTRUCT { ?s u:amount ?newAmount . } </div><div class="line">WHERE {</div><div class="line">    ?s im:product ?prodName ;</div><div class="line">       im:amount ?amount ; </div><div class="line">       im:units ?units .</div><div class="line">       BIND (STRDT(?amount, URI(CONCAT("http://learningsparql.com/ns/units#",?units))) AS ?newAmount)</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<li>STRDT()接收两个参数，一个literal值和一个类型URI，创建一个typed literal（自定义类型）  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">CONSTRUCT &#123; ?s u:amount ?newAmount . &#125; </div><div class="line">WHERE &#123;</div><div class="line">    ?s im:product ?prodName ;</div><div class="line">       im:amount ?amount ; </div><div class="line">       im:units ?units .</div><div class="line">       BIND (STRDT(?amount, URI(CONCAT("http://learningsparql.com/ns/units#",?units))) AS ?newAmount)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="Checking-Adding-and-Removing-Spoken-Language-Tags" class="heading-control"><a href="#Checking-Adding-and-Removing-Spoken-Language-Tags" class="headerlink" title="Checking, Adding, and Removing Spoken Language Tags"></a>Checking, Adding, and Removing Spoken Language Tags<a class="heading-anchor" href="#Checking-Adding-and-Removing-Spoken-Language-Tags" aria-hidden="true"></a></h4><ul>
@@ -699,8 +699,8 @@
 </ul>
 <h4 id="Adding-Data-to-a-Dataset" class="heading-control"><a href="#Adding-Data-to-a-Dataset" class="headerlink" title="Adding Data to a Dataset"></a>Adding Data to a Dataset<a class="heading-anchor" href="#Adding-Data-to-a-Dataset" aria-hidden="true"></a></h4><ul>
 <li><p>更新文件后缀为.ru，意思是一个插入请求，not a query</p>
-<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># INSERT DATA后面跟要插入的triples</div><div class="line"># 简单快速插入数据</div><div class="line">INSERT DATA </div><div class="line">{d:i8301 ab:homeTel "(718) 440-9821" . ab:Person a rdfs:Class .}</div></pre></td></tr></tbody></table></figure>
-<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#where后面跟triple patterns，可以引用上面的变量</div><div class="line"># 灵活创造</div><div class="line">INSERT {d:i8301 ab:homeTel "(718) 440-9821" . ab:Person a rdfs:Class .}</div><div class="line">WHERE {}</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># INSERT DATA后面跟要插入的triples</div><div class="line"># 简单快速插入数据</div><div class="line">INSERT DATA </div><div class="line">&#123;d:i8301 ab:homeTel "(718) 440-9821" . ab:Person a rdfs:Class .&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#where后面跟triple patterns，可以引用上面的变量</div><div class="line"># 灵活创造</div><div class="line">INSERT &#123;d:i8301 ab:homeTel "(718) 440-9821" . ab:Person a rdfs:Class .&#125;</div><div class="line">WHERE &#123;&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>三元组模式就是任意位置都可以被变量替换的三元组</p>
 </li>
@@ -731,14 +731,14 @@
 <li>with语句指明要操作的图，比GRAPH节省</li>
 <li>USING的作用类似于SELECT语句的FROM</li>
 <li><p>USING NAMED === FROM NAMED</p>
-  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">USING NAMED d:g2 </div><div class="line">WHERE</div><div class="line">{ </div><div class="line">    # 这里一定要声明GRAPH d:g2</div><div class="line">    GRAPH d:g2 {?s dm:tag "five" . ?s dm:tag "six" .}</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">USING NAMED d:g2 </div><div class="line">WHERE</div><div class="line">&#123; </div><div class="line">    # 这里一定要声明GRAPH d:g2</div><div class="line">    GRAPH d:g2 &#123;?s dm:tag "five" . ?s dm:tag "six" .&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>使用USING就不要使用WITH</p>
 </li>
 </ul>
-<h4 id="Deleting-and-Replacing-Triples-in-Named-Graphs" class="heading-control"><a href="#Deleting-and-Replacing-Triples-in-Named-Graphs" class="headerlink" title="Deleting and Replacing Triples in Named Graphs"></a>Deleting and Replacing Triples in Named Graphs<a class="heading-anchor" href="#Deleting-and-Replacing-Triples-in-Named-Graphs" aria-hidden="true"></a></h4>  <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DELETE</span> <span class="keyword">DATA</span> { GRAPH d:g2{ d:x dm:tag <span class="string">"six"</span> }}</div></pre></td></tr></tbody></table></figure>
-  <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># GRAPH+图名或者变量名</div><div class="line">DELETE { GRAPH ?g { ?s ?p "three" } } </div><div class="line">WHERE { GRAPH ?g { ?s ?p "three" } }</div></pre></td></tr></tbody></table></figure>
-  <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">WITH d:g1 </div><div class="line"><span class="keyword">DELETE</span> { ?s ?p <span class="string">"four"</span>}</div><div class="line"><span class="keyword">WHERE</span> { ?s ?p <span class="string">"four"</span>}</div></pre></td></tr></tbody></table></figure>
+<h4 id="Deleting-and-Replacing-Triples-in-Named-Graphs" class="heading-control"><a href="#Deleting-and-Replacing-Triples-in-Named-Graphs" class="headerlink" title="Deleting and Replacing Triples in Named Graphs"></a>Deleting and Replacing Triples in Named Graphs<a class="heading-anchor" href="#Deleting-and-Replacing-Triples-in-Named-Graphs" aria-hidden="true"></a></h4>  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DELETE</span> <span class="keyword">DATA</span> &#123; GRAPH d:g2&#123; d:x dm:tag <span class="string">"six"</span> &#125;&#125;</div></pre></td></tr></table></figure>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># GRAPH+图名或者变量名</div><div class="line">DELETE &#123; GRAPH ?g &#123; ?s ?p "three" &#125; &#125; </div><div class="line">WHERE &#123; GRAPH ?g &#123; ?s ?p "three" &#125; &#125;</div></pre></td></tr></table></figure>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">WITH d:g1 </div><div class="line"><span class="keyword">DELETE</span> &#123; ?s ?p <span class="string">"four"</span>&#125;</div><div class="line"><span class="keyword">WHERE</span> &#123; ?s ?p <span class="string">"four"</span>&#125;</div></pre></td></tr></table></figure>
 <h3 id="Building-Applications-With-SPARQL" class="heading-control"><a href="#Building-Applications-With-SPARQL" class="headerlink" title="Building Applications With SPARQL"></a>Building Applications With SPARQL<a class="heading-anchor" href="#Building-Applications-With-SPARQL" aria-hidden="true"></a></h3><ul>
 <li>将查询发送到端点的最常见方式是将查询的转义版本作为参数添加到端点的URI</li>
 <li>D2RQ</li>
@@ -759,25 +759,7 @@
 <li><strong>Turtle</strong>: An increasingly popular RDF serialization format based on N3</li>
 <li><strong>URI</strong>: “URI” is used more often to refer to an identifier, and “URL” to refer to a locator, or address.We use URIs to identify resources and property names in RDF</li>
 </ul>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
       
     </div>
 
@@ -908,7 +890,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -921,7 +903,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1014,7 +996,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共28.8k字</span>
+  <span class="post-count">博客全站共27.1k字</span>
 </div>
 
 

@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  391 字
+                  341 字
                 </span>
               
 
@@ -410,43 +410,25 @@
       
 
       
-        <h3 id="声明浏览器对象" class="heading-control"><a href="#声明浏览器对象" class="headerlink" title="声明浏览器对象"></a>声明浏览器对象<a class="heading-anchor" href="#声明浏览器对象" aria-hidden="true"></a></h3><p>ubuntu下打不开chrome浏览器，重新安装了chromium-browser，并使用下面的声明语句<br></p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">browser = webdriver.Chrome(<span class="string">"/usr/lib/chromium-browser/chromedriver"</span>)</div></pre></td></tr></tbody></table></figure><p></p>
+        <h3 id="声明浏览器对象" class="heading-control"><a href="#声明浏览器对象" class="headerlink" title="声明浏览器对象"></a>声明浏览器对象<a class="heading-anchor" href="#声明浏览器对象" aria-hidden="true"></a></h3><p>ubuntu下打不开chrome浏览器，重新安装了chromium-browser，并使用下面的声明语句<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">browser = webdriver.Chrome(<span class="string">"/usr/lib/chromium-browser/chromedriver"</span>)</div></pre></td></tr></table></figure></p>
 <p>方案来源<a href="https://stackoverflow.com/questions/22476112/using-chromedriver-with-selenium-python-ubuntu" target="_blank" rel="external">https://stackoverflow.com/questions/22476112/using-chromedriver-with-selenium-python-ubuntu</a> </p>
 <p>貌似添加chrome的path也能解决 </p>
-<h3 id="获取元素" class="heading-control"><a href="#获取元素" class="headerlink" title="获取元素"></a>获取元素<a class="heading-anchor" href="#获取元素" aria-hidden="true"></a></h3><p>可以通过id，name，classname，xpath，css_selector等获得<br>两种写法：<a id="more"></a><br></p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</div><div class="line">elem = browser.find_element(By.ID,<span class="string">"kw"</span>)</div></pre></td></tr></tbody></table></figure><p></p>
-<p>或者<br></p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">elem = browser.find_element_by_id(<span class="string">"kw"</span>)</div></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="获取元素" class="heading-control"><a href="#获取元素" class="headerlink" title="获取元素"></a>获取元素<a class="heading-anchor" href="#获取元素" aria-hidden="true"></a></h3><p>可以通过id，name，classname，xpath，css_selector等获得<br>两种写法：<a id="more"></a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</div><div class="line">elem = browser.find_element(By.ID,<span class="string">"kw"</span>)</div></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">elem = browser.find_element_by_id(<span class="string">"kw"</span>)</div></pre></td></tr></table></figure></p>
 <h3 id="获取多个元素" class="heading-control"><a href="#获取多个元素" class="headerlink" title="获取多个元素"></a>获取多个元素<a class="heading-anchor" href="#获取多个元素" aria-hidden="true"></a></h3><p>就是element和elements的小区别，返回一个列表 </p>
 <h3 id="元素交互" class="heading-control"><a href="#元素交互" class="headerlink" title="元素交互"></a>元素交互<a class="heading-anchor" href="#元素交互" aria-hidden="true"></a></h3><p>先获取特定元素，再对其调用交互<br>input.send_keys(“xxx”) 为元素赋值”xxx“<br>button.click() 点击button元素</p>
-<h3 id="交互动作" class="heading-control"><a href="#交互动作" class="headerlink" title="交互动作"></a>交互动作<a class="heading-anchor" href="#交互动作" aria-hidden="true"></a></h3><p>将动作附加到动作链中执行,比如可以实现元素拖拽、点击、双击等<br></p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> selenium.webdriver <span class="keyword">import</span> ActionChains</div></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="交互动作" class="heading-control"><a href="#交互动作" class="headerlink" title="交互动作"></a>交互动作<a class="heading-anchor" href="#交互动作" aria-hidden="true"></a></h3><p>将动作附加到动作链中执行,比如可以实现元素拖拽、点击、双击等<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> selenium.webdriver <span class="keyword">import</span> ActionChains</div></pre></td></tr></table></figure></p>
 <h3 id="执行JavaScript" class="heading-control"><a href="#执行JavaScript" class="headerlink" title="执行JavaScript"></a>执行JavaScript<a class="heading-anchor" href="#执行JavaScript" aria-hidden="true"></a></h3><p>browser.execute_script(script_name)  </p>
-<h3 id="获取属性值" class="heading-control"><a href="#获取属性值" class="headerlink" title="获取属性值"></a>获取属性值<a class="heading-anchor" href="#获取属性值" aria-hidden="true"></a></h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">elem.get_attribute(<span class="string">'xxx'</span>) </div><div class="line">elem.get_property(<span class="string">'xxxx'</span>)</div></pre></td></tr></tbody></table></figure>
+<h3 id="获取属性值" class="heading-control"><a href="#获取属性值" class="headerlink" title="获取属性值"></a>获取属性值<a class="heading-anchor" href="#获取属性值" aria-hidden="true"></a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">elem.get_attribute(<span class="string">'xxx'</span>) </div><div class="line">elem.get_property(<span class="string">'xxxx'</span>)</div></pre></td></tr></table></figure>
 <h3 id="获取文本值" class="heading-control"><a href="#获取文本值" class="headerlink" title="获取文本值"></a>获取文本值<a class="heading-anchor" href="#获取文本值" aria-hidden="true"></a></h3><p>elem.text  </p>
 <h3 id="获取ID、位置、标签名、大小" class="heading-control"><a href="#获取ID、位置、标签名、大小" class="headerlink" title="获取ID、位置、标签名、大小"></a>获取ID、位置、标签名、大小<a class="heading-anchor" href="#获取ID、位置、标签名、大小" aria-hidden="true"></a></h3><p>elem.id<br>elem.location<br>elem.tag_name<br>elem.size</p>
 <h3 id="Frame" class="heading-control"><a href="#Frame" class="headerlink" title="Frame"></a>Frame<a class="heading-anchor" href="#Frame" aria-hidden="true"></a></h3><p>提取元素时，要注意frame的切换<br>位于子frame时，找不到父frame中的元素</p>
 <h3 id="等待" class="heading-control"><a href="#等待" class="headerlink" title="等待"></a>等待<a class="heading-anchor" href="#等待" aria-hidden="true"></a></h3><p>隐式等待<br>显式等待</p>
-<h3 id="前进后退" class="heading-control"><a href="#前进后退" class="headerlink" title="前进后退"></a>前进后退<a class="heading-anchor" href="#前进后退" aria-hidden="true"></a></h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brower.back()</div><div class="line">brower.forward()</div></pre></td></tr></tbody></table></figure>
-<h3 id="Cookies" class="heading-control"><a href="#Cookies" class="headerlink" title="Cookies"></a>Cookies<a class="heading-anchor" href="#Cookies" aria-hidden="true"></a></h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">browser.get_cookies()</div><div class="line">browser.add_cookie({dict})</div></pre></td></tr></tbody></table></figure>
-<h3 id="选项卡管理" class="heading-control"><a href="#选项卡管理" class="headerlink" title="选项卡管理"></a>选项卡管理<a class="heading-anchor" href="#选项卡管理" aria-hidden="true"></a></h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#打开一个页面，新建一个选项卡，切换回页面</span></div><div class="line">url=<span class="string">"http://www.runoob.com/try/try.php?filename=jqueryui-api-droppable"</span></div><div class="line">browser.get(url)</div><div class="line">browser.execute_script(<span class="string">'window.open()'</span>)</div><div class="line">browser.switch_to.window(browser.window_handles[<span class="number">0</span>])</div></pre></td></tr></tbody></table></figure>
+<h3 id="前进后退" class="heading-control"><a href="#前进后退" class="headerlink" title="前进后退"></a>前进后退<a class="heading-anchor" href="#前进后退" aria-hidden="true"></a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brower.back()</div><div class="line">brower.forward()</div></pre></td></tr></table></figure>
+<h3 id="Cookies" class="heading-control"><a href="#Cookies" class="headerlink" title="Cookies"></a>Cookies<a class="heading-anchor" href="#Cookies" aria-hidden="true"></a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">browser.get_cookies()</div><div class="line">browser.add_cookie(&#123;dict&#125;)</div></pre></td></tr></table></figure>
+<h3 id="选项卡管理" class="heading-control"><a href="#选项卡管理" class="headerlink" title="选项卡管理"></a>选项卡管理<a class="heading-anchor" href="#选项卡管理" aria-hidden="true"></a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#打开一个页面，新建一个选项卡，切换回页面</span></div><div class="line">url=<span class="string">"http://www.runoob.com/try/try.php?filename=jqueryui-api-droppable"</span></div><div class="line">browser.get(url)</div><div class="line">browser.execute_script(<span class="string">'window.open()'</span>)</div><div class="line">browser.switch_to.window(browser.window_handles[<span class="number">0</span>])</div></pre></td></tr></table></figure>
 <h3 id="异常" class="heading-control"><a href="#异常" class="headerlink" title="异常"></a>异常<a class="heading-anchor" href="#异常" aria-hidden="true"></a></h3><p>超时、元素不存在等</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
       
     </div>
 
@@ -579,7 +561,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -592,7 +574,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -685,7 +667,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共28.8k字</span>
+  <span class="post-count">博客全站共27.1k字</span>
 </div>
 
 

@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  270 字
+                  218 字
                 </span>
               
 
@@ -413,26 +413,8 @@
         <p>Given a positive integer n, break it into the sum of at least two positive integers and maximize the product of those integers. Return the maximum product you can get.</p>
 <p>For example, given n = 2, return 1 (2 = 1 + 1); given n = 10, return 36 (10 = 3 + 3 + 4).<br>Note: You may assume that n is not less than 2 and not larger than 58.</p>
 <p><strong>思路:<a id="more"></a> 最值问题,求导.</strong><br>假设一个数N分成了N/x份,每份都是x,则有<br>$$<br>y=x^{N/x},\<br>\ln y=(N/x)\ln x,\<br>\frac{1}{y}*y^{‘}=\frac{n}{x^2}(1-\ln x),<br>$$<br>另y’=0,则有lnx=1,x=e.<br>题中规定x只能是正整数,e约为2.718,则取离e较近的数3,此时y较大.<br>于是有递推式: dp(i)=3dp(i-3) (i&gt;4 ),i&lt;=4时,dp[i]=[1,1,1,2,4].</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">integerBreak</span><span class="params">(self, n)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :type n: int</div><div class="line">        :rtype: int</div><div class="line">        bottom to up dp.</div><div class="line">        """</div><div class="line">        res=[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>]</div><div class="line">        <span class="keyword">if</span> n&lt;=<span class="number">4</span>:<span class="keyword">return</span> res[n]</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            ans=<span class="number">1</span></div><div class="line">            <span class="keyword">while</span> n&gt;<span class="number">4</span>:</div><div class="line">                ans*=<span class="number">3</span></div><div class="line">                n-=<span class="number">3</span></div><div class="line">            ans*=n</div><div class="line">        <span class="keyword">return</span> ans</div></pre></td></tr></tbody></table></figure>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">integerBreak</span><span class="params">(self, n)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :type n: int</div><div class="line">        :rtype: int</div><div class="line">        bottom to up dp.</div><div class="line">        """</div><div class="line">        res=[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>]</div><div class="line">        <span class="keyword">if</span> n&lt;=<span class="number">4</span>:<span class="keyword">return</span> res[n]</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            ans=<span class="number">1</span></div><div class="line">            <span class="keyword">while</span> n&gt;<span class="number">4</span>:</div><div class="line">                ans*=<span class="number">3</span></div><div class="line">                n-=<span class="number">3</span></div><div class="line">            ans*=n</div><div class="line">        <span class="keyword">return</span> ans</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -556,7 +538,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -569,7 +551,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -646,7 +628,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共28.8k字</span>
+  <span class="post-count">博客全站共27.1k字</span>
 </div>
 
 

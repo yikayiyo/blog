@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1.7k 字
+                  1.6k 字
                 </span>
               
 
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  7 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -462,49 +462,31 @@
 <li>使用 <strong>tf.get_variable()</strong>,它会在创建变量之前检查其是否存在</li>
 <li>将所用到的变量放到一个VarScope，将这个VarScope设置为可复用的（reusable）</li>
 </ol>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fully_connected</span><span class="params">(x,output_dim,scope_name)</span>:</span> <span class="comment">#	基础组件：全连接层</span></div><div class="line">    <span class="keyword">with</span> tf.variable_scope(scope_name):</div><div class="line">        w = tf.get_variable(<span class="string">"weights"</span>,[x.shape[<span class="number">1</span>],output_dim],initializer=tf.random_normal_initializer())</div><div class="line">        b = tf.get_variable(<span class="string">"bias"</span>,[output_dim],initializer= tf.constant_initializer(<span class="number">0.0</span>))</div><div class="line">        <span class="keyword">return</span> tf.matmul(x,w) + b</div><div class="line">        </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">two_hidden_layer</span><span class="params">(x)</span>:</span>  <span class="comment">#网络结构：两个全连接层</span></div><div class="line">    h1 = fully_connected(x,<span class="number">50</span>,<span class="string">'h1'</span>)</div><div class="line">    h2 = fully_connected(h1,<span class="number">10</span>,<span class="string">'h2'</span>)</div><div class="line">    </div><div class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">'two_layers'</span>) <span class="keyword">as</span> scope: <span class="comment">#调用网络，输入x1，x2</span></div><div class="line">    logits1 = two_hidden_layer(x1)</div><div class="line">    scope.reuse_variables()</div><div class="line">    logits2 = two_hidden_layer(x2）</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fully_connected</span><span class="params">(x,output_dim,scope_name)</span>:</span> <span class="comment">#	基础组件：全连接层</span></div><div class="line">    <span class="keyword">with</span> tf.variable_scope(scope_name):</div><div class="line">        w = tf.get_variable(<span class="string">"weights"</span>,[x.shape[<span class="number">1</span>],output_dim],initializer=tf.random_normal_initializer())</div><div class="line">        b = tf.get_variable(<span class="string">"bias"</span>,[output_dim],initializer= tf.constant_initializer(<span class="number">0.0</span>))</div><div class="line">        <span class="keyword">return</span> tf.matmul(x,w) + b</div><div class="line">        </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">two_hidden_layer</span><span class="params">(x)</span>:</span>  <span class="comment">#网络结构：两个全连接层</span></div><div class="line">    h1 = fully_connected(x,<span class="number">50</span>,<span class="string">'h1'</span>)</div><div class="line">    h2 = fully_connected(h1,<span class="number">10</span>,<span class="string">'h2'</span>)</div><div class="line">    </div><div class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">'two_layers'</span>) <span class="keyword">as</span> scope: <span class="comment">#调用网络，输入x1，x2</span></div><div class="line">    logits1 = two_hidden_layer(x1)</div><div class="line">    scope.reuse_variables()</div><div class="line">    logits2 = two_hidden_layer(x2）</div></pre></td></tr></table></figure>
 <p>以上代码模式，基础组件可以定义更多，比如conv，relu，网络结构可以更复杂，比如放一个ResNet，非常容易scale。<br>由于使用了变量共享，多次传入x，网络TensorBoard图的复杂程度不会爆炸式增加。</p>
 <p>Graph collections</p>
 <p>使用这个，可以获取满足一定条件的所有变量，tf.get_collection(key,scope=None)<br>比如执行optimizer的时候，默认情况下它会获取key=tf.GraphKeys.TRAINABLE_VARIABLES的变量，即所有可训练的变量（当然也可以传入指定的、要训练的变量<br>获取某个scope下的所有变量，tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES,scope=’scope_name’)<br>key还有许多其它的值，见官网。</p>
 <h4 id="Manage-experiments" class="heading-control"><a href="#Manage-experiments" class="headerlink" title="Manage experiments"></a>Manage experiments<a class="heading-anchor" href="#Manage-experiments" aria-hidden="true"></a></h4><p>实验总是很久，中断随时发生，因此训练可以随时随地停止、像没事一样恢复，非常重要。<br>另外一个问题是论文结果复现，控制实验的随机因子对复现结果非常关键。</p>
 <p>tf.train.Saver()</p>
 <p><strong>周期性地保存模型参数</strong>是个好习惯<br>tf.train.Saver()类将图的<strong>变量保存</strong>（不是整张图）到二进制文件，也就是一个checkpoint（变量名到tensors的映射）</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#定义模型</span></div><div class="line">...</div><div class="line">global_steps = tf.Variable(<span class="number">0</span>, trainable=<span class="keyword">False</span>，name=<span class="string">'global_steps'</span>)</div><div class="line">optimizer = tf.train.GradientDescentOptimizer(lr).minimize(loss,global_step=global_steps)</div><div class="line"><span class="comment">#创建一个saver对象</span></div><div class="line">saver = tf.train.Saver()</div><div class="line"></div><div class="line"><span class="comment">#启动一个会话来执行计算</span></div><div class="line"><span class="keyword">with</span> tf.session() <span class="keyword">as</span> sess:</div><div class="line">	<span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">1</span>,training_steps):</div><div class="line">        sess.run([optimizer]) <span class="comment">#global_step会在每一步训练后自加1</span></div><div class="line">        <span class="keyword">if</span> step%<span class="number">1000</span>==<span class="number">0</span>:</div><div class="line">            <span class="comment">#这里传入step也差不多吧...默认保存图中所有变量</span></div><div class="line">            saver.save(sess,<span class="string">'checkpoints/model-name'</span>,global_step=global_steps)</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#定义模型</span></div><div class="line">...</div><div class="line">global_steps = tf.Variable(<span class="number">0</span>, trainable=<span class="keyword">False</span>，name=<span class="string">'global_steps'</span>)</div><div class="line">optimizer = tf.train.GradientDescentOptimizer(lr).minimize(loss,global_step=global_steps)</div><div class="line"><span class="comment">#创建一个saver对象</span></div><div class="line">saver = tf.train.Saver()</div><div class="line"></div><div class="line"><span class="comment">#启动一个会话来执行计算</span></div><div class="line"><span class="keyword">with</span> tf.session() <span class="keyword">as</span> sess:</div><div class="line">	<span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">1</span>,training_steps):</div><div class="line">        sess.run([optimizer]) <span class="comment">#global_step会在每一步训练后自加1</span></div><div class="line">        <span class="keyword">if</span> step%<span class="number">1000</span>==<span class="number">0</span>:</div><div class="line">            <span class="comment">#这里传入step也差不多吧...默认保存图中所有变量</span></div><div class="line">            saver.save(sess,<span class="string">'checkpoints/model-name'</span>,global_step=global_steps)</div></pre></td></tr></table></figure>
 <p>生成的checkpoint名，像这样，’checkpoints/skip-gram-10000’<br>在恢复模型时可以直接传入checkpoint名（如果有的话</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ckpt = tf.train.get_checkpoint_state(os.path.dirname(<span class="string">'checkpoints/model-name'</span>))</div><div class="line"><span class="keyword">if</span> ckpt <span class="keyword">and</span> ckpt.model_checkpoint_path:</div><div class="line">    saver.restore(sess,ckpt.model_checkpoint_path) <span class="comment">#恢复的是最近的一个check point</span></div></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ckpt = tf.train.get_checkpoint_state(os.path.dirname(<span class="string">'checkpoints/model-name'</span>))</div><div class="line"><span class="keyword">if</span> ckpt <span class="keyword">and</span> ckpt.model_checkpoint_path:</div><div class="line">    saver.restore(sess,ckpt.model_checkpoint_path) <span class="comment">#恢复的是最近的一个check point</span></div></pre></td></tr></table></figure>
 <p>恢复的时候，网络图还得自己重新搭（still have to create the graph ourselves）之后再加载变量<br>当然，经常的做法是到目前为止表现最好的参数也保存下来（不止是最近的一次）</p>
 <p>tf.summary</p>
 <p>记录模型训练过程中指标变化，包括loss，accuracy等等</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#创建summaries</span></div><div class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">"summaries"</span>):</div><div class="line">    tf.summary.scalar(<span class="string">"loss"</span>,loss)</div><div class="line">    tf.summary.histogram(<span class="string">"histogram loss"</span>,loss)</div><div class="line">    tf.summary.scalar(<span class="string">"accuracy"</span>,accuracy)</div><div class="line">    summary_op = tf.summary.merge_all()</div><div class="line"></div><div class="line"><span class="comment">#执行summary op</span></div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">    <span class="keyword">for</span> step <span class="keyword">in</span> range(steps):</div><div class="line">        _loss,_,summary = sess.run([model.loss,model.optimizer,model.summary_op],feed_dict={...})</div><div class="line">        writer = tf.summary.FileWriter(<span class="string">'path'</span>+str(lr),sess.graph) <span class="comment">#将lr写入路径，方便tensorboard对比</span></div><div class="line">        writer.add(summary,global_step=step) <span class="comment">#记录每一个step的summary</span></div><div class="line">    writer.close()</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#创建summaries</span></div><div class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">"summaries"</span>):</div><div class="line">    tf.summary.scalar(<span class="string">"loss"</span>,loss)</div><div class="line">    tf.summary.histogram(<span class="string">"histogram loss"</span>,loss)</div><div class="line">    tf.summary.scalar(<span class="string">"accuracy"</span>,accuracy)</div><div class="line">    summary_op = tf.summary.merge_all()</div><div class="line"></div><div class="line"><span class="comment">#执行summary op</span></div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">    <span class="keyword">for</span> step <span class="keyword">in</span> range(steps):</div><div class="line">        _loss,_,summary = sess.run([model.loss,model.optimizer,model.summary_op],feed_dict=&#123;...&#125;)</div><div class="line">        writer = tf.summary.FileWriter(<span class="string">'path'</span>+str(lr),sess.graph) <span class="comment">#将lr写入路径，方便tensorboard对比</span></div><div class="line">        writer.add(summary,global_step=step) <span class="comment">#记录每一个step的summary</span></div><div class="line">    writer.close()</div></pre></td></tr></table></figure>
 <p>control randomization</p>
 <p>为了使得别人在实验时结果会与你一致</p>
 <ol>
 <li><p>op级别<br>所有的tensor初始化时都传入seed参数<br>session记录了随机状态，每一个新的session都会重新start the random state</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">c = tf.random_uniform([],<span class="number">-10</span>,<span class="number">10</span>,seed=<span class="number">2</span>)</div><div class="line">d = tf.random_uniform([],<span class="number">-10</span>,<span class="number">10</span>,seed=<span class="number">2</span>)</div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">    print(sess.run(c)) <span class="comment">#value: a</span></div><div class="line">    print(sess.run(d)) <span class="comment">#same value: a</span></div><div class="line">    print(sess.run(c)) <span class="comment">#value: b</span></div></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">c = tf.random_uniform([],<span class="number">-10</span>,<span class="number">10</span>,seed=<span class="number">2</span>)</div><div class="line">d = tf.random_uniform([],<span class="number">-10</span>,<span class="number">10</span>,seed=<span class="number">2</span>)</div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">    print(sess.run(c)) <span class="comment">#value: a</span></div><div class="line">    print(sess.run(d)) <span class="comment">#same value: a</span></div><div class="line">    print(sess.run(c)) <span class="comment">#value: b</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>graph级别<br>比如demo1.py和demo2.py代码相同，设置了tf.set_random_seed(seed)的话执行结果是相同的</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">tf.set_random_seed(<span class="number">2</span>)</div><div class="line">c = tf.random_uniform([],<span class="number">-10</span>,<span class="number">10</span>)</div><div class="line">d = tf.random_uniform([],<span class="number">-10</span>,<span class="number">10</span>)</div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">    print(sess.run(c)) <span class="comment"># 都是a</span></div><div class="line">    print(sess.run(d)) <span class="comment"># 都是b</span></div></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">tf.set_random_seed(<span class="number">2</span>)</div><div class="line">c = tf.random_uniform([],<span class="number">-10</span>,<span class="number">10</span>)</div><div class="line">d = tf.random_uniform([],<span class="number">-10</span>,<span class="number">10</span>)</div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">    print(sess.run(c)) <span class="comment"># 都是a</span></div><div class="line">    print(sess.run(d)) <span class="comment"># 都是b</span></div></pre></td></tr></table></figure>
 </li>
 </ol>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
       
     </div>
 
@@ -639,7 +621,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -652,7 +634,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -745,7 +727,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共28.8k字</span>
+  <span class="post-count">博客全站共27.1k字</span>
 </div>
 
 

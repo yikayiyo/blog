@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="学习笔记,python," />
+  <meta name="keywords" content="python,学习笔记," />
 
 
 
@@ -90,7 +90,7 @@
 
 
 <meta name="description" content="拷贝是对于可变对象list而言的，非容器类型（如数字、字符串、和其他’原子’类型的对象）是没有拷贝这个说法的 赋值1234&amp;gt;&amp;gt;&amp;gt; a = [1,2,3,[4,5]]&amp;gt;&amp;gt;&amp;gt; b = a&amp;gt;&amp;gt;&amp;gt; a is bTrue b是a的别名，指向一个地址">
-<meta name="keywords" content="学习笔记,python">
+<meta name="keywords" content="python,学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深、浅拷贝">
 <meta property="og:url" content="https://yikayiyo.github.io/2017/06/22/深浅拷贝/index.html">
@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  362 字
+                  310 字
                 </span>
               
 
@@ -411,31 +411,13 @@
 
       
         <p><strong>拷贝是对于可变对象list而言的，非容器类型（如数字、字符串、和其他’原子’类型的对象）是没有拷贝这个说法的</strong></p>
-<h3 id="赋值" class="heading-control"><a href="#赋值" class="headerlink" title="赋值"></a>赋值<a class="heading-anchor" href="#赋值" aria-hidden="true"></a></h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,[<span class="number">4</span>,<span class="number">5</span>]]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b = a</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a <span class="keyword">is</span> b</div><div class="line"><span class="keyword">True</span></div></pre></td></tr></tbody></table></figure>
+<h3 id="赋值" class="heading-control"><a href="#赋值" class="headerlink" title="赋值"></a>赋值<a class="heading-anchor" href="#赋值" aria-hidden="true"></a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,[<span class="number">4</span>,<span class="number">5</span>]]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b = a</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a <span class="keyword">is</span> b</div><div class="line"><span class="keyword">True</span></div></pre></td></tr></table></figure>
 <p>b是a的别名，指向一个地址<a id="more"></a></p>
-<h3 id="浅拷贝" class="heading-control"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝<a class="heading-anchor" href="#浅拷贝" aria-hidden="true"></a></h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>b = a[:]              <span class="comment">#或者使用 b = list(a)</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a <span class="keyword">is</span> b</div><div class="line"><span class="keyword">False</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>] <span class="keyword">is</span> b[<span class="number">0</span>]</div><div class="line"><span class="keyword">True</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b.append([<span class="number">6</span>,<span class="number">7</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b</div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="number">4</span>, <span class="number">5</span>], [<span class="number">6</span>, <span class="number">7</span>]]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="number">4</span>, <span class="number">5</span>]]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b[<span class="number">3</span>].append(<span class="string">'x'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b</div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="number">4</span>, <span class="number">5</span>, <span class="string">'x'</span>], [<span class="number">6</span>, <span class="number">7</span>]]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="number">4</span>, <span class="number">5</span>, <span class="string">'x'</span>]]</div></pre></td></tr></tbody></table></figure>
+<h3 id="浅拷贝" class="heading-control"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝<a class="heading-anchor" href="#浅拷贝" aria-hidden="true"></a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>b = a[:]              <span class="comment">#或者使用 b = list(a)</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a <span class="keyword">is</span> b</div><div class="line"><span class="keyword">False</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>] <span class="keyword">is</span> b[<span class="number">0</span>]</div><div class="line"><span class="keyword">True</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b.append([<span class="number">6</span>,<span class="number">7</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b</div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="number">4</span>, <span class="number">5</span>], [<span class="number">6</span>, <span class="number">7</span>]]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="number">4</span>, <span class="number">5</span>]]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b[<span class="number">3</span>].append(<span class="string">'x'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b</div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="number">4</span>, <span class="number">5</span>, <span class="string">'x'</span>], [<span class="number">6</span>, <span class="number">7</span>]]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="number">4</span>, <span class="number">5</span>, <span class="string">'x'</span>]]</div></pre></td></tr></table></figure>
 <p>浅拷贝构造了一个新的list对象<br>b的内部元素<strong>是a元素的引用</strong> ( the new list represents a sequence of references to the same elements as in the first )<br>修改b中的可变对象会影响a ；</p>
-<h3 id="深拷贝" class="heading-control"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝<a class="heading-anchor" href="#深拷贝" aria-hidden="true"></a></h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> copy</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b=copy.deepcopy(a)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a <span class="keyword">is</span> b</div><div class="line"><span class="keyword">False</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b</div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="number">4</span>, <span class="number">5</span>, <span class="string">'x'</span>]]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="number">4</span>, <span class="number">5</span>, <span class="string">'x'</span>]]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b[<span class="number">3</span>].pop()</div><div class="line"><span class="string">'x'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b</div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="number">4</span>, <span class="number">5</span>]]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="number">4</span>, <span class="number">5</span>, <span class="string">'x'</span>]]</div></pre></td></tr></tbody></table></figure>
+<h3 id="深拷贝" class="heading-control"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝<a class="heading-anchor" href="#深拷贝" aria-hidden="true"></a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> copy</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b=copy.deepcopy(a)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a <span class="keyword">is</span> b</div><div class="line"><span class="keyword">False</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b</div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="number">4</span>, <span class="number">5</span>, <span class="string">'x'</span>]]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="number">4</span>, <span class="number">5</span>, <span class="string">'x'</span>]]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b[<span class="number">3</span>].pop()</div><div class="line"><span class="string">'x'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b</div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="number">4</span>, <span class="number">5</span>]]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="number">4</span>, <span class="number">5</span>, <span class="string">'x'</span>]]</div></pre></td></tr></table></figure>
 <p>不仅list对象是新的，list里的元素也是新的；<br>这里a[3] is not b[3] .</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
       
     </div>
 
@@ -463,9 +445,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
-          
             <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
           
         </div>
       
@@ -568,7 +550,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -581,7 +563,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -674,7 +656,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共28.8k字</span>
+  <span class="post-count">博客全站共27.1k字</span>
 </div>
 
 

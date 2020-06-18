@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="学习笔记,python," />
+  <meta name="keywords" content="python,学习笔记," />
 
 
 
@@ -90,7 +90,7 @@
 
 
 <meta name="description" content="问题:为什么2!=True呢?1234567num=2&amp;gt;&amp;gt;&amp;gt; if num==True:...     print &apos;True&apos;... else:...     print &apos;False&apos;... False">
-<meta name="keywords" content="学习笔记,python">
+<meta name="keywords" content="python,学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2!=True">
 <meta property="og:url" content="https://yikayiyo.github.io/2017/05/23/2!=True/index.html">
@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  591 字
+                  541 字
                 </span>
               
 
@@ -410,14 +410,14 @@
       
 
       
-        <p>问题:为什么2!=True呢?<br></p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">num=<span class="number">2</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">if</span> num==<span class="keyword">True</span>:</div><div class="line"><span class="meta">... </span>    <span class="keyword">print</span> <span class="string">'True'</span></div><div class="line"><span class="meta">... </span><span class="keyword">else</span>:</div><div class="line"><span class="meta">... </span>    <span class="keyword">print</span> <span class="string">'False'</span></div><div class="line"><span class="meta">... </span></div><div class="line"><span class="keyword">False</span></div></pre></td></tr></tbody></table></figure><p></p>
+        <p>问题:为什么2!=True呢?<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">num=<span class="number">2</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">if</span> num==<span class="keyword">True</span>:</div><div class="line"><span class="meta">... </span>    <span class="keyword">print</span> <span class="string">'True'</span></div><div class="line"><span class="meta">... </span><span class="keyword">else</span>:</div><div class="line"><span class="meta">... </span>    <span class="keyword">print</span> <span class="string">'False'</span></div><div class="line"><span class="meta">... </span></div><div class="line"><span class="keyword">False</span></div></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <p>其实也是个无聊的东西…查官方文档时候感觉还不错,至少能看懂…</p>
 <h4 id="真值测试" class="heading-control"><a href="#真值测试" class="headerlink" title="真值测试"></a>真值测试<a class="heading-anchor" href="#真值测试" aria-hidden="true"></a></h4><p>python中的任何对象都有真值，以下对象的真值为<strong>false</strong>：</p>
 <pre><code>- None
 - False
 - zero of any numeric type,for example 0,0.0,0j.
-- any empty sequence,for example,'',(),[].
+- any empty sequence,for example,&apos;&apos;,(),[].
 - any empty mapping,for example,{}
 - instances of user-defined classes, if the class defines a __bool__() or __len__() method, when that method returns the integer zero or bool value False. 
 </code></pre><p>其它所有对象的真值都被视为 <strong>true</strong> 。一些返回布尔值的操作和内置函数，总是返回0或者False来表示真值为<strong>false</strong>，返回1或者True来表示真值为<strong>true</strong>. (例外: <strong>布尔操作</strong> or 和 and 总是<strong>返回其操作数</strong>)</p>
@@ -450,29 +450,11 @@
 </table>
 <p>Notes:<br>(1) This is a short-circuit operator, so it only evaluates the second argument if the first one is false.<br>只会在第一个参数为假的时候考虑第二个参数.<br>(2) This is a short-circuit operator, so it only evaluates the second argument if the first one is true.<br>只会在第一个参数为真的时候考虑第二个参数.<br>(3) not has a lower priority than non-Boolean operators, so <strong>not a == b</strong> is interpreted as <strong>not (a == b)</strong>, and <strong>a == not b</strong> is a syntax error.</p>
 <p>于是有:</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">True</span> <span class="keyword">and</span> <span class="number">0</span>		<span class="comment"># 0	</span></div><div class="line"><span class="number">0</span> <span class="keyword">and</span> <span class="keyword">True</span>		<span class="comment"># 0</span></div><div class="line"><span class="keyword">True</span> <span class="keyword">and</span> <span class="number">1</span>		<span class="comment"># 1</span></div><div class="line"><span class="number">1</span> <span class="keyword">and</span> <span class="keyword">True</span>		<span class="comment"># True</span></div><div class="line"><span class="keyword">True</span> <span class="keyword">and</span> <span class="number">2</span>		<span class="comment"># 2</span></div><div class="line"><span class="number">2</span> <span class="keyword">and</span> <span class="keyword">True</span>		<span class="comment"># True</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">and</span> <span class="number">0</span>		<span class="comment"># False</span></div><div class="line"><span class="number">0</span> <span class="keyword">and</span> <span class="keyword">False</span>		<span class="comment"># 0</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">and</span> <span class="number">1</span>		<span class="comment"># False</span></div><div class="line"><span class="number">1</span> <span class="keyword">and</span> <span class="keyword">False</span>		<span class="comment"># False</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">and</span> <span class="number">2</span>		<span class="comment"># False</span></div><div class="line"><span class="number">2</span> <span class="keyword">and</span> <span class="keyword">False</span>		<span class="comment"># False</span></div></pre></td></tr></tbody></table></figure>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">True</span> <span class="keyword">or</span> <span class="number">0</span>		<span class="comment"># True</span></div><div class="line"><span class="number">0</span> <span class="keyword">or</span> <span class="keyword">True</span>		<span class="comment"># True</span></div><div class="line"><span class="keyword">True</span> <span class="keyword">or</span> <span class="number">1</span>		<span class="comment"># True</span></div><div class="line"><span class="number">1</span> <span class="keyword">or</span> <span class="keyword">True</span>		<span class="comment"># 1</span></div><div class="line"><span class="keyword">True</span> <span class="keyword">or</span> <span class="number">2</span>		<span class="comment"># True</span></div><div class="line"><span class="number">2</span> <span class="keyword">or</span> <span class="keyword">True</span>		<span class="comment"># 2</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">or</span> <span class="number">0</span>		<span class="comment"># 0</span></div><div class="line"><span class="number">0</span> <span class="keyword">or</span> <span class="keyword">False</span>		<span class="comment"># False</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">or</span> <span class="number">1</span>		<span class="comment"># 1</span></div><div class="line"><span class="number">1</span> <span class="keyword">or</span> <span class="keyword">False</span>		<span class="comment"># 1</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">or</span> <span class="number">2</span>		<span class="comment"># 2</span></div><div class="line"><span class="number">2</span> <span class="keyword">or</span> <span class="keyword">False</span>		<span class="comment"># 2</span></div></pre></td></tr></tbody></table></figure>
-<h4 id="布尔值" class="heading-control"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值<a class="heading-anchor" href="#布尔值" aria-hidden="true"></a></h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">isinstance(<span class="keyword">True</span>,int)	<span class="comment"># True</span></div><div class="line">isinstance(<span class="keyword">False</span>,int)	<span class="comment"># True</span></div><div class="line"><span class="keyword">True</span> <span class="keyword">is</span> <span class="number">1</span>		<span class="comment"># False</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">is</span> <span class="number">0</span>		<span class="comment"># False</span></div><div class="line">int(<span class="keyword">True</span>)		<span class="comment"># 1</span></div><div class="line">int(<span class="keyword">False</span>)		<span class="comment"># 0</span></div><div class="line">bool(<span class="number">2</span>) 		<span class="comment"># True</span></div><div class="line">bool(<span class="number">0</span>) 		<span class="comment"># False</span></div></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">True</span> <span class="keyword">and</span> <span class="number">0</span>		<span class="comment"># 0	</span></div><div class="line"><span class="number">0</span> <span class="keyword">and</span> <span class="keyword">True</span>		<span class="comment"># 0</span></div><div class="line"><span class="keyword">True</span> <span class="keyword">and</span> <span class="number">1</span>		<span class="comment"># 1</span></div><div class="line"><span class="number">1</span> <span class="keyword">and</span> <span class="keyword">True</span>		<span class="comment"># True</span></div><div class="line"><span class="keyword">True</span> <span class="keyword">and</span> <span class="number">2</span>		<span class="comment"># 2</span></div><div class="line"><span class="number">2</span> <span class="keyword">and</span> <span class="keyword">True</span>		<span class="comment"># True</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">and</span> <span class="number">0</span>		<span class="comment"># False</span></div><div class="line"><span class="number">0</span> <span class="keyword">and</span> <span class="keyword">False</span>		<span class="comment"># 0</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">and</span> <span class="number">1</span>		<span class="comment"># False</span></div><div class="line"><span class="number">1</span> <span class="keyword">and</span> <span class="keyword">False</span>		<span class="comment"># False</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">and</span> <span class="number">2</span>		<span class="comment"># False</span></div><div class="line"><span class="number">2</span> <span class="keyword">and</span> <span class="keyword">False</span>		<span class="comment"># False</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">True</span> <span class="keyword">or</span> <span class="number">0</span>		<span class="comment"># True</span></div><div class="line"><span class="number">0</span> <span class="keyword">or</span> <span class="keyword">True</span>		<span class="comment"># True</span></div><div class="line"><span class="keyword">True</span> <span class="keyword">or</span> <span class="number">1</span>		<span class="comment"># True</span></div><div class="line"><span class="number">1</span> <span class="keyword">or</span> <span class="keyword">True</span>		<span class="comment"># 1</span></div><div class="line"><span class="keyword">True</span> <span class="keyword">or</span> <span class="number">2</span>		<span class="comment"># True</span></div><div class="line"><span class="number">2</span> <span class="keyword">or</span> <span class="keyword">True</span>		<span class="comment"># 2</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">or</span> <span class="number">0</span>		<span class="comment"># 0</span></div><div class="line"><span class="number">0</span> <span class="keyword">or</span> <span class="keyword">False</span>		<span class="comment"># False</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">or</span> <span class="number">1</span>		<span class="comment"># 1</span></div><div class="line"><span class="number">1</span> <span class="keyword">or</span> <span class="keyword">False</span>		<span class="comment"># 1</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">or</span> <span class="number">2</span>		<span class="comment"># 2</span></div><div class="line"><span class="number">2</span> <span class="keyword">or</span> <span class="keyword">False</span>		<span class="comment"># 2</span></div></pre></td></tr></table></figure>
+<h4 id="布尔值" class="heading-control"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值<a class="heading-anchor" href="#布尔值" aria-hidden="true"></a></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">isinstance(<span class="keyword">True</span>,int)	<span class="comment"># True</span></div><div class="line">isinstance(<span class="keyword">False</span>,int)	<span class="comment"># True</span></div><div class="line"><span class="keyword">True</span> <span class="keyword">is</span> <span class="number">1</span>		<span class="comment"># False</span></div><div class="line"><span class="keyword">False</span> <span class="keyword">is</span> <span class="number">0</span>		<span class="comment"># False</span></div><div class="line">int(<span class="keyword">True</span>)		<span class="comment"># 1</span></div><div class="line">int(<span class="keyword">False</span>)		<span class="comment"># 0</span></div><div class="line">bool(<span class="number">2</span>) 		<span class="comment"># True</span></div><div class="line">bool(<span class="number">0</span>) 		<span class="comment"># False</span></div></pre></td></tr></table></figure>
 <p>布尔值包括两个常量对象，分别是True和False，来表示真值；<br>在数值上下文中，布尔值True和False等同于1和0，例如：5+True，返回6；<br>内置函数bool()可以将任何值转换为布尔值，前提是该值可以被解释为真值.<br>结论：2 != True ，但是 bool(2) == True.</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
       
     </div>
 
@@ -500,9 +482,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
-          
             <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
           
         </div>
       
@@ -605,7 +587,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -618,7 +600,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -711,7 +693,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共28.8k字</span>
+  <span class="post-count">博客全站共27.1k字</span>
 </div>
 
 

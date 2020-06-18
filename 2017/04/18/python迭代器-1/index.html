@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="学习笔记,python,迭代器," />
+  <meta name="keywords" content="python,学习笔记,迭代器," />
 
 
 
@@ -90,7 +90,7 @@
 
 
 <meta name="description" content="选用一个可迭代的列表对象实验: 12345678910111213&amp;gt;&amp;gt;&amp;gt; i=[1,2,3,4]&amp;gt;&amp;gt;&amp;gt; for t in i:	print t1234&amp;gt;&amp;gt;&amp;gt; i.__iter__&amp;lt;method-wrapper &apos;__iter__&apos; of list object at 0x04040378&amp;gt;&amp;gt;&amp;gt;&amp;gt; i.__iter_">
-<meta name="keywords" content="学习笔记,python,迭代器">
+<meta name="keywords" content="python,学习笔记,迭代器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python迭代器(1)">
 <meta property="og:url" content="https://yikayiyo.github.io/2017/04/18/python迭代器-1/index.html">
@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  357 字
+                  305 字
                 </span>
               
 
@@ -411,37 +411,19 @@
 
       
         <p>选用一个可迭代的列表对象实验:</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>i=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> t <span class="keyword">in</span> i:</div><div class="line">	<span class="keyword">print</span> t</div><div class="line"></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">2</span></div><div class="line"><span class="number">3</span></div><div class="line"><span class="number">4</span></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__</div><div class="line">&lt;method-wrapper <span class="string">'__iter__'</span> of list object at <span class="number">0x04040378</span>&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__()</div><div class="line">&lt;listiterator object at <span class="number">0x040561F0</span>&gt;</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>i=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> t <span class="keyword">in</span> i:</div><div class="line">	<span class="keyword">print</span> t</div><div class="line"></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">2</span></div><div class="line"><span class="number">3</span></div><div class="line"><span class="number">4</span></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__</div><div class="line">&lt;method-wrapper <span class="string">'__iter__'</span> of list object at <span class="number">0x04040378</span>&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__()</div><div class="line">&lt;listiterator object at <span class="number">0x040561F0</span>&gt;</div></pre></td></tr></table></figure>
 <p>从上面的代码可知:</p>
 <p>​    <strong>可迭代对象实现了__iter__方法</strong>或一个实现了__iter__方法的对象是可迭代的(iterable);</p>
 <p>​    <strong>可迭代对象调用__iter__方法会返回一个迭代器(iterator)</strong></p>
 <p>接下来继续实验:</p>
 <a id="more"></a>
 <p>​    书中说到,所谓的迭代器就是具有next()方法的对象,调用next()方法会返回该对象的下一个值,如果该方法被调用,但是迭代器没有值可以返回,就会引发一个StopIteration异常.</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__().next()</div><div class="line"><span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__().next()</div><div class="line"><span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__().next()</div><div class="line"><span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__().next()</div><div class="line"><span class="number">1</span></div></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__().next()</div><div class="line"><span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__().next()</div><div class="line"><span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__().next()</div><div class="line"><span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__().next()</div><div class="line"><span class="number">1</span></div></pre></td></tr></table></figure>
 <p>并没有按照我的想法打印出1,2,3,4.</p>
 <p>尝试下面的代码:</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">ite=i.__iter__()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>ite</div><div class="line">&lt;listiterator object at <span class="number">0x040564F0</span>&gt;</div><div class="line">&gt;&gt;&gt;ite.next()</div><div class="line"><span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>ite.next()</div><div class="line"><span class="number">2</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>ite.next()</div><div class="line"><span class="number">3</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>ite.next()</div><div class="line"><span class="number">4</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>ite.next()</div><div class="line"></div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;pyshell#23&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    ite.next()</div><div class="line">StopIteration</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">ite=i.__iter__()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>ite</div><div class="line">&lt;listiterator object at <span class="number">0x040564F0</span>&gt;</div><div class="line">&gt;&gt;&gt;ite.next()</div><div class="line"><span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>ite.next()</div><div class="line"><span class="number">2</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>ite.next()</div><div class="line"><span class="number">3</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>ite.next()</div><div class="line"><span class="number">4</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>ite.next()</div><div class="line"></div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;pyshell#23&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    ite.next()</div><div class="line">StopIteration</div></pre></td></tr></table></figure>
 <p>原因还没想到啊…</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
       
     </div>
 
@@ -469,9 +451,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
-          
             <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
           
             <a href="/tags/迭代器/" rel="tag"># 迭代器</a>
           
@@ -567,7 +549,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -580,7 +562,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -657,7 +639,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共28.8k字</span>
+  <span class="post-count">博客全站共27.1k字</span>
 </div>
 
 

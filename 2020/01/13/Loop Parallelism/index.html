@@ -89,17 +89,17 @@
 
 
 
-<meta name="description" content="Parallel Loops未知循环次数，利用了指针的for循环每一个迭代当作一个子任务，finish约束整个循环 1234finish {    for (p = head; p != null ; p = p.next)         async compute(p);} 已知循环次数n，可以利用forall 123// vector additionforall (i : [0:n-1])">
+<meta name="description" content="Parallel Loops未知循环次数，利用了指针的for循环每一个迭代当作一个子任务，finish约束整个循环 1234finish &amp;#123;    for (p = head; p != null ; p = p.next)         async compute(p);&amp;#125; 已知循环次数n，可以利用forall 123// vector additionforall (i">
 <meta name="keywords" content="学习笔记,java,并行编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Loop Parallelism">
 <meta property="og:url" content="https://yikayiyo.github.io/2020/01/13/Loop Parallelism/index.html">
 <meta property="og:site_name" content="Misbehavior">
-<meta property="og:description" content="Parallel Loops未知循环次数，利用了指针的for循环每一个迭代当作一个子任务，finish约束整个循环 1234finish {    for (p = head; p != null ; p = p.next)         async compute(p);} 已知循环次数n，可以利用forall 123// vector additionforall (i : [0:n-1])">
+<meta property="og:description" content="Parallel Loops未知循环次数，利用了指针的for循环每一个迭代当作一个子任务，finish约束整个循环 1234finish &amp;#123;    for (p = head; p != null ; p = p.next)         async compute(p);&amp;#125; 已知循环次数n，可以利用forall 123// vector additionforall (i">
 <meta property="og:updated_time" content="2020-01-19T08:10:19.891Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Loop Parallelism">
-<meta name="twitter:description" content="Parallel Loops未知循环次数，利用了指针的for循环每一个迭代当作一个子任务，finish约束整个循环 1234finish {    for (p = head; p != null ; p = p.next)         async compute(p);} 已知循环次数n，可以利用forall 123// vector additionforall (i : [0:n-1])">
+<meta name="twitter:description" content="Parallel Loops未知循环次数，利用了指针的for循环每一个迭代当作一个子任务，finish约束整个循环 1234finish &amp;#123;    for (p = head; p != null ; p = p.next)         async compute(p);&amp;#125; 已知循环次数n，可以利用forall 123// vector additionforall (i">
 
 
 
@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  705 字
+                  671 字
                 </span>
               
 
@@ -411,18 +411,18 @@
 
       
         <h3 id="Parallel-Loops" class="heading-control"><a href="#Parallel-Loops" class="headerlink" title="Parallel Loops"></a>Parallel Loops<a class="heading-anchor" href="#Parallel-Loops" aria-hidden="true"></a></h3><p>未知循环次数，利用了指针的for循环<br>每一个迭代当作一个子任务，<code>finish</code>约束整个循环</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">finish {</div><div class="line">    <span class="keyword">for</span> (p = head; p != <span class="keyword">null</span> ; p = p.next) </div><div class="line">        <span class="function">async <span class="title">compute</span><span class="params">(p)</span></span>;</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">finish &#123;</div><div class="line">    <span class="keyword">for</span> (p = head; p != <span class="keyword">null</span> ; p = p.next) </div><div class="line">        <span class="function">async <span class="title">compute</span><span class="params">(p)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>已知循环次数n，可以利用<code>forall</code></p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// vector addition</span></div><div class="line">forall (i : [<span class="number">0</span>:n-<span class="number">1</span>]) </div><div class="line">    a[i] = b[i] + c[i]</div></pre></td></tr></tbody></table></figure>
-<p>利用 Java streams，上述功能有更加简洁的表达方式<br></p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">a = IntStream.rangeClosed(<span class="number">0</span>, N-<span class="number">1</span>).parallel().toArray(i -&gt; b[i] + c[i]);</div></pre></td></tr></tbody></table></figure><p></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// vector addition</span></div><div class="line">forall (i : [<span class="number">0</span>:n-<span class="number">1</span>]) </div><div class="line">    a[i] = b[i] + c[i]</div></pre></td></tr></table></figure>
+<p>利用 Java streams，上述功能有更加简洁的表达方式<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">a = IntStream.rangeClosed(<span class="number">0</span>, N-<span class="number">1</span>).parallel().toArray(i -&gt; b[i] + c[i]);</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <h3 id="Parallel-Matrix-Multiplication" class="heading-control"><a href="#Parallel-Matrix-Multiplication" class="headerlink" title="Parallel Matrix Multiplication"></a>Parallel Matrix Multiplication<a class="heading-anchor" href="#Parallel-Matrix-Multiplication" aria-hidden="true"></a></h3><p>假设两个<code>n*n</code>的矩阵相乘，有</p>
 <p>$$<br>c[i][j] = \sum_{k=0}^{n-1} a[i][k] * b[k][j]<br>$$<br>伪代码表示为</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(i : [<span class="number">0</span>:n-<span class="number">1</span>]) {</div><div class="line">  <span class="keyword">for</span>(j : [<span class="number">0</span>:n-<span class="number">1</span>]) { c[i][j] = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(k : [<span class="number">0</span>:n-<span class="number">1</span>]) {</div><div class="line">      c[i][j] = c[i][j] + a[i][k]*b[k][j]</div><div class="line">    }</div><div class="line">  }</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(i : [<span class="number">0</span>:n-<span class="number">1</span>]) &#123;</div><div class="line">  <span class="keyword">for</span>(j : [<span class="number">0</span>:n-<span class="number">1</span>]) &#123; c[i][j] = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(k : [<span class="number">0</span>:n-<span class="number">1</span>]) &#123;</div><div class="line">      c[i][j] = c[i][j] + a[i][k]*b[k][j]</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>要替换成并行计算，可以简单地将外两层的for循环改成<code>forall</code></p>
 <p>for-k 必须是线性的，因为这里有写数据（data race</p>
 <h3 id="Barriers-in-Parallel-Loops" class="heading-control"><a href="#Barriers-in-Parallel-Loops" class="headerlink" title="Barriers in Parallel Loops"></a>Barriers in Parallel Loops<a class="heading-anchor" href="#Barriers-in-Parallel-Loops" aria-hidden="true"></a></h3><p>下面有一个简单的并行任务</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">forall (i : [<span class="number">0</span>:n-<span class="number">1</span>]) {</div><div class="line">    myId = lookup(i); <span class="comment">// convert int to a string </span></div><div class="line">    print HELLO, myId;</div><div class="line">    print BYE, myId;</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">forall (i : [<span class="number">0</span>:n-<span class="number">1</span>]) &#123;</div><div class="line">    myId = lookup(i); <span class="comment">// convert int to a string </span></div><div class="line">    print HELLO, myId;</div><div class="line">    print BYE, myId;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>在不同的执行下会有不同顺序的结果（相同myId对应的HELLO一定在BYE之前</p>
 <p>barriers可以将一个parallel loop分为不同的阶段</p>
 <p>在两个print之间插入一个barrier，可以保证所有的HELLO出现在BYE之前</p>
@@ -436,18 +436,18 @@
 <h3 id="Parallel-One-Dimensional-Iterative-Averaging" class="heading-control"><a href="#Parallel-One-Dimensional-Iterative-Averaging" class="headerlink" title="Parallel One-Dimensional Iterative Averaging"></a>Parallel One-Dimensional Iterative Averaging<a class="heading-anchor" href="#Parallel-One-Dimensional-Iterative-Averaging" aria-hidden="true"></a></h3><p>Solve the recurrence<br>$$<br>X<em>i=\frac{X</em>{i-1}+X_{i+1}}2<br>$$</p>
 <p>with boundary conditions<br>$$<br>X_0=0\ and\ X_n=1<br>$$</p>
 <p><a href="https://en.wikipedia.org/wiki/Jacobi_method" target="_blank" rel="external">Jacobi method</a>利用两个数组oldX[] and newX[]迭代求解该问题，并行伪代码如下：</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (iter: [<span class="number">0</span>:nsteps-<span class="number">1</span>]) {</div><div class="line">  forall (i: [<span class="number">1</span>:n-<span class="number">1</span>]) {</div><div class="line">    newX[i] = (oldX[i-<span class="number">1</span>] + oldX[i+<span class="number">1</span>]) / <span class="number">2</span>;</div><div class="line">  }</div><div class="line">  swap pointers newX and oldX;</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (iter: [<span class="number">0</span>:nsteps-<span class="number">1</span>]) &#123;</div><div class="line">  forall (i: [<span class="number">1</span>:n-<span class="number">1</span>]) &#123;</div><div class="line">    newX[i] = (oldX[i-<span class="number">1</span>] + oldX[i+<span class="number">1</span>]) / <span class="number">2</span>;</div><div class="line">  &#125;</div><div class="line">  swap pointers newX and oldX;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上述方法创建了 <em>nsteps</em> <em>×</em> (<em>n</em> <em>−</em> 1) 个任务</p>
 <p><strong>使用Barriers可以减少需要创建的任务个数</strong></p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">forall ( i: [<span class="number">1</span>:n-<span class="number">1</span>]) {</div><div class="line">  <span class="keyword">for</span> (iter: [<span class="number">0</span>:nsteps-<span class="number">1</span>]) {</div><div class="line">    newX[i] = (oldX[i-<span class="number">1</span>] + oldX[i+<span class="number">1</span>]) / <span class="number">2</span>;</div><div class="line">    NEXT; <span class="comment">// Barrier</span></div><div class="line">    swap pointers newX and oldX;</div><div class="line">  }</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">forall ( i: [<span class="number">1</span>:n-<span class="number">1</span>]) &#123;</div><div class="line">  <span class="keyword">for</span> (iter: [<span class="number">0</span>:nsteps-<span class="number">1</span>]) &#123;</div><div class="line">    newX[i] = (oldX[i-<span class="number">1</span>] + oldX[i+<span class="number">1</span>]) / <span class="number">2</span>;</div><div class="line">    NEXT; <span class="comment">// Barrier</span></div><div class="line">    swap pointers newX and oldX;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上述方法只需要创建 <em>(n-1)</em> 个任务</p>
 <p>This is a significant improvement since creating tasks is usually more expensive than performing barrier operations.</p>
 <h3 id="Iteration-Grouping-Chunking-in-Parallel-Loops" class="heading-control"><a href="#Iteration-Grouping-Chunking-in-Parallel-Loops" class="headerlink" title="Iteration Grouping/Chunking in Parallel Loops"></a>Iteration Grouping/Chunking in Parallel Loops<a class="heading-anchor" href="#Iteration-Grouping-Chunking-in-Parallel-Loops" aria-hidden="true"></a></h3><p>对于向量相加问题</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">forall (i : [<span class="number">0</span>:n-<span class="number">1</span>]) a[i] = b[i] + c[i]</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">forall (i : [<span class="number">0</span>:n-<span class="number">1</span>]) a[i] = b[i] + c[i]</div></pre></td></tr></table></figure>
 <p>上述方法创建了n个任务，当n很大时overheads也会很大</p>
 <p>解决方法</p>
 <p><strong>分组</strong>（<em>loop</em> <em>chunking</em> or <em>iteration grouping</em></p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">forall (g:[<span class="number">0</span>:ng-<span class="number">1</span>])</div><div class="line">  <span class="keyword">for</span> (i : mygroup(g, ng, [<span class="number">0</span>:n-<span class="number">1</span>])) a[i] = b[i] + c[i]</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">forall (g:[<span class="number">0</span>:ng-<span class="number">1</span>])</div><div class="line">  <span class="keyword">for</span> (i : mygroup(g, ng, [<span class="number">0</span>:n-<span class="number">1</span>])) a[i] = b[i] + c[i]</div></pre></td></tr></table></figure>
 <p>上述方法将任务个数从 <strong>n</strong> 降到了 <strong>ng</strong>（分组个数</p>
 <p>分组方法有两种：</p>
 <ul>
@@ -460,25 +460,7 @@
 </ul>
 </li>
 </ul>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
       
     </div>
 
@@ -613,7 +595,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -626,7 +608,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -719,7 +701,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共28.8k字</span>
+  <span class="post-count">博客全站共27.1k字</span>
 </div>
 
 
