@@ -93,9 +93,8 @@
 <meta property="og:url" content="https://yikayiyo.github.io/page/6/index.html">
 <meta property="og:site_name" content="Misbehavior">
 <meta property="og:description" content="浪漫在哪里">
+<meta property="article:author" content="yikayiyo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Misbehavior">
-<meta name="twitter:description" content="浪漫在哪里">
 
 
 
@@ -130,7 +129,7 @@
 
 
   <title> Misbehavior </title>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -294,7 +293,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/06/12/决策树/">
+    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/06/12/%E5%86%B3%E7%AD%96%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yikayiyo">
@@ -316,7 +315,7 @@
             
               
                 
-                <a class="post-title-link" href="/2017/06/12/决策树/" itemprop="url">
+                <a class="post-title-link" href="/2017/06/12/%E5%86%B3%E7%AD%96%E6%A0%91/" itemprop="url">
                   决策树
                 </a>
               
@@ -376,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  292 字
+                  344 字
                 </span>
               
 
@@ -413,21 +412,39 @@
       
         
           
-            <h4 id="构造决策树" class="heading-control"><a href="#构造决策树" class="headerlink" title="构造决策树"></a>构造决策树<a class="heading-anchor" href="#构造决策树" aria-hidden="true"></a></h4><p>第一个问题:当前数据集上哪个特征在划分数据分类时起决定作用?为此需要一个评估标准.</p>
+            <h4 id="构造决策树"><a href="#构造决策树" class="headerlink" title="构造决策树"></a>构造决策树</h4><p>第一个问题:当前数据集上哪个特征在划分数据分类时起决定作用?为此需要一个评估标准.</p>
 <p>划分的大原则是:将无序的数据变得有序.</p>
 <p>划分之后接着划分,递归.</p>
 <p>递归结束条件:程序遍历完所有划分数据集的属性或者分支下的数据均为一个类型.</p>
 <p>为了度量引入了信息论的东西,也就是熵.</p>
-<h4 id="熵" class="heading-control"><a href="#熵" class="headerlink" title="熵"></a>熵<a class="heading-anchor" href="#熵" aria-hidden="true"></a></h4><p>信息的定义:如果待分类的事务可能划分在多个分类中,则符号xi的信息定义为:<br>$$<br>l(x_i)=-\log_2 p(x_i),<br>$$</p>
+<h4 id="熵"><a href="#熵" class="headerlink" title="熵"></a>熵</h4><p>信息的定义:如果待分类的事务可能划分在多个分类中,则符号xi的信息定义为:<br>$$<br>l(x_i)=-\log_2 p(x_i),<br>$$</p>
 <p>其中p(xi)是选择该分类的概率.</p>
 <p>熵是信息的期望值.我们需要计算所有类别所有可能值包含的信息期望值:<br>$$<br>H=-\sum_{i=1}^n p(x_i)\log_2 p(x_i),<br>$$</p>
 <p>其中,n为样本分类.</p>
-<h4 id="另外" class="heading-control"><a href="#另外" class="headerlink" title="另外"></a>另外<a class="heading-anchor" href="#另外" aria-hidden="true"></a></h4><p>数据最好是标称型的 ；(对于ID3算法,数值型数据最好是离散的.</p>
+<h4 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h4><p>数据最好是标称型的 ；(对于ID3算法,数值型数据最好是离散的.</p>
 <p>出现过拟合时,可以剪枝.</p>
 <p>剪枝策略,预剪枝或者后剪枝.</p>
 <p>别的决策数算法,C4.5|CART.</p>
-<p><a href="https://github.com/yikayiyo/machinelearninginaction/blob/master/Ch03/trees.py" target="_blank" rel="external">https://github.com/yikayiyo/machinelearninginaction/blob/master/Ch03/trees.py</a></p>
-
+<p><a href="https://github.com/yikayiyo/machinelearninginaction/blob/master/Ch03/trees.py" target="_blank" rel="noopener">https://github.com/yikayiyo/machinelearninginaction/blob/master/Ch03/trees.py</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
           
         
       
@@ -470,7 +487,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/06/09/借助义元改善词表示学习/">
+    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/06/09/%E5%80%9F%E5%8A%A9%E4%B9%89%E5%85%83%E6%94%B9%E5%96%84%E8%AF%8D%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yikayiyo">
@@ -492,7 +509,7 @@
             
               
                 
-                <a class="post-title-link" href="/2017/06/09/借助义元改善词表示学习/" itemprop="url">
+                <a class="post-title-link" href="/2017/06/09/%E5%80%9F%E5%8A%A9%E4%B9%89%E5%85%83%E6%94%B9%E5%96%84%E8%AF%8D%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/" itemprop="url">
                   借助义元改善词表示学习
                 </a>
               
@@ -568,7 +585,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  5 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -588,11 +605,11 @@
 
       
         
-          <img src="/2017/06/09/借助义元改善词表示学习/HowNet.png" alt="HowNet中的一个例子" title="HowNet中的一个例子">
-<h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><p>  义元是语义上的最小单位，单词的每一个含义通常都是很多义元组合而成的。为了让每个词义的义元更加确切，人们进行了手工标注，并构建了常识性的语言知识库。这篇文章指出，单词的义元信息可以改善词表示学习（一种将单词映射到低维语义空间的技术，是许多NLP任务的一个基本步骤）。关键点在于利用义元信息准确捕捉单词在特定语境下的确切含义。具体说来，作者拓展了skip-gram框架，提出了三种义元编码模型来学习sememes-senses-words的表示，
+          <img src="/2017/06/09/%E5%80%9F%E5%8A%A9%E4%B9%89%E5%85%83%E6%94%B9%E5%96%84%E8%AF%8D%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/HowNet.png" class="" title="HowNet中的一个例子">
+<h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><p>  义元是语义上的最小单位，单词的每一个含义通常都是很多义元组合而成的。为了让每个词义的义元更加确切，人们进行了手工标注，并构建了常识性的语言知识库。这篇文章指出，单词的义元信息可以改善词表示学习（一种将单词映射到低维语义空间的技术，是许多NLP任务的一个基本步骤）。关键点在于利用义元信息准确捕捉单词在特定语境下的确切含义。具体说来，作者拓展了skip-gram框架，提出了三种义元编码模型来学习sememes-senses-words的表示，</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/06/09/借助义元改善词表示学习/" rel="contents">
+            <a class="btn" href="/2017/06/09/%E5%80%9F%E5%8A%A9%E4%B9%89%E5%85%83%E6%94%B9%E5%96%84%E8%AF%8D%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -638,7 +655,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/06/05/简洁的python/">
+    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/06/05/%E7%AE%80%E6%B4%81%E7%9A%84python/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yikayiyo">
@@ -660,7 +677,7 @@
             
               
                 
-                <a class="post-title-link" href="/2017/06/05/简洁的python/" itemprop="url">
+                <a class="post-title-link" href="/2017/06/05/%E7%AE%80%E6%B4%81%E7%9A%84python/" itemprop="url">
                   简洁的python
                 </a>
               
@@ -720,7 +737,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  868 字
+                  914 字
                 </span>
               
 
@@ -757,12 +774,13 @@
       
         
           <h4 id="条件表达式"><a href="#条件表达式" class="headerlink" title="条件表达式"></a>条件表达式</h4><p>一般情况下,条件分支只有简单的返回或对同一变量进行赋值操作时,可以转为条件表达式.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#1.改写条件语句</span></div><div class="line"><span class="keyword">if</span> x &gt; <span class="number">0</span>:</div><div class="line">    y = math.log(x)</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    y = float(<span class="string">'nan'</span>)</div><div class="line"><span class="comment">#简洁写法</span></div><div class="line">y = math.log(x) <span class="keyword">if</span> x &gt; <span class="number">0</span> <span class="keyword">else</span> float(<span class="string">'nan'</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#2.改写递归函数</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fac</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="keyword">if</span> x == <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> x * fac(x<span class="number">-1</span>)</div><div class="line"><span class="comment">#简洁写法</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fac</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="number">1</span> <span class="keyword">if</span> x == <span class="number">0</span> <span class="keyword">else</span> x * fac(x<span class="number">-1</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.改写条件语句</span></span><br><span class="line"><span class="keyword">if</span> x &gt; <span class="number">0</span>:</span><br><span class="line">    y = math.log(x)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    y = float(<span class="string">'nan'</span>)</span><br><span class="line"><span class="comment">#简洁写法</span></span><br><span class="line">y = math.log(x) <span class="keyword">if</span> x &gt; <span class="number">0</span> <span class="keyword">else</span> float(<span class="string">'nan'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#2.改写递归函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fac</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> x == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> x * fac(x<span class="number">-1</span>)</span><br><span class="line"><span class="comment">#简洁写法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fac</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> <span class="keyword">if</span> x == <span class="number">0</span> <span class="keyword">else</span> x * fac(x<span class="number">-1</span>)</span><br></pre></td></tr></tbody></table></figure>
+
 <p>列表解析(list comprehension)</p>
-<p>将一个列表转为另一个时用更少的代码<br>
+<p>将一个列表转为另一个时用更少的代码</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/06/05/简洁的python/" rel="contents">
+            <a class="btn" href="/2017/06/05/%E7%AE%80%E6%B4%81%E7%9A%84python/" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -808,7 +826,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/06/03/redis事务/">
+    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/06/03/redis%E4%BA%8B%E5%8A%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yikayiyo">
@@ -830,7 +848,7 @@
             
               
                 
-                <a class="post-title-link" href="/2017/06/03/redis事务/" itemprop="url">
+                <a class="post-title-link" href="/2017/06/03/redis%E4%BA%8B%E5%8A%A1/" itemprop="url">
                   redis事务
                 </a>
               
@@ -890,7 +908,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  496 字
+                  544 字
                 </span>
               
 
@@ -906,7 +924,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -926,10 +944,10 @@
 
       
         
-          <h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>  一组命令的集合,要么都执行,要么都不执行.同命令一样,是Redis的最小执行单位.<br>
+          <h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>  一组命令的集合,要么都执行,要么都不执行.同命令一样,是Redis的最小执行单位.<br></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/06/03/redis事务/" rel="contents">
+            <a class="btn" href="/2017/06/03/redis%E4%BA%8B%E5%8A%A1/" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1057,7 +1075,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  541 字
+                  591 字
                 </span>
               
 
@@ -1093,7 +1111,8 @@
 
       
         
-          <p>问题:为什么2!=True呢?<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">num=<span class="number">2</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">if</span> num==<span class="keyword">True</span>:</div><div class="line"><span class="meta">... </span>    <span class="keyword">print</span> <span class="string">'True'</span></div><div class="line"><span class="meta">... </span><span class="keyword">else</span>:</div><div class="line"><span class="meta">... </span>    <span class="keyword">print</span> <span class="string">'False'</span></div><div class="line"><span class="meta">... </span></div><div class="line"><span class="keyword">False</span></div></pre></td></tr></table></figure></p>
+          <p>问题:为什么2!=True呢?</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">num=<span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">if</span> num==<span class="literal">True</span>:</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">print</span> <span class="string">'True'</span></span><br><span class="line"><span class="meta">... </span><span class="keyword">else</span>:</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">print</span> <span class="string">'False'</span></span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></tbody></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/05/23/2!=True/" rel="contents">
@@ -1137,10 +1156,8 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
   </nav>
-
-
 
           </div>
           
@@ -1272,7 +1289,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共27.1k字</span>
+  <span class="post-count">博客全站共28.9k字</span>
 </div>
 
 

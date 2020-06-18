@@ -89,17 +89,18 @@
 
 
 
-<meta name="description" content="Given a positive integer n, break it into the sum of at least two positive integers and maximize the product of those integers. Return the maximum product you can get. For example, given n = 2, return">
-<meta name="keywords" content="学习笔记,动态规划">
+<meta name="description" content="Given a positive integer n, break it into the sum of at least two positive integers and maximize the product of those integers. Return the maximum product you can get. For example, given n &#x3D; 2, return">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Integer Break">
-<meta property="og:url" content="https://yikayiyo.github.io/2017/06/23/Integer Break/index.html">
+<meta property="og:url" content="https://yikayiyo.github.io/2017/06/23/Integer%20Break/index.html">
 <meta property="og:site_name" content="Misbehavior">
-<meta property="og:description" content="Given a positive integer n, break it into the sum of at least two positive integers and maximize the product of those integers. Return the maximum product you can get. For example, given n = 2, return">
-<meta property="og:updated_time" content="2017-07-24T13:36:52.000Z">
+<meta property="og:description" content="Given a positive integer n, break it into the sum of at least two positive integers and maximize the product of those integers. Return the maximum product you can get. For example, given n &#x3D; 2, return">
+<meta property="article:published_time" content="2017-06-23T02:59:19.000Z">
+<meta property="article:modified_time" content="2017-07-24T13:36:52.000Z">
+<meta property="article:author" content="yikayiyo">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="动态规划">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Integer Break">
-<meta name="twitter:description" content="Given a positive integer n, break it into the sum of at least two positive integers and maximize the product of those integers. Return the maximum product you can get. For example, given n = 2, return">
 
 
 
@@ -134,7 +135,7 @@
 
 
   <title> Integer Break | Misbehavior </title>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -296,7 +297,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/06/23/Integer Break/">
+    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/06/23/Integer%20Break/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yikayiyo">
@@ -375,7 +376,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  218 字
+                  270 字
                 </span>
               
 
@@ -413,8 +414,27 @@
         <p>Given a positive integer n, break it into the sum of at least two positive integers and maximize the product of those integers. Return the maximum product you can get.</p>
 <p>For example, given n = 2, return 1 (2 = 1 + 1); given n = 10, return 36 (10 = 3 + 3 + 4).<br>Note: You may assume that n is not less than 2 and not larger than 58.</p>
 <p><strong>思路:<a id="more"></a> 最值问题,求导.</strong><br>假设一个数N分成了N/x份,每份都是x,则有<br>$$<br>y=x^{N/x},\<br>\ln y=(N/x)\ln x,\<br>\frac{1}{y}*y^{‘}=\frac{n}{x^2}(1-\ln x),<br>$$<br>另y’=0,则有lnx=1,x=e.<br>题中规定x只能是正整数,e约为2.718,则取离e较近的数3,此时y较大.<br>于是有递推式: dp(i)=3dp(i-3) (i&gt;4 ),i&lt;=4时,dp[i]=[1,1,1,2,4].</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">integerBreak</span><span class="params">(self, n)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :type n: int</div><div class="line">        :rtype: int</div><div class="line">        bottom to up dp.</div><div class="line">        """</div><div class="line">        res=[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>]</div><div class="line">        <span class="keyword">if</span> n&lt;=<span class="number">4</span>:<span class="keyword">return</span> res[n]</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            ans=<span class="number">1</span></div><div class="line">            <span class="keyword">while</span> n&gt;<span class="number">4</span>:</div><div class="line">                ans*=<span class="number">3</span></div><div class="line">                n-=<span class="number">3</span></div><div class="line">            ans*=n</div><div class="line">        <span class="keyword">return</span> ans</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">integerBreak</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        bottom to up dp.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        res=[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>]</span><br><span class="line">        <span class="keyword">if</span> n&lt;=<span class="number">4</span>:<span class="keyword">return</span> res[n]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            ans=<span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> n&gt;<span class="number">4</span>:</span><br><span class="line">                ans*=<span class="number">3</span></span><br><span class="line">                n-=<span class="number">3</span></span><br><span class="line">            ans*=n</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></tbody></table></figure>
 
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
 
@@ -442,9 +462,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
           
-            <a href="/tags/动态规划/" rel="tag"># 动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"># 动态规划</a>
           
         </div>
       
@@ -457,8 +477,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/19/selenium学习/" rel="next" title="selenium学习">
-                <i class="fa fa-chevron-left"></i> selenium学习
+              <a href="/2017/06/22/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/" rel="next" title="深、浅拷贝">
+                <i class="fa fa-chevron-left"></i> 深、浅拷贝
               </a>
             
           </div>
@@ -467,8 +487,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/22/深浅拷贝/" rel="prev" title="深、浅拷贝">
-                深、浅拷贝 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/19/selenium%E5%AD%A6%E4%B9%A0/" rel="prev" title="selenium学习">
+                selenium学习 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -628,7 +648,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共27.1k字</span>
+  <span class="post-count">博客全站共28.9k字</span>
 </div>
 
 

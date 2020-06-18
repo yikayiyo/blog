@@ -87,16 +87,16 @@
 
 
 
-<meta name="description" content="A Fun Guy喜欢美女帅哥 不喜欢笨蛋  邮箱:  yikayiyo@163.com">
+<meta name="description" content="A Fun Guy喜欢美女帅哥 不喜欢笨蛋  邮箱:  yikayiyo@163.com          document.querySelectorAll(&#39;.github-emoji&#39;)           .forEach(el &#x3D;&gt; {             if (!el.dataset.src) { return; }             const img &#x3D; documen">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Misbehavior">
 <meta property="og:url" content="https://yikayiyo.github.io/about/index.html">
 <meta property="og:site_name" content="Misbehavior">
-<meta property="og:description" content="A Fun Guy喜欢美女帅哥 不喜欢笨蛋  邮箱:  yikayiyo@163.com">
-<meta property="og:updated_time" content="2019-12-31T09:36:17.456Z">
+<meta property="og:description" content="A Fun Guy喜欢美女帅哥 不喜欢笨蛋  邮箱:  yikayiyo@163.com          document.querySelectorAll(&#39;.github-emoji&#39;)           .forEach(el &#x3D;&gt; {             if (!el.dataset.src) { return; }             const img &#x3D; documen">
+<meta property="article:published_time" content="2019-12-31T09:36:17.456Z">
+<meta property="article:modified_time" content="2019-12-31T09:36:17.456Z">
+<meta property="article:author" content="yikayiyo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Misbehavior">
-<meta name="twitter:description" content="A Fun Guy喜欢美女帅哥 不喜欢笨蛋  邮箱:  yikayiyo@163.com">
 
 
 
@@ -137,7 +137,7 @@
      | Misbehavior
   
 </title>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -300,11 +300,29 @@
 
     
     
-      <h2 id="A-Fun-Guy" class="heading-control"><a href="#A-Fun-Guy" class="headerlink" title="A Fun Guy"></a>A Fun Guy<a class="heading-anchor" href="#A-Fun-Guy" aria-hidden="true"></a></h2><p>喜欢美女帅哥</p>
+      <h2 id="A-Fun-Guy"><a href="#A-Fun-Guy" class="headerlink" title="A Fun Guy"></a>A Fun Guy</h2><p>喜欢美女帅哥</p>
 <p>不喜欢笨蛋</p>
 <hr>
-<p><em>邮箱:  yikayiyo@163.com</em></p>
-
+<p><em>邮箱:  <a href="mailto:yikayiyo@163.com">yikayiyo@163.com</a></em></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
     
   </div>
 
@@ -443,7 +461,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共27.1k字</span>
+  <span class="post-count">博客全站共28.9k字</span>
 </div>
 
 

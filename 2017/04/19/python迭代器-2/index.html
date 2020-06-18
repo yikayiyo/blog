@@ -89,17 +89,19 @@
 
 
 
-<meta name="description" content="昨天的问题解决了   -   - 123456&amp;gt;&amp;gt;&amp;gt; i.__iter__()&amp;lt;listiterator object at 0x7f5f9d3f2310&amp;gt;&amp;gt;&amp;gt;&amp;gt; i.__iter__()&amp;lt;listiterator object at 0x7f5f9d3f22d0&amp;gt;&amp;gt;&amp;gt;&amp;gt; i.__iter__()&amp;lt;listiter">
-<meta name="keywords" content="python,学习笔记,迭代器">
+<meta name="description" content="昨天的问题解决了   -   - 123456&gt;&gt;&gt; i.__iter__()&lt;listiterator object at 0x7f5f9d3f2310&gt;&gt;&gt;&gt; i.__iter__()&lt;listiterator object at 0x7f5f9d3f22d0&gt;&gt;&gt;&gt; i.__iter__()&lt;listiter">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python迭代器(2)">
-<meta property="og:url" content="https://yikayiyo.github.io/2017/04/19/python迭代器-2/index.html">
+<meta property="og:url" content="https://yikayiyo.github.io/2017/04/19/python%E8%BF%AD%E4%BB%A3%E5%99%A8-2/index.html">
 <meta property="og:site_name" content="Misbehavior">
-<meta property="og:description" content="昨天的问题解决了   -   - 123456&amp;gt;&amp;gt;&amp;gt; i.__iter__()&amp;lt;listiterator object at 0x7f5f9d3f2310&amp;gt;&amp;gt;&amp;gt;&amp;gt; i.__iter__()&amp;lt;listiterator object at 0x7f5f9d3f22d0&amp;gt;&amp;gt;&amp;gt;&amp;gt; i.__iter__()&amp;lt;listiter">
-<meta property="og:updated_time" content="2017-06-06T13:15:08.000Z">
+<meta property="og:description" content="昨天的问题解决了   -   - 123456&gt;&gt;&gt; i.__iter__()&lt;listiterator object at 0x7f5f9d3f2310&gt;&gt;&gt;&gt; i.__iter__()&lt;listiterator object at 0x7f5f9d3f22d0&gt;&gt;&gt;&gt; i.__iter__()&lt;listiter">
+<meta property="article:published_time" content="2017-04-19T06:20:26.000Z">
+<meta property="article:modified_time" content="2017-06-06T13:15:08.000Z">
+<meta property="article:author" content="yikayiyo">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="迭代器">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python迭代器(2)">
-<meta name="twitter:description" content="昨天的问题解决了   -   - 123456&amp;gt;&amp;gt;&amp;gt; i.__iter__()&amp;lt;listiterator object at 0x7f5f9d3f2310&amp;gt;&amp;gt;&amp;gt;&amp;gt; i.__iter__()&amp;lt;listiterator object at 0x7f5f9d3f22d0&amp;gt;&amp;gt;&amp;gt;&amp;gt; i.__iter__()&amp;lt;listiter">
 
 
 
@@ -134,7 +136,7 @@
 
 
   <title> python迭代器(2) | Misbehavior </title>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -296,7 +298,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/04/19/python迭代器-2/">
+    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/04/19/python%E8%BF%AD%E4%BB%A3%E5%99%A8-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yikayiyo">
@@ -375,7 +377,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  130 字
+                  182 字
                 </span>
               
 
@@ -411,12 +413,31 @@
 
       
         <p>昨天的问题解决了   -   -</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__()</div><div class="line">&lt;listiterator object at <span class="number">0x7f5f9d3f2310</span>&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__()</div><div class="line">&lt;listiterator object at <span class="number">0x7f5f9d3f22d0</span>&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__()</div><div class="line">&lt;listiterator object at <span class="number">0x7f5f9d3f2350</span>&gt;</div></pre></td></tr></table></figure>
-<p>每次调用 <strong><em>i.__iter__()</em></strong>时总会产生新的iterator对象,这样调用<strong><em>next()</em></strong>时才会总是输出1.</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__()</span><br><span class="line">&lt;listiterator object at <span class="number">0x7f5f9d3f2310</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__()</span><br><span class="line">&lt;listiterator object at <span class="number">0x7f5f9d3f22d0</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>i.__iter__()</span><br><span class="line">&lt;listiterator object at <span class="number">0x7f5f9d3f2350</span>&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>每次调用 <strong><em>i._<em>iter_</em>()</em></strong>时总会产生新的iterator对象,这样调用<strong><em>next()</em></strong>时才会总是输出1.</p>
 <p>去麻烦了一下外国朋友,顺便写了写英文 : )</p>
 <p>我之前为什么会觉得四次调用是作用在同一个对象上的呢? 尴尬 -  -</p>
-<p>[<a href="http://stackoverflow.com/questions/43487625/what-happend-when-i-assign-an-iterator-to-a-variable" target="_blank" rel="external">http://stackoverflow.com/questions/43487625/what-happend-when-i-assign-an-iterator-to-a-variable</a>]</p>
-
+<p>[<a href="http://stackoverflow.com/questions/43487625/what-happend-when-i-assign-an-iterator-to-a-variable]" target="_blank" rel="noopener">http://stackoverflow.com/questions/43487625/what-happend-when-i-assign-an-iterator-to-a-variable]</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
 
@@ -446,9 +467,9 @@
           
             <a href="/tags/python/" rel="tag"># python</a>
           
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
           
-            <a href="/tags/迭代器/" rel="tag"># 迭代器</a>
+            <a href="/tags/%E8%BF%AD%E4%BB%A3%E5%99%A8/" rel="tag"># 迭代器</a>
           
         </div>
       
@@ -461,8 +482,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/30/what-s-overfitting-in-machine-learning/" rel="next" title="what`s overfitting in machine learning">
-                <i class="fa fa-chevron-left"></i> what`s overfitting in machine learning
+              <a href="/2017/04/18/python%E8%BF%AD%E4%BB%A3%E5%99%A8-1/" rel="next" title="python迭代器(1)">
+                <i class="fa fa-chevron-left"></i> python迭代器(1)
               </a>
             
           </div>
@@ -471,8 +492,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/18/python迭代器-1/" rel="prev" title="python迭代器(1)">
-                python迭代器(1) <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/30/what-s-overfitting-in-machine-learning/" rel="prev" title="what`s overfitting in machine learning">
+                what`s overfitting in machine learning <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -632,7 +653,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共27.1k字</span>
+  <span class="post-count">博客全站共28.9k字</span>
 </div>
 
 

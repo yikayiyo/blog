@@ -89,17 +89,18 @@
 
 
 
-<meta name="description" content="关键词协程、生成器 笔记 协程：又称作Coroutine。从字面上来理解，即协同运行的例程，它是比是线程（thread）更细量级的用户态线程，特点是允许用户的主动调用和主动退出，挂起当前的例程然后返回值或去执行其他任务，接着返回到原来停下的点继续执行  有时间再写。。。">
-<meta name="keywords" content="python,学习笔记">
+<meta name="description" content="关键词协程、生成器 笔记 协程：又称作Coroutine。从字面上来理解，即协同运行的例程，它是比是线程（thread）更细量级的用户态线程，特点是允许用户的主动调用和主动退出，挂起当前的例程然后返回值或去执行其他任务，接着返回到原来停下的点继续执行  有时间再写。。。            document.querySelectorAll(&#39;.github-emoji&#39;)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="异步网络编程">
-<meta property="og:url" content="https://yikayiyo.github.io/2018/11/25/python异步/index.html">
+<meta property="og:url" content="https://yikayiyo.github.io/2018/11/25/python%E5%BC%82%E6%AD%A5/index.html">
 <meta property="og:site_name" content="Misbehavior">
-<meta property="og:description" content="关键词协程、生成器 笔记 协程：又称作Coroutine。从字面上来理解，即协同运行的例程，它是比是线程（thread）更细量级的用户态线程，特点是允许用户的主动调用和主动退出，挂起当前的例程然后返回值或去执行其他任务，接着返回到原来停下的点继续执行  有时间再写。。。">
-<meta property="og:updated_time" content="2019-05-18T09:14:12.000Z">
+<meta property="og:description" content="关键词协程、生成器 笔记 协程：又称作Coroutine。从字面上来理解，即协同运行的例程，它是比是线程（thread）更细量级的用户态线程，特点是允许用户的主动调用和主动退出，挂起当前的例程然后返回值或去执行其他任务，接着返回到原来停下的点继续执行  有时间再写。。。            document.querySelectorAll(&#39;.github-emoji&#39;)">
+<meta property="article:published_time" content="2018-11-25T08:14:00.000Z">
+<meta property="article:modified_time" content="2019-05-18T09:14:12.000Z">
+<meta property="article:author" content="yikayiyo">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="异步网络编程">
-<meta name="twitter:description" content="关键词协程、生成器 笔记 协程：又称作Coroutine。从字面上来理解，即协同运行的例程，它是比是线程（thread）更细量级的用户态线程，特点是允许用户的主动调用和主动退出，挂起当前的例程然后返回值或去执行其他任务，接着返回到原来停下的点继续执行  有时间再写。。。">
 
 
 
@@ -134,7 +135,7 @@
 
 
   <title> 异步网络编程 | Misbehavior </title>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -296,7 +297,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2018/11/25/python异步/">
+    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2018/11/25/python%E5%BC%82%E6%AD%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yikayiyo">
@@ -375,7 +376,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  105 字
+                  157 字
                 </span>
               
 
@@ -410,14 +411,32 @@
       
 
       
-        <h3 id="关键词" class="heading-control"><a href="#关键词" class="headerlink" title="关键词"></a>关键词<a class="heading-anchor" href="#关键词" aria-hidden="true"></a></h3><p>协程、生成器</p>
-<h3 id="笔记" class="heading-control"><a href="#笔记" class="headerlink" title="笔记"></a>笔记<a class="heading-anchor" href="#笔记" aria-hidden="true"></a></h3><ul>
+        <h3 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h3><p>协程、生成器</p>
+<h3 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h3><ul>
 <li><p>协程：又称作Coroutine。从字面上来理解，即协同运行的例程，它是比是线程（thread）更细量级的用户态线程，特点是允许用户的主动调用和主动退出，挂起当前的例程然后返回值或去执行其他任务，接着返回到原来停下的点继续执行</p>
 </li>
 <li><p>有时间再写。。。</p>
 </li>
 </ul>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
 
@@ -447,7 +466,7 @@
           
             <a href="/tags/python/" rel="tag"># python</a>
           
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
           
         </div>
       
@@ -460,8 +479,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/25/devops/" rel="next" title="DevOps for dummies">
-                <i class="fa fa-chevron-left"></i> DevOps for dummies
+              <a href="/2018/04/05/%E8%AF%8D%E5%90%91%E9%87%8F/" rel="next" title="word2vec + manage experiments">
+                <i class="fa fa-chevron-left"></i> word2vec + manage experiments
               </a>
             
           </div>
@@ -470,8 +489,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/05/词向量/" rel="prev" title="word2vec + manage experiments">
-                word2vec + manage experiments <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/25/devops/" rel="prev" title="DevOps for dummies">
+                DevOps for dummies <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -656,7 +675,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共27.1k字</span>
+  <span class="post-count">博客全站共28.9k字</span>
 </div>
 
 

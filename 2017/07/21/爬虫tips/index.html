@@ -90,16 +90,17 @@
 
 
 <meta name="description" content="链接抓取 根据首页链接抓取内容 页面包含的链接放入一个set,避免重复 解析robot.txt,避免下载禁止爬取的页面 已经抓取过的链接放在一个set">
-<meta name="keywords" content="学习笔记,爬虫">
 <meta property="og:type" content="article">
 <meta property="og:title" content="爬虫tips">
-<meta property="og:url" content="https://yikayiyo.github.io/2017/07/21/爬虫tips/index.html">
+<meta property="og:url" content="https://yikayiyo.github.io/2017/07/21/%E7%88%AC%E8%99%ABtips/index.html">
 <meta property="og:site_name" content="Misbehavior">
 <meta property="og:description" content="链接抓取 根据首页链接抓取内容 页面包含的链接放入一个set,避免重复 解析robot.txt,避免下载禁止爬取的页面 已经抓取过的链接放在一个set">
-<meta property="og:updated_time" content="2017-08-22T09:33:54.000Z">
+<meta property="article:published_time" content="2017-07-21T07:16:19.000Z">
+<meta property="article:modified_time" content="2017-08-22T09:33:54.000Z">
+<meta property="article:author" content="yikayiyo">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="爬虫">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="爬虫tips">
-<meta name="twitter:description" content="链接抓取 根据首页链接抓取内容 页面包含的链接放入一个set,避免重复 解析robot.txt,避免下载禁止爬取的页面 已经抓取过的链接放在一个set">
 
 
 
@@ -134,7 +135,7 @@
 
 
   <title> 爬虫tips | Misbehavior </title>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -296,7 +297,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/07/21/爬虫tips/">
+    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/07/21/%E7%88%AC%E8%99%ABtips/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yikayiyo">
@@ -375,7 +376,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  699 字
+                  751 字
                 </span>
               
 
@@ -410,7 +411,7 @@
       
 
       
-        <h3 id="链接抓取" class="heading-control"><a href="#链接抓取" class="headerlink" title="链接抓取"></a>链接抓取<a class="heading-anchor" href="#链接抓取" aria-hidden="true"></a></h3><ul>
+        <h3 id="链接抓取"><a href="#链接抓取" class="headerlink" title="链接抓取"></a>链接抓取</h3><ul>
 <li>根据首页链接抓取内容</li>
 <li>页面包含的链接放入一个set,避免重复</li>
 <li>解析robot.txt,避免下载禁止爬取的页面</li>
@@ -421,7 +422,7 @@
 <li>下载失败时重试下载(设置一个try_times参数,递归调用 </li>
 </ul>
 <p>得到一堆html页面</p>
-<h3 id="数据抓取" class="heading-control"><a href="#数据抓取" class="headerlink" title="数据抓取"></a>数据抓取<a class="heading-anchor" href="#数据抓取" aria-hidden="true"></a></h3><table>
+<h3 id="数据抓取"><a href="#数据抓取" class="headerlink" title="数据抓取"></a>数据抓取</h3><table>
 <thead>
 <tr>
 <th>方法</th>
@@ -430,8 +431,7 @@
 <th>安装难度</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>正则</td>
 <td>快</td>
 <td>困难</td>
@@ -449,11 +449,27 @@
 <td>简单</td>
 <td>相对困难</td>
 </tr>
-</tbody>
-</table>
-<p>如果爬虫的瓶颈在下载页面,不是数据抓取,那么可以使用BS<br>如果要抓的数据不多,使用正则更加高效率<br>lxml是最佳选择</p>
-<h4 id="正则" class="heading-control"><a href="#正则" class="headerlink" title="正则"></a>正则<a class="heading-anchor" href="#正则" aria-hidden="true"></a></h4><p>如果要选取的东西,格式很常见,有很多相似项,可以尝试指明它的父元素或者祖先元素,最好是有id属性 (:_&lt; id是<strong>唯一</strong>的吧)  </p>
-<h4 id="CSS选择器" class="heading-control"><a href="#CSS选择器" class="headerlink" title="CSS选择器"></a>CSS选择器<a class="heading-anchor" href="#CSS选择器" aria-hidden="true"></a></h4><ul>
+<tr>
+<td>如果爬虫的瓶颈在下载页面,不是数据抓取,那么可以使用BS</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>如果要抓的数据不多,使用正则更加高效率</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>lxml是最佳选择</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="正则"><a href="#正则" class="headerlink" title="正则"></a>正则</h4><p>如果要选取的东西,格式很常见,有很多相似项,可以尝试指明它的父元素或者祖先元素,最好是有id属性 (:_&lt; id是<strong>唯一</strong>的吧)  </p>
+<h4 id="CSS选择器"><a href="#CSS选择器" class="headerlink" title="CSS选择器"></a>CSS选择器</h4><ul>
 <li>选择所有标签: *.</li>
 <li>选择a标签: a</li>
 <li>选择class=”link”的元素: .link</li>
@@ -463,25 +479,49 @@
 <li>选择a标签内的所有span标签: a span</li>
 <li>选择title属性为”home”的所有a标签: a[title=home]</li>
 </ul>
-<h4 id="给链接抽取添加数据处理回调" class="heading-control"><a href="#给链接抽取添加数据处理回调" class="headerlink" title="给链接抽取添加数据处理回调"></a>给链接抽取添加数据处理回调<a class="heading-anchor" href="#给链接抽取添加数据处理回调" aria-hidden="true"></a></h4><ul>
-<li>构造回调<strong>函数</strong>或者回调<strong>类</strong>(定义<strong>__call__()</strong>方法)</li>
+<h4 id="给链接抽取添加数据处理回调"><a href="#给链接抽取添加数据处理回调" class="headerlink" title="给链接抽取添加数据处理回调"></a>给链接抽取添加数据处理回调</h4><ul>
+<li>构造回调<strong>函数</strong>或者回调<strong>类</strong>(定义<strong>_<em>call_</em>()</strong>方法)</li>
 <li>数据写入文件</li>
 </ul>
-<h3 id="下载缓存" class="heading-control"><a href="#下载缓存" class="headerlink" title="下载缓存"></a>下载缓存<a class="heading-anchor" href="#下载缓存" aria-hidden="true"></a></h3><h4 id="磁盘缓存" class="heading-control"><a href="#磁盘缓存" class="headerlink" title="磁盘缓存"></a>磁盘缓存<a class="heading-anchor" href="#磁盘缓存" aria-hidden="true"></a></h4><ul>
-<li>下载前检查缓存</li>
-<li>没有时再请求网页下载,并存至缓存</li>
-<li>设计URL到文件名的<strong>映射</strong> : 注意命名格式限制,例如长度,允许的字符</li>
-<li>数据(html)可以压缩: zlib.compress|zlib.decompress</li>
+<h3 id="下载缓存"><a href="#下载缓存" class="headerlink" title="下载缓存"></a>下载缓存</h3><h4 id="磁盘缓存"><a href="#磁盘缓存" class="headerlink" title="磁盘缓存"></a>磁盘缓存</h4><ul>
+<li><p>下载前检查缓存</p>
+</li>
+<li><p>没有时再请求网页下载,并存至缓存</p>
+</li>
+<li><p>设计URL到文件名的<strong>映射</strong> : 注意命名格式限制,例如长度,允许的字符</p>
+</li>
+<li><p>数据(html)可以压缩: zlib.compress|zlib.decompress</p>
+</li>
 <li><p>保存时间戳,过期缓存失效</p>
 <p><strong>缺点</strong>: 受限于文件系统,数量有限</p>
 </li>
 </ul>
-<h4 id="数据库缓存" class="heading-control"><a href="#数据库缓存" class="headerlink" title="数据库缓存"></a>数据库缓存<a class="heading-anchor" href="#数据库缓存" aria-hidden="true"></a></h4><p>存储大量数据,没有复杂的连接操作,选择易拓展的NoSql<br>加载时间比文件系统多,但免于文件系统的限制</p>
-<h3 id="并发下载" class="heading-control"><a href="#并发下载" class="headerlink" title="并发下载"></a>并发下载<a class="heading-anchor" href="#并发下载" aria-hidden="true"></a></h3><h4 id="多线程爬虫" class="heading-control"><a href="#多线程爬虫" class="headerlink" title="多线程爬虫"></a>多线程爬虫<a class="heading-anchor" href="#多线程爬虫" aria-hidden="true"></a></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#处理url的函数</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">thread_crawler</span>:</span></div><div class="line">    ...</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">process_url</span>:</span></div><div class="line">		<span class="keyword">pass</span></div><div class="line">    ...</div><div class="line">	</div><div class="line">    <span class="comment">#逻辑:设定一个线程池,最大线程数为max_threads.当有URL爬取时,检测是否有线程,有的话处理掉完成的线程,			再判断是否创建新线程</span></div><div class="line">    threads=[]</div><div class="line">    <span class="keyword">while</span> threads <span class="keyword">or</span> crawl_queue:</div><div class="line">        <span class="keyword">for</span> thread <span class="keyword">in</span> threads:</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> thread.is_allive():</div><div class="line">                <span class="comment">#remove</span></div><div class="line">                threads.remove(thread)</div><div class="line">        <span class="comment">#在多个线程中启动process_url,条件是当前线程数小于设定值,并且待爬队列不为空</span></div><div class="line">        <span class="keyword">while</span> len(threads)&lt;max_threads <span class="keyword">and</span> crawl_queue:</div><div class="line">            thread = threading.Thread(target=process_url)</div><div class="line">            thread.start()</div><div class="line">            threads.append(thread)</div></pre></td></tr></table></figure>
-<h4 id="多进程爬虫" class="heading-control"><a href="#多进程爬虫" class="headerlink" title="多进程爬虫"></a>多进程爬虫<a class="heading-anchor" href="#多进程爬虫" aria-hidden="true"></a></h4><p>有几个cpu创建几个进程</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">processes=[]</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(num_cpus):</div><div class="line">    p=multiprocessing.Process(target=thread_crawler)</div><div class="line">    p.start()</div><div class="line">    processes.append(p)</div></pre></td></tr></table></figure>
-<h3 id="动态内容" class="heading-control"><a href="#动态内容" class="headerlink" title="动态内容"></a>动态内容<a class="heading-anchor" href="#动态内容" aria-hidden="true"></a></h3><p>todo…</p>
+<h4 id="数据库缓存"><a href="#数据库缓存" class="headerlink" title="数据库缓存"></a>数据库缓存</h4><p>存储大量数据,没有复杂的连接操作,选择易拓展的NoSql<br>加载时间比文件系统多,但免于文件系统的限制</p>
+<h3 id="并发下载"><a href="#并发下载" class="headerlink" title="并发下载"></a>并发下载</h3><h4 id="多线程爬虫"><a href="#多线程爬虫" class="headerlink" title="多线程爬虫"></a>多线程爬虫</h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#处理url的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">thread_crawler</span>:</span></span><br><span class="line">    ...</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">process_url</span>:</span></span><br><span class="line">		<span class="keyword">pass</span></span><br><span class="line">    ...</span><br><span class="line">	</span><br><span class="line">    <span class="comment">#逻辑:设定一个线程池,最大线程数为max_threads.当有URL爬取时,检测是否有线程,有的话处理掉完成的线程,			再判断是否创建新线程</span></span><br><span class="line">    threads=[]</span><br><span class="line">    <span class="keyword">while</span> threads <span class="keyword">or</span> crawl_queue:</span><br><span class="line">        <span class="keyword">for</span> thread <span class="keyword">in</span> threads:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> thread.is_allive():</span><br><span class="line">                <span class="comment">#remove</span></span><br><span class="line">                threads.remove(thread)</span><br><span class="line">        <span class="comment">#在多个线程中启动process_url,条件是当前线程数小于设定值,并且待爬队列不为空</span></span><br><span class="line">        <span class="keyword">while</span> len(threads)&lt;max_threads <span class="keyword">and</span> crawl_queue:</span><br><span class="line">            thread = threading.Thread(target=process_url)</span><br><span class="line">            thread.start()</span><br><span class="line">            threads.append(thread)</span><br></pre></td></tr></tbody></table></figure>
 
+<h4 id="多进程爬虫"><a href="#多进程爬虫" class="headerlink" title="多进程爬虫"></a>多进程爬虫</h4><p>有几个cpu创建几个进程</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">processes=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(num_cpus):</span><br><span class="line">    p=multiprocessing.Process(target=thread_crawler)</span><br><span class="line">    p.start()</span><br><span class="line">    processes.append(p)</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="动态内容"><a href="#动态内容" class="headerlink" title="动态内容"></a>动态内容</h3><p>todo…</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
 
@@ -509,9 +549,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
           
-            <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
+            <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"># 爬虫</a>
           
         </div>
       
@@ -524,8 +564,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/23/selenium + phantomJS 小Demo/" rel="next" title="selenium + phantomJS 小Demo">
-                <i class="fa fa-chevron-left"></i> selenium + phantomJS 小Demo
+              <a href="/2017/07/19/selenium%E5%AD%A6%E4%B9%A0/" rel="next" title="selenium学习">
+                <i class="fa fa-chevron-left"></i> selenium学习
               </a>
             
           </div>
@@ -534,8 +574,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/19/selenium学习/" rel="prev" title="selenium学习">
-                selenium学习 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/23/selenium%20+%20phantomJS%20%E5%B0%8FDemo/" rel="prev" title="selenium + phantomJS 小Demo">
+                selenium + phantomJS 小Demo <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -720,7 +760,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共27.1k字</span>
+  <span class="post-count">博客全站共28.9k字</span>
 </div>
 
 

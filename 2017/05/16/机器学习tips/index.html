@@ -90,16 +90,17 @@
 
 
 <meta name="description" content="Part 1“A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P if its performance at tasks in T, as measured by P, improves with experienc">
-<meta name="keywords" content="学习笔记,machine learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习tips">
-<meta property="og:url" content="https://yikayiyo.github.io/2017/05/16/机器学习tips/index.html">
+<meta property="og:url" content="https://yikayiyo.github.io/2017/05/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0tips/index.html">
 <meta property="og:site_name" content="Misbehavior">
 <meta property="og:description" content="Part 1“A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P if its performance at tasks in T, as measured by P, improves with experienc">
-<meta property="og:updated_time" content="2017-08-01T10:52:40.000Z">
+<meta property="article:published_time" content="2017-05-16T01:05:23.000Z">
+<meta property="article:modified_time" content="2017-08-01T10:52:40.000Z">
+<meta property="article:author" content="yikayiyo">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="machine learning">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="机器学习tips">
-<meta name="twitter:description" content="Part 1“A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P if its performance at tasks in T, as measured by P, improves with experienc">
 
 
 
@@ -134,7 +135,7 @@
 
 
   <title> 机器学习tips | Misbehavior </title>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -296,7 +297,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/05/16/机器学习tips/">
+    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2017/05/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0tips/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yikayiyo">
@@ -375,7 +376,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  751 字
+                  803 字
                 </span>
               
 
@@ -391,7 +392,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  4 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -410,7 +411,7 @@
       
 
       
-        <h3 id="Part-1" class="heading-control"><a href="#Part-1" class="headerlink" title="Part 1"></a>Part 1<a class="heading-anchor" href="#Part-1" aria-hidden="true"></a></h3><p>“A computer program is said to learn from experience <em>E</em> with respect to some class of tasks <em>T</em> and performance measure <em>P</em> if its performance at tasks in <em>T</em>, as measured by <em>P</em>, improves with experience <em>E</em>.”</p>
+        <h3 id="Part-1"><a href="#Part-1" class="headerlink" title="Part 1"></a>Part 1</h3><p>“A computer program is said to learn from experience <em>E</em> with respect to some class of tasks <em>T</em> and performance measure <em>P</em> if its performance at tasks in <em>T</em>, as measured by <em>P</em>, improves with experience <em>E</em>.”</p>
 <p>Machine learning is all about drawing lines through data and we decide what purpose the line services, such as <strong>a decision boundary</strong> in a classification algorithm, or <strong>a predictor</strong> that models real-world behavior. And these lines in turn just come from finding <strong>the minimum of a cost function</strong> using <strong>gradient descent</strong>.<a id="more"></a></p>
 <p>The key to determining what parameters to choose to best approximate the data is to find a way to characterize how “wrong” our boundary or predictor is. We do this by using a <strong>cost function</strong> (or a <strong>loss function</strong>).</p>
 <p>The <strong>perceptron algorithm</strong> forms the basis for many modern day ML algorithms, most notably <strong>neural networks</strong>. </p>
@@ -418,12 +419,12 @@
 <p>We would want to use different weights for each input.</p>
 <p>We use a bias as a measure of how difficult it is for the perceptron to say ‘yes’ or ‘no’</p>
 <p>A logistic model can predict probabilities while a perceptron can only predict yes or no.</p>
-<h3 id="Part-2" class="heading-control"><a href="#Part-2" class="headerlink" title="Part 2"></a>Part 2<a class="heading-anchor" href="#Part-2" aria-hidden="true"></a></h3><p>A support vector is a vector from the data point with the smallest margin to the decision boundary.</p>
+<h3 id="Part-2"><a href="#Part-2" class="headerlink" title="Part 2"></a>Part 2</h3><p>A support vector is a vector from the data point with the smallest margin to the decision boundary.</p>
 <p>The idea behind a support vector machine is to classify data by drawing a decision boundary such that it <strong><em>maximizes</em> the support vectors</strong>. By maximizing the support vectors, we’re also maximizing the margins in a data set, and thus the decision boundary is as far away as possible from the data points.</p>
 <p>The SVM algorithm fails when you have a <strong>linearly inseparable</strong> dataset.</p>
 <p>Before, we wanted <em>every single</em> data point to be as far away (to the correct side) from the decision boundary as possible. Now, we’ll allow a data point to stray toward the wrong side of the boundary, but we’ll add a “cost” to that happening (remember cost functions from the last post?). This is something that happens very often in machine learning and is called <strong>regularization</strong>.</p>
 <p>You can think of a kernel as mapping a set data from one coordinate system to another coordinate system. In the original coordinate system the data may not be linearly separable at all, whereas in the new coordinate system if we choose the correct kernel, we should get a set a data set is very easily linearly separable.</p>
-<h3 id="Part-3" class="heading-control"><a href="#Part-3" class="headerlink" title="Part 3"></a>Part 3<a class="heading-anchor" href="#Part-3" aria-hidden="true"></a></h3><p>A neuron takes in any number of numerical inputs and spits out just one output. To get to this output, the neuron calculates an intermediate value called s by multiplying each input by a different weight, adding them all together, and adding an additional number called the bias.</p>
+<h3 id="Part-3"><a href="#Part-3" class="headerlink" title="Part 3"></a>Part 3</h3><p>A neuron takes in any number of numerical inputs and spits out just one output. To get to this output, the neuron calculates an intermediate value called s by multiplying each input by a different weight, adding them all together, and adding an additional number called the bias.</p>
 <p>An activation function is any function that takes in our s and gives the output of our neuron, called the <strong>activation</strong>.</p>
 <p>Using a step function makes training very difficult because there’s no way to tell whether the neural network is getting closer or farther from the correct answer.But sigmoid function is a nice activation function because it is smooth everywhere, making it easier to figure out if you’re getting closer to the top.</p>
 <p>Artificial neural network are composed of <strong>layers</strong> of artificial neurons in a similar way. In general, there are three types of layers: an input layer, one or more hidden layers, and an output layer. </p>
@@ -431,8 +432,26 @@
 <p>When the neural network outputs the wrong answer, you find the slopes of the output layer (the domino closest to the marble) first because it was the direct cause of the incorrect answer. And since the output layer depends on the hidden layer, you’ll have to fix that too by finding the slopes and using gradient descent. Eventually you’ll work your way back to the hidden layer closest to the input layer.</p>
 <p>Changing the parameters in one layer will affect the outputs of the next layer which will affect the outputs of the next layer, and so on until the cost function itself is affected.It turns out that once we calculate the slopes of a given layer, we can easily find the slopes of a previous layer.</p>
 <p>We calculate slopes by starting from the back and propagating our algorithm backwards through the neural network until we get all the slopes for gradient descent.This, in a nutshell, is the back-propagation algorithm.</p>
-<h3 id="Part-4" class="heading-control"><a href="#Part-4" class="headerlink" title="Part 4"></a>Part 4<a class="heading-anchor" href="#Part-4" aria-hidden="true"></a></h3><p>Todo…</p>
-
+<h3 id="Part-4"><a href="#Part-4" class="headerlink" title="Part 4"></a>Part 4</h3><p>Todo…</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
 
@@ -460,7 +479,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
           
             <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
           
@@ -475,8 +494,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/17/烦/" rel="next" title="烦">
-                <i class="fa fa-chevron-left"></i> 烦
+              <a href="/2017/05/15/Logistic-Regression/" rel="next" title="Logistic Regression">
+                <i class="fa fa-chevron-left"></i> Logistic Regression
               </a>
             
           </div>
@@ -485,8 +504,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/15/Logistic-Regression/" rel="prev" title="Logistic Regression">
-                Logistic Regression <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/17/%E7%83%A6/" rel="prev" title="烦">
+                烦 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -671,7 +690,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共27.1k字</span>
+  <span class="post-count">博客全站共28.9k字</span>
 </div>
 
 
