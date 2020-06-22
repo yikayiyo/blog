@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yikayiyo.github.io/"/>
-  <updated>2020-06-18T09:25:42.976Z</updated>
+  <updated>2020-06-22T15:56:39.404Z</updated>
   <id>https://yikayiyo.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>网站性能提升最佳实践一</title>
+    <link href="https://yikayiyo.github.io/2020/06/22/%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E4%B8%80/"/>
+    <id>https://yikayiyo.github.io/2020/06/22/%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E4%B8%80/</id>
+    <published>2020-06-22T14:51:53.000Z</published>
+    <updated>2020-06-22T15:56:39.404Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://developer.yahoo.com/performance/rules.html?guccounter=1#csslink" target="_blank" rel="noopener">https://developer.yahoo.com/performance/rules.html?guccounter=1#csslink</a></p><ul><li>Content</li><li>Server</li><li>Cookie</li><li>CSS</li><li>JavaScript</li><li>Images</li><li>Mobile</li></ul><p>原文从七个方面总结网站性能提升。</p><p>本篇总结Content方面。</p><h3 id="Make-Fewer-HTTP-Requests-减少HTTP请求"><a href="#Make-Fewer-HTTP-Requests-减少HTTP请求" class="headerlink" title="Make Fewer HTTP Requests 减少HTTP请求"></a><a href="https://developer.yahoo.com/performance/rules.html#num_http" target="_blank" rel="noopener">Make Fewer HTTP Requests</a> 减少HTTP请求</h3><p>减少页面的组件数量，可以减少HTTP请求数量。</p><p>减少页面组件的方法：</p><ul><li><p>精简页面设计</p></li><li><p>不简化设计的情况下：</p><ul><li>文件组合（js文件放到一个里面，css文件放到一个里面）</li></ul></li><li><p><a href="https://css-tricks.com/css-sprites/" target="_blank" rel="noopener">CSS Sprites</a>：背景图片合并成一张，利用css属性设置各个部分到相对应的页面</p><ul><li><a href="https://css-tricks.com/examples/CSSClip/" target="_blank" rel="noopener">CSS Sprites with Inline Images</a> 也可以用来处理图片</li></ul></li><li><p>将内联图片放到css文件中（ Combining inline images into your cached stylesheets is a way to reduce HTTP requests and avoid increasing the size of your pages ？How ? ( Todo: find demo</p></li></ul><h3 id="Reduce-DNS-Lookups-减少DNS查询"><a href="#Reduce-DNS-Lookups-减少DNS查询" class="headerlink" title="Reduce DNS Lookups 减少DNS查询"></a><a href="https://developer.yahoo.com/performance/rules.html#dns_lookups" target="_blank" rel="noopener">Reduce DNS Lookups</a> 减少DNS查询</h3><p>减少网站的主机名（hostnames），可以减少DNS查询次数</p><p>但是减少网站主机名会减少页面的并发下载量</p><blockquote><p>Trade-off：Avoiding DNS lookups cuts response times, but reducing parallel downloads may increase response times. </p></blockquote><p> Guide：Split components across <strong>at least two but no more than four</strong> hostnames.</p><h3 id="Avoid-Redirects-避免网站重定向"><a href="#Avoid-Redirects-避免网站重定向" class="headerlink" title="Avoid Redirects 避免网站重定向"></a><a href="https://developer.yahoo.com/performance/rules.html#redirects" target="_blank" rel="noopener">Avoid Redirects</a> 避免网站重定向</h3><p>最经常发生的重定向：应该加/的地方没有加/</p><p>重定向可以用来从旧网站跳转到新网站</p><p>重定向也可以用来连接网站的不同部分、根据特定情况让用户跳转</p><p>解决办法：</p><ul><li><p>如果两个网站在同一个服务器，使用 <code>Alias and mod_rewrite</code></p></li><li><p>如果是网站换了个新域名，创建一个CNAME (a DNS record that creates an alias pointing from one domain name to another)，结合<code>Alias or mod_rewrite</code></p></li></ul><h3 id="Make-Ajax-Cacheable-缓存Ajax请求"><a href="#Make-Ajax-Cacheable-缓存Ajax请求" class="headerlink" title="Make Ajax Cacheable 缓存Ajax请求"></a><a href="https://developer.yahoo.com/performance/rules.html#cacheajax" target="_blank" rel="noopener">Make Ajax Cacheable</a> 缓存Ajax请求</h3><p><strong>异步不等于即时</strong></p><p>优化异步请求：</p><ul><li>缓存Ajax请求</li></ul><p>何时使用旧的响应，何时发送新的请求？</p><blockquote><p>This could be done by adding a timestamp to the address book Ajax URL indicating the last time the user modified her address book, for example, &amp;t=1190241612. If the address book hasn’t been modified since the last download, the timestamp will be the same and the address book will be read from the browser’s cache eliminating an extra HTTP roundtrip. If the user has modified her address book, the timestamp ensures the new URL doesn’t match the cached response, and the browser will request the updated address book entries.</p></blockquote><p>Todo</p><h3 id="Postload-Components"><a href="#Postload-Components" class="headerlink" title="Postload Components"></a><a href="https://developer.yahoo.com/performance/rules.html#postload" target="_blank" rel="noopener">Postload Components</a></h3><h3 id="Preload-Components"><a href="#Preload-Components" class="headerlink" title="Preload Components"></a><a href="https://developer.yahoo.com/performance/rules.html#preload" target="_blank" rel="noopener">Preload Components</a></h3><h3 id="Reduce-the-Number-of-DOM-Elements"><a href="#Reduce-the-Number-of-DOM-Elements" class="headerlink" title="Reduce the Number of DOM Elements"></a><a href="https://developer.yahoo.com/performance/rules.html#min_dom" target="_blank" rel="noopener">Reduce the Number of DOM Elements</a></h3><h3 id="Split-Components-Across-Domains"><a href="#Split-Components-Across-Domains" class="headerlink" title="Split Components Across Domains"></a><a href="https://developer.yahoo.com/performance/rules.html#split" target="_blank" rel="noopener">Split Components Across Domains</a></h3><h3 id="Minimize-Number-of-iframes"><a href="#Minimize-Number-of-iframes" class="headerlink" title="Minimize Number of iframes"></a><a href="https://developer.yahoo.com/performance/rules.html#iframes" target="_blank" rel="noopener">Minimize Number of iframes</a></h3><h3 id="Avoid-404s"><a href="#Avoid-404s" class="headerlink" title="Avoid 404s"></a><a href="https://developer.yahoo.com/performance/rules.html#no404" target="_blank" rel="noopener">Avoid 404s</a></h3><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;a href=&quot;https://developer.yahoo.com/performance/rules.html?guccounter=1#csslink&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://developer.yahoo.
+      
+    
+    </summary>
+    
+    
+    
+      <category term="学习笔记" scheme="https://yikayiyo.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="前端" scheme="https://yikayiyo.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="翻译" scheme="https://yikayiyo.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+  </entry>
   
   <entry>
     <title>surface测试</title>
@@ -568,29 +596,6 @@
       <category term="关联数据" scheme="https://yikayiyo.github.io/tags/%E5%85%B3%E8%81%94%E6%95%B0%E6%8D%AE/"/>
     
       <category term="DBpedia" scheme="https://yikayiyo.github.io/tags/DBpedia/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>线性模型</title>
-    <link href="https://yikayiyo.github.io/2017/11/11/%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/"/>
-    <id>https://yikayiyo.github.io/2017/11/11/%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/</id>
-    <published>2017-11-11T03:22:45.000Z</published>
-    <updated>2018-04-10T08:52:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>能不能使用线性分类器得到形状为圆圈的决策边界？</p><a id="more"></a><ul><li>可以的！所谓的线性分类器，<strong>线性</strong>指的是权重向量<strong>w</strong>和标签y的关系，而决策边界指的是y如何随着x的变化而变化</li></ul><p><strong>the prediction is driven by the score w · φ(x)</strong>，其中x是原始输入，φ(x)是提取到的特征</p><p>机器学习问题：定义优化问题，求解得到<strong>w</strong>（在 φ(x)固定的情况下）</p><p>构造特征：</p><ul><li>先验知识</li><li>特征模板</li></ul><p>定义特征：</p><ul><li>数组：适用于特征稠密的情况，假定特征排序固定</li><li>字典：特征稀疏(few nonzeros)时用字典表示字段到double<br>的映射更有效</li></ul><p>定义特征时一定要明确特征的含义</p><p>模型的表达（表现）能力——Expressivity：</p><ul><li>hypothesis class：特征φ(x)固定而<strong>w</strong>不同的预测器的集合<br>$$<br>F = {f_w : w ∈ R^d}<br>$$</li><li>学习的目的：利用训练数据从F中找到一个特定的预测器</li><li>如果<strong>φ(x)定义的F</strong>中的预测器都很差劲，no amount of learning can help.</li><li>关键在于：φ(x)能不能把好的预测器表达出来</li><li>F是不是<strong>越大越好？</strong></li></ul><p><strong>non-linearities in the original measurements(原始度量中的非线性)</strong> :</p><ul><li>Non-monotonicity(非单调性)：<ul><li>体温和健康程度的关系就不是单调的，你不能说体温越高越健康，反之亦然</li><li>φ(x) = [1, temperature(x)]   bad</li><li>φ(x) = [1, (temperature(x) − 37)^2] 转换特征，利用了先验知识</li><li>φ(x) = [1, temperature(x), temperature(x)^2]   task to simple blocks</li></ul></li><li>Saturation(饱和)：<ul><li>产品推荐</li><li>φ(x) = N(x) 购买产品的人数（受欢迎程度）和相关性，不具有线性关系</li><li>φ(x) = logN(x) 转换特征，取对数（N with a large dynamic range）</li><li>φ(x) = [1[0 &lt; N(x) ≤ 10], 1[10 &lt; N(x) ≤ 100],…]离散化，范围足够精细的话，可以非常灵活地捕捉常规关系</li></ul></li><li>Interaction between features(特征组合)：<ul><li>根据身高、体重预测健康病人状况</li><li>φ(x) = [height(x), weight(x)] #没能捕获身高体重的关系</li><li>φ(x) = (52 + 1.9(height(x) − 60) − weight(x))^2 #组合输入得到新的特征，利用了外界知识</li><li>φ(x) = [1, height(x), weight(x), height(x)^2, weight(x)^2, height(x)weight(x)] #添加包含多个度量的特征</li></ul></li></ul><p>Linear in what？ </p><ul><li>Linear in w?  Yes</li><li>Linear in φ(x)?  Yes </li><li>Linear in x?  No! (x not necessarily even a vector，可以是图片、文字)</li></ul><p>小结：</p><ul><li>从特征提取的角度来看，我们可以定义<strong>任意</strong>特征，带来x的极度非线性的函数</li><li>从学习的角度来看，线性在有效优化权重方面起着重要作用（因为它会导致凸优化问题）</li><li><strong>线性模型很强大</strong>！</li><li>将手工定义特征自动化—&gt; 神经网络</li></ul><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;能不能使用线性分类器得到形状为圆圈的决策边界？&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="学习笔记" scheme="https://yikayiyo.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="machine learning" scheme="https://yikayiyo.github.io/tags/machine-learning/"/>
     
   </entry>
   
