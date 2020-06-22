@@ -44,6 +44,44 @@
     
     
     <entry>
+      <title>几则笑话</title>
+      <link href="/2020/02/22/%E5%87%A0%E5%88%99%E7%AC%91%E8%AF%9D/"/>
+      <url>/2020/02/22/%E5%87%A0%E5%88%99%E7%AC%91%E8%AF%9D/</url>
+      
+        <content type="html"><![CDATA[<img src="/2020/02/22/%E5%87%A0%E5%88%99%E7%AC%91%E8%AF%9D/0222fig1.png" class="" title="weibo"><img src="/2020/02/22/%E5%87%A0%E5%88%99%E7%AC%91%E8%AF%9D/0222fig2.png" class="" title="weiboJinggao"><p>看到这则信息，下面有人举了几个前苏联的笑话，感觉很有意思，于是就去找了几个，笑得肚子疼。</p><blockquote><p>有个人在红场散发传单，被克格勃逮住了。那人辩解，我发的都是白纸。克格勃冷笑道，你以为我不知道你什么意思？</p></blockquote><blockquote><p>在苏共二十三次代表大会上，勃列日涅夫作报告，他问：“我们这里有没有敌人？”一个人回答：“有一个，他坐在第四排第十八号位子上。”勃问：“为什么他是敌人？”回答：“列宁说过敌人是不会打瞌睡的，我发现全场只有他一个人没有打瞌睡！”</p></blockquote><blockquote><p>“在苏联是否可以存在两党制？”“不，不可能，因为我们养不起。”</p></blockquote><blockquote><p>苏联特工对美国特工夸口道：“我们知道你们国家所有核导弹发射井的位置。”美国特工说：“那又有什么，我们知道你们未来20年全体政治局委员名单。”</p></blockquote><blockquote><p>一天戈尔巴乔夫到一个农场视察，看到有几头猪，就到猪旁边拍了一张照片。随行人员在照片上写上：戈尔巴乔夫和猪在一起，但又感到不妥。于是改成：猪和戈尔巴乔夫在一起，可还是感觉不对。最后把照片上的字改成：左起第三位是戈尔巴乔夫。</p></blockquote><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 杂 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>健康的武汉</title>
+      <link href="/2020/02/11/%E5%81%A5%E5%BA%B7%E7%9A%84%E6%AD%A6%E6%B1%89/"/>
+      <url>/2020/02/11/%E5%81%A5%E5%BA%B7%E7%9A%84%E6%AD%A6%E6%B1%89/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>一个健康的社会不该只有一种声音。</p></blockquote><p>哪里也去不了，就不停地刷屏。</p><p>医护人员在医院休息室嚎啕大哭，火化工人在殡仪馆唱歌给自己打气，主妇在阳台上绝望地哭喊救命，电话里快要崩溃的发自党性的咆哮…</p><p>房间的门被焊被锁被堵，外出的车队在高速上排成长龙，为了活命想偷渡到隔壁省却发现河对岸一排一排的人在围追堵截…</p><p>和新闻里的完全不一样。</p><p>我听到了两种声音。</p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 杂 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Data flow Synchronization and Pipelining</title>
       <link href="/2020/01/16/Pipelining/"/>
       <url>/2020/01/16/Pipelining/</url>
