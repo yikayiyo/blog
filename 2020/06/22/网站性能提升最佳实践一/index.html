@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Misbehavior">
 <meta property="og:description" content="https:&#x2F;&#x2F;developer.yahoo.com&#x2F;performance&#x2F;rules.html?guccounter&#x3D;1#csslink  Content Server Cookie CSS JavaScript Images Mobile  原文从七个方面总结网站性能提升。 本篇总结Content方面。 Make Fewer HTTP Requests 减少HTTP请求减少页面的组件数量，">
 <meta property="article:published_time" content="2020-06-22T14:51:53.000Z">
-<meta property="article:modified_time" content="2020-06-22T15:56:39.404Z">
+<meta property="article:modified_time" content="2020-06-29T07:30:35.886Z">
 <meta property="article:author" content="yikayiyo">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="前端">
@@ -350,8 +350,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-22T23:56:39+08:00">
-                2020-06-22
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-29T15:30:35+08:00">
+                2020-06-29
               </time>
             
           </span>
@@ -377,7 +377,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  600 字
+                  1k 字
                 </span>
               
 
@@ -393,7 +393,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -463,12 +463,50 @@
 <ul>
 <li>缓存Ajax请求</li>
 </ul>
-<p>何时使用旧的响应，何时发送新的请求？</p>
-<blockquote>
+<a id="more"></a>
+
+<h4 id="何时使用旧的响应，何时发送新的请求？"><a href="#何时使用旧的响应，何时发送新的请求？" class="headerlink" title="何时使用旧的响应，何时发送新的请求？"></a>何时使用旧的响应，何时发送新的请求？</h4><blockquote>
 <p>This could be done by adding a timestamp to the address book Ajax URL indicating the last time the user modified her address book, for example, &amp;t=1190241612. If the address book hasn’t been modified since the last download, the timestamp will be the same and the address book will be read from the browser’s cache eliminating an extra HTTP roundtrip. If the user has modified her address book, the timestamp ensures the new URL doesn’t match the cached response, and the browser will request the updated address book entries.</p>
 </blockquote>
-<p>Todo</p>
-<h3 id="Postload-Components"><a href="#Postload-Components" class="headerlink" title="Postload Components"></a><a href="https://developer.yahoo.com/performance/rules.html#postload" target="_blank" rel="noopener">Postload Components</a></h3><h3 id="Preload-Components"><a href="#Preload-Components" class="headerlink" title="Preload Components"></a><a href="https://developer.yahoo.com/performance/rules.html#preload" target="_blank" rel="noopener">Preload Components</a></h3><h3 id="Reduce-the-Number-of-DOM-Elements"><a href="#Reduce-the-Number-of-DOM-Elements" class="headerlink" title="Reduce the Number of DOM Elements"></a><a href="https://developer.yahoo.com/performance/rules.html#min_dom" target="_blank" rel="noopener">Reduce the Number of DOM Elements</a></h3><h3 id="Split-Components-Across-Domains"><a href="#Split-Components-Across-Domains" class="headerlink" title="Split Components Across Domains"></a><a href="https://developer.yahoo.com/performance/rules.html#split" target="_blank" rel="noopener">Split Components Across Domains</a></h3><h3 id="Minimize-Number-of-iframes"><a href="#Minimize-Number-of-iframes" class="headerlink" title="Minimize Number of iframes"></a><a href="https://developer.yahoo.com/performance/rules.html#iframes" target="_blank" rel="noopener">Minimize Number of iframes</a></h3><h3 id="Avoid-404s"><a href="#Avoid-404s" class="headerlink" title="Avoid 404s"></a><a href="https://developer.yahoo.com/performance/rules.html#no404" target="_blank" rel="noopener">Avoid 404s</a></h3><script>
+<h3 id="Postload-Components"><a href="#Postload-Components" class="headerlink" title="Postload Components"></a><a href="https://developer.yahoo.com/performance/rules.html#postload" target="_blank" rel="noopener">Postload Components</a></h3><p>非必须的组件延迟加载，比如一些js代码、用户点击后才显示的内容、文件夹里面的图片</p>
+<p>确保页面正常工作，然后通过一些延迟加载的脚本增强页面上的体验，比如动画、拖放</p>
+<h3 id="Preload-Components"><a href="#Preload-Components" class="headerlink" title="Preload Components"></a><a href="https://developer.yahoo.com/performance/rules.html#preload" target="_blank" rel="noopener">Preload Components</a></h3><p>利用计算机的闲置时间，预加载将来需要的内容</p>
+<ol>
+<li><p>无条件的</p>
+<p>只要打开某网站就加载一些额外的组件。</p>
+<p>打开google.com，总会预加载之后搜索界面的图片</p>
+</li>
+<li><p>有条件的</p>
+<p>搜索框输入内容就会预加载内容</p>
+</li>
+<li><p>预期中的</p>
+<p>上线网站新设计时预加载可以不影响用户体验</p>
+</li>
+</ol>
+<h3 id="Reduce-the-Number-of-DOM-Elements"><a href="#Reduce-the-Number-of-DOM-Elements" class="headerlink" title="Reduce the Number of DOM Elements"></a><a href="https://developer.yahoo.com/performance/rules.html#min_dom" target="_blank" rel="noopener">Reduce the Number of DOM Elements</a></h3><p>页面tag数量</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">'*'</span>).length</span><br></pre></td></tr></tbody></table></figure>
+
+<p>只有在语义上有意义时，才使用<code>&lt;div&gt;</code>（ 因为它总会添加一行</p>
+<h4 id="有多少个DOM元素才算多呢？"><a href="#有多少个DOM元素才算多呢？" class="headerlink" title="有多少个DOM元素才算多呢？"></a>有多少个DOM元素才算多呢？</h4><p>检查其他类似的页面，然后比较。</p>
+<h3 id="Split-Components-Across-Domains"><a href="#Split-Components-Across-Domains" class="headerlink" title="Split Components Across Domains"></a><a href="https://developer.yahoo.com/performance/rules.html#split" target="_blank" rel="noopener">Split Components Across Domains</a></h3><p>拆分组件可以最大限度地实现并行下载</p>
+<p>确保使用的域名数量不超过2-4个，因为DNS查询惩罚</p>
+<p>例子：</p>
+<p>将HTML文件和动态内容托管在<a href="http://www.example.org，并在static1.example.org和static2.example.org上拆分部署静态组件" target="_blank" rel="noopener">www.example.org，并在static1.example.org和static2.example.org上拆分部署静态组件</a></p>
+<h3 id="Minimize-Number-of-iframes"><a href="#Minimize-Number-of-iframes" class="headerlink" title="Minimize Number of iframes"></a><a href="https://developer.yahoo.com/performance/rules.html#iframes" target="_blank" rel="noopener">Minimize Number of iframes</a></h3><p><code>&lt;iframe&gt;</code> 优点：</p>
+<ul>
+<li>Helps with slow third-party content like badges and ads</li>
+<li>Security sandbox</li>
+<li>Download scripts in parallel</li>
+</ul>
+<p><code>&lt;iframe&gt;</code> 缺点：</p>
+<ul>
+<li>Costly even if blank</li>
+<li>Blocks page onload</li>
+<li>Non-semantic</li>
+</ul>
+<h3 id="Avoid-404s"><a href="#Avoid-404s" class="headerlink" title="Avoid 404s"></a><a href="https://developer.yahoo.com/performance/rules.html#no404" target="_blank" rel="noopener">Avoid 404s</a></h3><p>HTTP请求是很昂贵的，提出HTTP请求，得到一个无用的响应（即404 Not Found）是完全没有必要的，而且会拖慢用户体验，没有任何好处。</p>
+<p><strong>Particularly bad</strong> is when the link to an external JavaScript is wrong and the result is a 404. First, this download will block parallel downloads. Next the browser may try to parse the 404 response body as if it were JavaScript code, trying to find something usable in it.</p>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -692,7 +730,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Make-Fewer-HTTP-Requests-减少HTTP请求"><span class="nav-number">1.</span> <span class="nav-text">Make Fewer HTTP Requests 减少HTTP请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reduce-DNS-Lookups-减少DNS查询"><span class="nav-number">2.</span> <span class="nav-text">Reduce DNS Lookups 减少DNS查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Avoid-Redirects-避免网站重定向"><span class="nav-number">3.</span> <span class="nav-text">Avoid Redirects 避免网站重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Make-Ajax-Cacheable-缓存Ajax请求"><span class="nav-number">4.</span> <span class="nav-text">Make Ajax Cacheable 缓存Ajax请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Postload-Components"><span class="nav-number">5.</span> <span class="nav-text">Postload Components</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Preload-Components"><span class="nav-number">6.</span> <span class="nav-text">Preload Components</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reduce-the-Number-of-DOM-Elements"><span class="nav-number">7.</span> <span class="nav-text">Reduce the Number of DOM Elements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Split-Components-Across-Domains"><span class="nav-number">8.</span> <span class="nav-text">Split Components Across Domains</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimize-Number-of-iframes"><span class="nav-number">9.</span> <span class="nav-text">Minimize Number of iframes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Avoid-404s"><span class="nav-number">10.</span> <span class="nav-text">Avoid 404s</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Make-Fewer-HTTP-Requests-减少HTTP请求"><span class="nav-number">1.</span> <span class="nav-text">Make Fewer HTTP Requests 减少HTTP请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reduce-DNS-Lookups-减少DNS查询"><span class="nav-number">2.</span> <span class="nav-text">Reduce DNS Lookups 减少DNS查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Avoid-Redirects-避免网站重定向"><span class="nav-number">3.</span> <span class="nav-text">Avoid Redirects 避免网站重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Make-Ajax-Cacheable-缓存Ajax请求"><span class="nav-number">4.</span> <span class="nav-text">Make Ajax Cacheable 缓存Ajax请求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#何时使用旧的响应，何时发送新的请求？"><span class="nav-number">4.1.</span> <span class="nav-text">何时使用旧的响应，何时发送新的请求？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Postload-Components"><span class="nav-number">5.</span> <span class="nav-text">Postload Components</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Preload-Components"><span class="nav-number">6.</span> <span class="nav-text">Preload Components</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reduce-the-Number-of-DOM-Elements"><span class="nav-number">7.</span> <span class="nav-text">Reduce the Number of DOM Elements</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#有多少个DOM元素才算多呢？"><span class="nav-number">7.1.</span> <span class="nav-text">有多少个DOM元素才算多呢？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Split-Components-Across-Domains"><span class="nav-number">8.</span> <span class="nav-text">Split Components Across Domains</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimize-Number-of-iframes"><span class="nav-number">9.</span> <span class="nav-text">Minimize Number of iframes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Avoid-404s"><span class="nav-number">10.</span> <span class="nav-text">Avoid 404s</span></a></li></ol></div>
             
 
           </div>
@@ -723,7 +761,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共30.8k字</span>
+  <span class="post-count">博客全站共31.2k字</span>
 </div>
 
 
