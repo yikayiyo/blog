@@ -293,6 +293,387 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2020/06/30/%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E5%9B%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yikayiyo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/a004d41c238dac41bbaf0850c4ed2bc1?s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misbehavior">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2020/06/30/%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E5%9B%9B/" itemprop="url">
+                  网站性能提升最佳实践四
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-30T11:08:45+08:00">
+                2020-06-30
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-30T12:14:52+08:00">
+                2020-06-30
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1.1k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  4 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><a href="https://developer.yahoo.com/performance/rules.html?guccounter=1#csslink" target="_blank" rel="noopener">https://developer.yahoo.com/performance/rules.html?guccounter=1#csslink</a></p>
+<ul>
+<li>Content</li>
+<li>Server</li>
+<li>Cookie</li>
+<li>CSS</li>
+<li>JavaScript</li>
+<li>Images</li>
+<li>Mobile</li>
+</ul>
+<p>原文从七个方面总结网站性能提升。</p>
+<p>本篇总结Javascript、Images方面。</p>
+<h2 id="Javascript"><a href="#Javascript" class="headerlink" title="Javascript"></a>Javascript</h2><h3 id="Put-Scripts-at-Bottom-脚本放在底部"><a href="#Put-Scripts-at-Bottom-脚本放在底部" class="headerlink" title="Put Scripts at Bottom 脚本放在底部"></a><a href="https://developer.yahoo.com/performance/rules.html#js_bottom" target="_blank" rel="noopener">Put Scripts at Bottom</a> 脚本放在底部</h3><p>脚本会阻塞并行下载</p>
+<p><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1.4" target="_blank" rel="noopener">HTTP / 1.1规范</a>建议浏览器每个主机名并行下载最多两个组件</p>
+<p>如果有多个主机名提供<strong>图像</strong>，则可以并行进行两个以上的下载，但是在下载<strong>脚本</strong>时，即使使用不同的主机名，浏览器也不会启动任何其他下载</p>
+<p>defer脚本表示脚本不包含document.write，浏览器可以继续渲染</p>
+<p>通常一个脚本如果可以defered，那它也可以移动到页面底部</p>
+<h3 id="Make-JavaScript-and-CSS-External-从外部引用js脚本和css文件"><a href="#Make-JavaScript-and-CSS-External-从外部引用js脚本和css文件" class="headerlink" title="Make JavaScript and CSS External 从外部引用js脚本和css文件"></a><a href="https://developer.yahoo.com/performance/rules.html#external" target="_blank" rel="noopener">Make JavaScript and CSS External</a> 从外部引用js脚本和css文件</h3><p>在HTML文档中内嵌的JavaScript和CSS会在每次请求HTML文档时被下载</p>
+<p>使用外部文件通常会产生更快的页面，因为JavaScript和CSS文件被浏览器缓存</p>
+<p>如果JavaScript和CSS在外部文件中，并且被浏览器缓存，则在不增加HTTP请求次数的情况下减小了HTML文档的大小</p>
+<p>如果用户每次会话都有多个页面浏览，并且许多页面重复使用相同的脚本和样式表，那么缓存外部文件的潜在好处就更大</p>
+<p>对于主页，这种每次会话只访问一次的页面，将js和css内联可能更好</p>
+<p>一个样例：</p>
+<p>对于许多浏览页面的第一个页面，内联js和css（减少请求次数，该页面<strong>加载完后动态下载</strong>外部文件，随后访问的页面会使用这些<strong>缓存</strong></p>
+<h3 id="Minify-JavaScript-and-CSS-压缩JavaScript和CSS"><a href="#Minify-JavaScript-and-CSS-压缩JavaScript和CSS" class="headerlink" title="Minify JavaScript and CSS 压缩JavaScript和CSS"></a><a href="https://developer.yahoo.com/performance/rules.html#minify" target="_blank" rel="noopener">Minify JavaScript and CSS</a> 压缩JavaScript和CSS</h3><p>压缩代码指的是删除不必要的代码，减小代码体积（因此可以提升响应性能</p>
+<p>混淆代码也是减小代码体积的方法，但是is more risky</p>
+<p>除了压缩外部脚本和样式之外，可以并且也应该压缩内联的<code>&lt;script&gt;</code>和<code>&lt;style&gt;</code>块。</p>
+<p>即使脚本和css文件已经被gzip了，压缩还能让它们的体积减少5%以上</p>
+<p><a href="https://tool.oschina.net/jscompress" target="_blank" rel="noopener">在线压缩工具</a></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/06/30/%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E5%9B%9B/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2020/06/30/%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E4%B8%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yikayiyo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/a004d41c238dac41bbaf0850c4ed2bc1?s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misbehavior">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2020/06/30/%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E4%B8%89/" itemprop="url">
+                  网站性能提升最佳实践三
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-30T10:08:46+08:00">
+                2020-06-30
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-30T11:06:10+08:00">
+                2020-06-30
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  654 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><a href="https://developer.yahoo.com/performance/rules.html?guccounter=1#csslink" target="_blank" rel="noopener">https://developer.yahoo.com/performance/rules.html?guccounter=1#csslink</a></p>
+<ul>
+<li>Content</li>
+<li>Server</li>
+<li>Cookie</li>
+<li>CSS</li>
+<li>JavaScript</li>
+<li>Images</li>
+<li>Mobile</li>
+</ul>
+<p>原文从七个方面总结网站性能提升。</p>
+<p>本篇总结Cookie、CSS、Mobile方面。</p>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><h3 id="Reduce-Cookie-Size-减小cookie大小"><a href="#Reduce-Cookie-Size-减小cookie大小" class="headerlink" title="Reduce Cookie Size 减小cookie大小"></a><a href="https://developer.yahoo.com/performance/rules.html#cookie_size" target="_blank" rel="noopener">Reduce Cookie Size</a> 减小cookie大小</h3><p>使用HTTP cookie的原因有多种，例如身份验证和个性化</p>
+<p>服务器和浏览器通过HTTP headers交换有关cookie的信息</p>
+<p>尽可能减小cookie的大小，有助于减少对用户响应时间的影响</p>
+<h3 id="Use-Cookie-Free-Domains-for-Components-尽可能不使用cookie"><a href="#Use-Cookie-Free-Domains-for-Components-尽可能不使用cookie" class="headerlink" title="Use Cookie-Free Domains for Components 尽可能不使用cookie"></a><a href="https://developer.yahoo.com/performance/rules.html#cookie_free" target="_blank" rel="noopener">Use Cookie-Free Domains for Components</a> 尽可能不使用cookie</h3><p>确保使用无Cookie的请求来请求静态组件</p>
+<p>创建一个子域并在其中托管所有静态组件</p>
+<p>一些代理可能拒绝缓存带cookie的请求得到的组件</p>
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><h3 id="Put-Stylesheets-at-Top-样式文件放到顶部"><a href="#Put-Stylesheets-at-Top-样式文件放到顶部" class="headerlink" title="Put Stylesheets at Top 样式文件放到顶部"></a><a href="https://developer.yahoo.com/performance/rules.html#css_top" target="_blank" rel="noopener">Put Stylesheets at Top</a> 样式文件放到顶部</h3><p>将样式表放到HEAD可以让页面逐步呈现</p>
+<h3 id="Avoid-CSS-Expressions-避免使用CSS表达式"><a href="#Avoid-CSS-Expressions-避免使用CSS表达式" class="headerlink" title="Avoid CSS Expressions 避免使用CSS表达式"></a><a href="https://developer.yahoo.com/performance/rules.html#css_expressions" target="_blank" rel="noopener">Avoid CSS Expressions</a> 避免使用CSS表达式</h3><p>css表达式可以动态的设置css属性</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/06/30/%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E4%B8%89/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2020/06/29/%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E4%BA%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -877,405 +1258,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2020/06/18/git%E4%BF%AE%E6%94%B9%E6%9C%80%E8%BF%91%E4%B8%80%E6%AC%A1commit%E7%9A%84%E4%BF%A1%E6%81%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yikayiyo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/a004d41c238dac41bbaf0850c4ed2bc1?s=460">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Misbehavior">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2020/06/18/git%E4%BF%AE%E6%94%B9%E6%9C%80%E8%BF%91%E4%B8%80%E6%AC%A1commit%E7%9A%84%E4%BF%A1%E6%81%AF/" itemprop="url">
-                  git修改最近一次commit的信息
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-18T13:29:00+08:00">
-                2020-06-18
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-18T13:40:50+08:00">
-                2020-06-18
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  115 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近一次提交的信息不太对，已经push到远端。</p>
-<img src="/2020/06/18/git%E4%BF%AE%E6%94%B9%E6%9C%80%E8%BF%91%E4%B8%80%E6%AC%A1commit%E7%9A%84%E4%BF%A1%E6%81%AF/xiugaiqian.png" class="" title="修改前">
-
-<p>修改步骤：</p>
-<ol>
-<li><p>输入命令，会进入编辑器</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend</span><br></pre></td></tr></tbody></table></figure>
-</li>
-<li><p>修改commit信息，退出编辑器</p>
-</li>
-<li><p>强制推送</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -f</span><br></pre></td></tr></tbody></table></figure>
-
-</li>
-</ol>
-<p>修改后：</p>
-<img src="/2020/06/18/git%E4%BF%AE%E6%94%B9%E6%9C%80%E8%BF%91%E4%B8%80%E6%AC%A1commit%E7%9A%84%E4%BF%A1%E6%81%AF/xiugaihou.png" class="" title="修改后">
-
-<p>注意到：<strong>commit号改变了</strong></p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://yikayiyo.github.io/2020/02/22/%E5%87%A0%E5%88%99%E7%AC%91%E8%AF%9D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yikayiyo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://s.gravatar.com/avatar/a004d41c238dac41bbaf0850c4ed2bc1?s=460">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Misbehavior">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2020/02/22/%E5%87%A0%E5%88%99%E7%AC%91%E8%AF%9D/" itemprop="url">
-                  几则笑话
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-22T20:41:23+08:00">
-                2020-02-22
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-22T20:49:57+08:00">
-                2020-06-22
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  411 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <img src="/2020/02/22/%E5%87%A0%E5%88%99%E7%AC%91%E8%AF%9D/0222fig1.png" class="" title="weibo">
-
-<img src="/2020/02/22/%E5%87%A0%E5%88%99%E7%AC%91%E8%AF%9D/0222fig2.png" class="" title="weiboJinggao">
-
-<p>看到这则信息，下面有人举了几个前苏联的笑话，感觉很有意思，于是就去找了几个，笑得肚子疼。</p>
-<blockquote>
-<p>有个人在红场散发传单，被克格勃逮住了。那人辩解，我发的都是白纸。克格勃冷笑道，你以为我不知道你什么意思？</p>
-</blockquote>
-<blockquote>
-<p>在苏共二十三次代表大会上，勃列日涅夫作报告，他问：“我们这里有没有敌人？”一个人回答：“有一个，他坐在第四排第十八号位子上。”勃问：“为什么他是敌人？”回答：“列宁说过敌人是不会打瞌睡的，我发现全场只有他一个人没有打瞌睡！”</p>
-</blockquote>
-<blockquote>
-<p>“在苏联是否可以存在两党制？”“不，不可能，因为我们养不起。”</p>
-</blockquote>
-<blockquote>
-<p>苏联特工对美国特工夸口道：“我们知道你们国家所有核导弹发射井的位置。”美国特工说：“那又有什么，我们知道你们未来20年全体政治局委员名单。”</p>
-</blockquote>
-<blockquote>
-<p>一天戈尔巴乔夫到一个农场视察，看到有几头猪，就到猪旁边拍了一张照片。随行人员在照片上写上：戈尔巴乔夫和猪在一起，但又感到不妥。于是改成：猪和戈尔巴乔夫在一起，可还是感觉不对。最后把照片上的字改成：左起第三位是戈尔巴乔夫。</p>
-</blockquote>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1323,7 +1305,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1413,7 +1395,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共32.5k字</span>
+  <span class="post-count">博客全站共34.3k字</span>
 </div>
 
 
