@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>消失的XXX</title>
+      <link href="/2020/12/30/%E6%B6%88%E5%A4%B1%E7%9A%84XXX/"/>
+      <url>/2020/12/30/%E6%B6%88%E5%A4%B1%E7%9A%84XXX/</url>
+      
+        <content type="html"><![CDATA[<img src="/2020/12/30/%E6%B6%88%E5%A4%B1%E7%9A%84XXX/boke.png" class="" title="消失的播客"><center>2020年听到一半被下架的播客。</center>- [【051】瘟疫、语言和具体的人：与历史学家罗新的聊天](https://www.youtube.com/watch?v=ghx4l0Cp9o0)- [【剩余榨值023】在巨大的shock后，我们所思考的、所做的一切都将与此有关](https://www.youtube.com/watch?v=mdTxI-H59K0)<hr><img src="/2020/12/30/%E6%B6%88%E5%A4%B1%E7%9A%84XXX/haohd.png" class="" title="消失的人"><img src="/2020/12/30/%E6%B6%88%E5%A4%B1%E7%9A%84XXX/yzy.png" class="" title="消失的人"><center>2020年6月4号之后，中国没有了郝叶夫妇。</center>***<img src="/2020/12/30/%E6%B6%88%E5%A4%B1%E7%9A%84XXX/hk.png" class="" title="消失的示威"><center>2019年香港示威游行的队伍，后来病毒来了。</center>***<img src="/2020/12/30/%E6%B6%88%E5%A4%B1%E7%9A%84XXX/dk.png" class="" title="消失的房源"><center>蛋壳暴雷，租客交了租金却被房东赶出房门。</center>***<img src="/2020/12/30/%E6%B6%88%E5%A4%B1%E7%9A%84XXX/lwl.png" class="" title="消失的爱"><center>李文亮爱身边的人。</center>***<img src="/2020/12/30/%E6%B6%88%E5%A4%B1%E7%9A%84XXX/TAX.png" class="" title="消失的友谊"><img src="/2020/12/30/%E6%B6%88%E5%A4%B1%E7%9A%84XXX/TAX2.png" class="" title="消失的友谊"><center>曾经的好朋友，如今话都不想说。</center>***<img src="/2020/12/30/%E6%B6%88%E5%A4%B1%E7%9A%84XXX/my1.png" class="" title="消失的崇拜"><img src="/2020/12/30/%E6%B6%88%E5%A4%B1%E7%9A%84XXX/my2.png" class="" title="消失的崇拜"><center>马云：变了的不是我</center>***<img src="/2020/12/30/%E6%B6%88%E5%A4%B1%E7%9A%84XXX/rck09.png" class="" title="消失的“红队”"><img src="/2020/12/30/%E6%B6%88%E5%A4%B1%E7%9A%84XXX/rck12.png" class="" title="消失的“红队”"><center>火箭：我一直是火箭啊</center><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 杂 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>styled-components + form小问题</title>
       <link href="/2020/09/01/styled-components%20+%20form%E5%B0%8F%E9%97%AE%E9%A2%98/"/>
       <url>/2020/09/01/styled-components%20+%20form%E5%B0%8F%E9%97%AE%E9%A2%98/</url>
